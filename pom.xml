@@ -55,9 +55,8 @@
             <version>5.2.9.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -141,7 +140,12 @@
             </exclusions>
         </dependency>
     </dependencies>
-
+    <repositories>
+        <repository>
+            <id>clojars.org</id>
+            <url>http:/clojars.org/repo</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
