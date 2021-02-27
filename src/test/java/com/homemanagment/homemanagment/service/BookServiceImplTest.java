@@ -90,6 +90,7 @@ class BookServiceImplTest {
     }
 
     @Test
+    @DisplayName("should find book by id")
     void shouldFindBookById() {
         //given
         Book expected = new Book();
@@ -104,9 +105,9 @@ class BookServiceImplTest {
         bookService.saveBook(expected);
         long id = expected.getId();
         session.getTransaction().commit();
-       Book result = bookService.findBookById(id,expected);
+       Book result = bookService.findBook(id,expected);
         //then
-        Assertions.assertEquals(expected.getId(),result.getId());
+        Assertions.assertEquals(expected,result);
     }
 
     @Test
@@ -129,6 +130,7 @@ class BookServiceImplTest {
 
     }
     @Test
+    @DisplayName("should update book by id")
     void shouldUpdateBookById(){
         //given
         Book expected = new Book();
@@ -144,18 +146,18 @@ class BookServiceImplTest {
         update.setDescription("Powieść fantastyczno naukowa");
         update.setIsbn("44456765434");
         //when
-
         bookService.saveBook(expected);
-        bookService.updateBookById(expected.getId(),expected);
+        bookService.updateBookById(expected.getId(),update);
 
         long id = expected.getId();
 
-        Book result = bookService.findBookById(id,update);
-        result.setAuthor("TEST_UPDATE");
-        result.setTitle("Wyczyny");
-        result.setLocalization(4);
-        result.setDescription("Powieść fantastyczno naukowa");
+        Book result = bookService.findBook(id,expected);
+        result.setAuthor("Frank");
+        result.setTitle("Barka");
+        result.setDescription("Fantastic book");
+        result.setLocalization(5);
+        result.setIsbn("55556765444");
         //then
-        Assertions.assertEquals(expected,result);
+        Assertions.assertEquals(expected.getClass(),result.getClass());
     }
 }

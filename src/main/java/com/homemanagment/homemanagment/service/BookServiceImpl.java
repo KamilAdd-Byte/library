@@ -35,8 +35,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public Book findBookById(long id, Book book) {
-        return this.repository.getOne(id);
+    public Book findBook(long id,Book book) {
+        return this.repository.findById(id).get();
     }
 
     @Override
@@ -46,14 +46,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
-    public void updateBookById(long id, Book book) {
-        Book update = repository.getOne(id);
-        update.setAuthor(book.getAuthor());
-        update.setTitle(book.getTitle());
-        update.setDescription(book.getDescription());
-        update.setIsbn(book.getIsbn());
-        update.setLocalization(book.getLocalization());
+//    @Transactional
+    public void updateBookById(long id,Book book) {
+        Book update = findBook(id, book);
         this.repository.save(update);
     }
 }
