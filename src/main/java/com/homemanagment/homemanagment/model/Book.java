@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -21,14 +22,17 @@ public class Book implements Comparable<Book>{
 
     @Size(min = 1, max = 20,message = "Tytuł nie może być pusty")
     @Column(name = "title",nullable = false,unique = true)
+    @NotBlank
     private String title;
 
     @Size(min = 2, max = 20,message = "Autor nie może zawierać pustego pola. Minimalnie dwa znaki")
     @Column(name = "author",nullable = false)
+    @NotBlank
     private String author;
 
     @Size(min = 10, max = 13,message = "Numer ISBN nie może zawierać pustego pola. Minimalnie 10 znaków")
     @Column(name = "isbn")
+    @NotBlank
     private String isbn;
 
     @Column(name = "description")
@@ -39,6 +43,14 @@ public class Book implements Comparable<Book>{
 
     @Embedded
     private Audit audit = new Audit();
+
+    @JoinColumn(name = "id_user_rental")
+    @OneToOne
+    private UserBookRental userBookRental;
+
+    @JoinColumn(name = "id_bookRental")
+    @ManyToOne
+    private BookRental bookRental;
 
     @Override
     public boolean equals(Object o) {
