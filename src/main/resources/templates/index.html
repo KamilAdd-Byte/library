@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Library Manager</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		  crossorigin="anonymous">
+	<style>
+        #container
+        {
+
+        }
+        #logo
+        {
+        : 40px;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+        table
+        {
+            align-content: center;
+        }
+        .table:hover
+        {
+            pointer-events: auto;
+            padding: 10px;
+        }
+        #footer
+        {
+            clear: both;
+            background-color: black;
+            font-size: 22px;
+            color: white;
+            text-align: center;
+        }
+        #navi
+        {
+            alignment: center;
+            padding: 20px;
+        }
+	</style>
+</head>
+<body>
+<div id="container">
+	<div id="logo">
+		<h1 align="center">Biblioteka domowa</h1>
+		<a th:href="@{/showNewBookForm}"  class="bg-success btn btn-success btn-lg mb-2"> Dodaj książkę </a>
+	</div>
+	<table th:border="2"class="table table-striped table-responsive-lg">
+		<!--tu przyciski-->
+		<thead>
+		<tr>
+			<th>ID książki</th>
+			<th>Data dodania</th>
+			<th>Tytuł książki</th>
+			<th>Autor książki</th>
+			<th>Opis książki</th>
+			<th>Numer ISBN</th>
+			<th>Lokalizacja</th>
+			<th>Opcje</th>
+			<!--				<th>Kategoria</th>-->
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:align="center" th:each="book: ${listAllBook}">
+			<td th:text="${book.id}"></td>
+			<td th:text="${book.getAudit().createOn}"></td>
+			<td th:text="${book.title}"></td>
+			<td th:text="${book.author}"></td>
+			<td th:text="${book.description}"></td>
+			<td th:text="${book.isbn}"></td>
+			<td th:text="${book.localization}"></td>
+
+			<td align="center">
+				<a th:href="@{/showBookUpdate/{id}(id=${book.id})}" class="btn btn-outline-warning"> Edytuj </a>
+				<a th:href="@{/showBookDeleted/{id}(id=${book.id})}" class="btn btn-outline-danger"> Usuń książkę </a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>	<!--tu tabela-->
+<div id="navi" align="center">
+<!--	<a th:href="@{/}" class="bg-dark btn btn-outline-warning" > Wróć na stronę główną</a>-->
+<!--	<a th:href="@{/playstation_info}" class="bg-dark btn btn-outline-primary" >Wyświetl liste gier konsolowych</a>-->
+</div>
+<div id="footer">
+	&copy Home Management System
+	<br>
+	Wszelkie prawa zastrzeżone @autor KamilAdd-Byte
+</div>
+</div>
+</body>
+</html>

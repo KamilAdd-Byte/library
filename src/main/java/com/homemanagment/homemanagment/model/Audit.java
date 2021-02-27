@@ -1,5 +1,7 @@
 package com.homemanagment.homemanagment.model;
 
+import lombok.Getter;
+
 import javax.persistence.Embeddable;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -7,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Embeddable
+@Getter
 class Audit {
     private LocalDateTime createOn;
     private LocalDateTime updateOn;

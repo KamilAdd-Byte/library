@@ -10,7 +10,8 @@ import javax.validation.Validator;
 @Component
 @Configuration
 public class BookValidator {
-    @Bean(name = "bookValid")
+
+    @Bean
     public Validator validator(){
         return new LocalValidatorFactoryBean();
     }
