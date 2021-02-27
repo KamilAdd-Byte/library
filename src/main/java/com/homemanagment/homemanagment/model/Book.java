@@ -52,14 +52,14 @@ public class Book implements Comparable<Book>{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Book)) return false;
         Book book = (Book) o;
-        return id == book.id && localization == book.localization && title.equals(book.title) && author.equals(book.author) && isbn.equals(book.isbn) && description.equals(book.description) && audit.equals(book.audit);
+        return id == book.id && localization == book.localization && title.equals(book.title) && author.equals(book.author) && isbn.equals(book.isbn) && Objects.equals(description, book.description) && Objects.equals(userBookRental, book.userBookRental) && Objects.equals(bookRental, book.bookRental);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, isbn, description, localization, audit);
+        return Objects.hash(id, title, author, isbn, description, localization, userBookRental, bookRental);
     }
 
     @Override

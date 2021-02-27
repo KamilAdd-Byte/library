@@ -19,4 +19,16 @@ class Audit {
         updateOn = LocalDateTime.now();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Audit)) return false;
+        Audit audit = (Audit) o;
+        return Objects.equals(createOn, audit.createOn) && Objects.equals(updateOn, audit.updateOn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(createOn, updateOn);
+    }
 }
