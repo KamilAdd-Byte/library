@@ -5,6 +5,9 @@ import com.homemanagment.homemanagment.model.BookComparator;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -50,6 +53,12 @@ public class BookServiceImpl implements BookService {
     public Book updateBookById(long id) {
         Optional<Book> book = repository.findById(id);
         return book.get();
+    }
+
+    @Override
+    public Page<Book> findPaginated(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber -1,pageSize);
+        return this.repository.findAll(pageable);
     }
 
     public List<Book> search(String keyword){
