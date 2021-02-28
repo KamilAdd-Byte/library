@@ -38,6 +38,13 @@ public class BookController {
     public String showAllBooks(Model model){
        return findPaginated(1,model);
     }
+//    @GetMapping("/")
+//    public String showOnBooks(Model model){
+//        model.addAttribute("listAllBook",repository.findAll());
+//        return "index";
+//    }
+
+
     @GetMapping("/showNewBookForm")
     public String showNewBookForm(Model model){
         Book book = new Book();
@@ -92,7 +99,7 @@ public class BookController {
         model.addAttribute("currentPage",pageNumber);
         model.addAttribute("totalPages",page.getTotalPages());
         model.addAttribute("totalItems",page.getTotalElements());
-        model.addAttribute("listBooks",bookList);
+        model.addAttribute("listAllBooks",bookList);
 
         return "index";
     }
