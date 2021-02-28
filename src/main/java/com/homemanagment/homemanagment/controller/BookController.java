@@ -11,7 +11,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -45,14 +44,19 @@ public class BookController {
         return "new_book";
     }
     @PostMapping(value = "/save_book")
-    public String saveNewBook(@ModelAttribute("book") @Valid Book book,  Model model, BindingResult bindingResult){
+    public String saveNewBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult){
        if (bindingResult.hasErrors()){
            List<ObjectError> objectErrorList = bindingResult.getAllErrors();
            objectErrorList.forEach(objectError -> System.out.println(objectError.getDefaultMessage()));
            return "new_book";
        }else
         service.saveBook(book);
-        model.addAttribute("message","Dodano ksiązkę do bazy");
-        return "redirect:/index";
+        return "new_book_info";
+    }
+
+    @GetMapping(value = "/new_book_info")
+    public String showNewBook(Model model){
+        model.addAttribute("book",new Book());
+        return "index";
     }
 }

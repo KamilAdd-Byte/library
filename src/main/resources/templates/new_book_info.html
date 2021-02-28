@@ -2,48 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>New book</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-		  crossorigin="anonymous">
-	<style>
-        #logo
-        {
-            background-color: black;
-            color: white;
-            text-align: center;
-        }
-        #navi
-        {
-            padding: 30px;
-        }
-        #footer
-        {
-            clear: both;
-            background-color: black;
-            font-size: 22px;
-            color: white;
-            text-align: center;
-        }
-	</style>
+	<title>Title</title>
 </head>
+<body>
 <body>
 <div id="container"  th:align="center">
 	<div id="logo">
 		<h1 align="center">Domowa biblioteka</h1>
 	</div>
 	<h2 style="font: message-box">Wprowadź informacje o książce</h2>
-	<p th:if="validationMessage" th:text="${v}">Default validation message</p>
-	<form action="#" th:action="@{/save_book}" th:object="${book}" method="POST">
-		<p th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title errors</p>
+	<form action="#" th:action="@{/index}" th:object="${book}" method="POST">
 		<input type="text" th:field="*{title}"
 			   placeholder="Tytuł książki" class="form-control mb-4 col-4">
-		<p th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></p>
 		<input type="text" th:field="*{author}"
 			   placeholder="Autor książki" class="form-control mb-4 col-4">
 		<input type="text" th:field="*{description}"
 			   placeholder="Opis książki" class="form-control mb-4 col-4">
-		<p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">Title errors</p>
 		<input type="text" th:field="*{isbn}"
 			   placeholder="Numer ISBN" class="form-control mb-4 col-4">
 		<input type="text" th:field="*{localization}"
@@ -65,5 +39,3 @@
 </div>
 </body>
 </html>
-
-
