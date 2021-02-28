@@ -1,26 +1,34 @@
 package com.homemanagment.homemanagment.model;
 
 import lombok.Getter;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.Embeddable;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import java.time.LocalDateTime;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Date;
 import java.util.Objects;
 
 @Embeddable
 @Getter
 class Audit {
-    private LocalDateTime createOn;
-    private LocalDateTime updateOn;
+    private LocalDate createOn;
+    private LocalDate updateOn;
     @PrePersist
     public void prePersist(){
-        createOn = LocalDateTime.now();
+        DateTimeFormatter dTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        dTF.format(localDateTime);
+        createOn = LocalDateTime.now().toLocalDate();
     }
     @PreUpdate
     public void preUpdate(){
-        updateOn = LocalDateTime.now();
+        updateOn = LocalDate.now();
     }
+
 
     @Override
     public boolean equals(Object o) {

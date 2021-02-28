@@ -45,7 +45,7 @@ public class BookController {
         return "new_book";
     }
     @PostMapping(value = "/save_book")
-    public String saveNewBook(@Valid @ModelAttribute("book") Book book, Model model, BindingResult bindingResult){
+    public String saveNewBook(@ModelAttribute("book") @Valid Book book,  Model model, BindingResult bindingResult){
        if (bindingResult.hasErrors()){
            List<ObjectError> objectErrorList = bindingResult.getAllErrors();
            objectErrorList.forEach(objectError -> System.out.println(objectError.getDefaultMessage()));
