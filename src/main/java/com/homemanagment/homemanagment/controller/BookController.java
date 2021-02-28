@@ -36,7 +36,7 @@ public class BookController {
     }
     @GetMapping("/")
     public String showAllBooks(Model model){
-       return findPaginated(1,model);
+       return findPaginated(1,model,"title","asc");
     }
 //    @GetMapping("/")
 //    public String showOnBooks(Model model){

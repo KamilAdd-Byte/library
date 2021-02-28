@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface BookDao extends JpaRepository<Book,Long> {
 
-    @Query(value = "SELECT *FROM book_table WHERE book.title=?1",nativeQuery = true)
+    @Query(value = "SELECT b FROM Book b WHERE b.title=?1")
     List<Book> searchBookByTitle (@Param("keyword") String title);
 }
