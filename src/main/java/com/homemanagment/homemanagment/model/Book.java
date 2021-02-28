@@ -39,25 +39,18 @@ public class Book implements Comparable<Book>{
     @Embedded
     private Audit audit = new Audit();
 
-    @JoinColumn(name = "id_user_rental")
-    @OneToOne
-    private UserBookRental userBookRental;
-
-    @JoinColumn(name = "id_bookRental")
-    @OneToOne
-    private BookRental bookRental;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Book)) return false;
         Book book = (Book) o;
-        return id == book.id && localization == book.localization && title.equals(book.title) && author.equals(book.author) && isbn.equals(book.isbn) && Objects.equals(description, book.description) && Objects.equals(userBookRental, book.userBookRental) && Objects.equals(bookRental, book.bookRental);
+        return id == book.id && localization == book.localization && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(isbn, book.isbn) && Objects.equals(description, book.description) && Objects.equals(audit, book.audit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, isbn, description, localization, userBookRental, bookRental);
+        return Objects.hash(id, title, author, isbn, description, localization, audit);
     }
 
     @Override
