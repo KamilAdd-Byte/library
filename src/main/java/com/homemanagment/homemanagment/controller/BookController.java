@@ -65,7 +65,7 @@ public class BookController {
     public String removeBookById (@PathVariable("id") int id,Book book,Model model){
         service.removeBookById(id,book);
         model.addAttribute("message","Pomyślnie usunięto książkę!");
-        return "redirect:/index";
+        return "redirect:/";
     }
     @GetMapping("/update/{id}")
     public String updateBookById (@PathVariable("id") int id, Model model){
