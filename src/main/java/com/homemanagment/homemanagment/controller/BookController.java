@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.List;
@@ -30,6 +31,7 @@ public class BookController {
     @GetMapping("/index")
     public String showFormListAllBooks(Model model){
         model.addAttribute("listAllBook",repository.findAll());
+        model.addAttribute("message","Usunięto z bazy");
         return "index";
     }
     @GetMapping("/")
@@ -59,4 +61,18 @@ public class BookController {
         model.addAttribute("book",new Book());
         return "index";
     }
+    @GetMapping("/remove/{id}")
+    public String removeBookById (@PathVariable("id") long id,Book book,Model model){
+        service.removeBookById(id,book);
+        model.addAttribute("message","Pomyślnie usunięto książkę!");
+        return "redirect:/index";
+    }
+    @GetMapping("/update/{id}")
+    public String updateBookById (@PathVariable("id") long id,Book book,Model model){
+        service.updateBookById(id, book);
+        model.addAttribute("message","Pomyślnie edytowano książkę!");
+        model.addAttribute("book",service.findBook(id, book));
+        return "update_book";
+    }
+
 }

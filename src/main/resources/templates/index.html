@@ -49,6 +49,7 @@
 		<h1 align="center">Biblioteka domowa</h1>
 		<a th:href="@{/showNewBookForm}"  class="bg-success btn btn-success btn-lg mb-2"> Dodaj książkę </a>
 	</div>
+	<h2 th:align="center" color="#FF0000" th:if="${message != null}" th:text="${message}"></h2>
 	<table th:border="2"class="table table-striped table-responsive-lg">
 		<!--tu przyciski-->
 		<thead>
@@ -75,8 +76,8 @@
 			<td th:text="${book.localization}"></td>
 
 			<td align="center">
-				<a th:href="@{/showBookUpdate/{id}(id=${book.id})}" class="btn btn-outline-warning"> Edytuj </a>
-				<a th:href="@{/showBookDeleted/{id}(id=${book.id})}" class="btn btn-outline-danger"> Usuń książkę </a>
+				<a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-outline-warning"> Edytuj </a>
+				<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger"> Usuń książkę </a>
 			</td>
 		</tr>
 		</tbody>

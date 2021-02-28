@@ -1,35 +1,67 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>Nowa książka</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		  crossorigin="anonymous">
+	<link href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_pearl-lustra.min.css" rel="stylesheet">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<style>
+        #logo
+        {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+        #navi
+        {
+            padding: 30px;
+        }
+        #footer
+        {
+            clear: both;
+            background-color: black;
+            font-size: 22px;
+            color: white;
+            text-align: center;
+        }
+	</style>
 </head>
+
 <body>
-<body>
-<div id="container"  th:align="center">
+<div id="container" th:align="center">
 	<div id="logo">
 		<h1 align="center">Domowa biblioteka</h1>
 	</div>
-	<h2 style="font: message-box">Wprowadź informacje o książce</h2>
-	<form action="#" th:action="@{/index}" th:object="${book}" method="POST">
-		<input type="text" th:field="*{title}"
-			   placeholder="Tytuł książki" class="form-control mb-4 col-4">
-		<input type="text" th:field="*{author}"
-			   placeholder="Autor książki" class="form-control mb-4 col-4">
-		<input type="text" th:field="*{description}"
-			   placeholder="Opis książki" class="form-control mb-4 col-4">
-		<input type="text" th:field="*{isbn}"
-			   placeholder="Numer ISBN" class="form-control mb-4 col-4">
-		<input type="text" th:field="*{localization}"
-			   placeholder="Lokalizacja na regale" class="form-control mb-4 col-4">
-		<button class="bg-success btn-lg" type="submit">Dodaj</button>
+	<h2 style="font: message-box">Wprowadzono książkę</h2>
+	<form action="#" method="POST" th:action="@{/index}" th:object="${book}">
+		<fieldset>
+			<legend>Tytuł</legend>
+			<label>
+				<input th:field="*{title}" type="text">
+			</label>
+		</fieldset>
+		<fieldset>
+			<legend>Autor</legend>
+				<input size="60px" th:text="*{author}" type="text">
+		</fieldset>
+		<fieldset>
+			<legend>Opis książki</legend>
+				<input th:text="*{description}" type="text">
+		</fieldset>
+		<fieldset>
+			<legend>Numer Isbn</legend>
+				<input th:text="*{isbn}" type="text">
+		</fieldset>
+		<fieldset>
+			<legend>Lokalizacja</legend>
+				<input th:text="*{localization}" type="text">
+		</fieldset>
 	</form>
 	<div id="navi">
-		<a th:href="@{/}" class="bg-dark btn btn-outline-primary" th:align="center"> Wróć na stronę główną</a>
-		<a th:href="@{/game_info}" class="bg-dark btn btn-outline-primary" th:align="center">Wyświetl listę gier planszowych</a>
-		<a th:href="@{/playstation_info}" class="bg-dark btn btn-outline-primary" th:align="center">Wyświetl listę gier konsolowych</a>
-		<a th:href="@{/book_info}" class="bg-dark btn btn-outline-primary" th:align="center">Wyświetl listę książek</a>
-
+		<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}"> Wróć na stronę główną</a>
 	</div>
 </div>
 <div id="footer">
