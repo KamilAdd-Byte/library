@@ -105,7 +105,7 @@ class BookServiceImplTest {
         bookService.saveBook(expected);
         long id = expected.getId();
         session.getTransaction().commit();
-       Book result = bookService.findBook(id,expected);
+       Book result = bookService.findBookByID(id);
         //then
         Assertions.assertEquals(expected,result);
     }
@@ -147,11 +147,11 @@ class BookServiceImplTest {
         update.setIsbn("44456765434");
         //when
         bookService.saveBook(expected);
-        bookService.updateBookById(expected.getId(),update);
+        bookService.updateBookById(expected.getId());
 
         long id = expected.getId();
 
-        Book result = bookService.findBook(id,expected);
+        Book result = bookService.findBookByID(id);
         result.setAuthor("Frank");
         result.setTitle("Barka");
         result.setDescription("Fantastic book");

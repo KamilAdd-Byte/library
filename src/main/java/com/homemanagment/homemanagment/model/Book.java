@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -22,7 +19,7 @@ public class Book implements Comparable<Book>{
     private long id;
 
     @Size(min = 1, max = 20,message = "Tytuł nie może być pusty")
-    @Column(name = "title",nullable = false,unique = true)
+    @Column(name = "title",nullable = false)
     private String title;
 
     @Size(min = 2, max = 20,message = "Autor nie może zawierać pustego pola. Minimalnie dwa znaki")

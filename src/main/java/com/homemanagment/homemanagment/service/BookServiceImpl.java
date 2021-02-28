@@ -1,8 +1,8 @@
 package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.Book;
+import com.homemanagment.homemanagment.model.BookComparator;
 import com.homemanagment.homemanagment.repositories.BookDao;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +32,11 @@ public class BookServiceImpl implements BookService {
         this.repository.save(book);
     }
 
-
     @Override
     @Transactional
-    public Book findBook(long id,Book book) {
-        return this.repository.findById(id).get();
+    public Book findBookByID(long id) {
+        Optional<Book> book = repository.findById(id);
+            return book.get();
     }
 
     @Override
@@ -46,9 +46,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-//    @Transactional
-    public void updateBookById(long id,Book book) {
-        Book update = findBook(id, book);
-        this.repository.save(update);
+    @Transactional
+    public Book updateBookById(long id) {
+        Optional<Book> book = repository.findById(id);
+        return book.get();
+    }
+
+    public List<Book> search(String keyword){
+        return repository.searchBookByTitle(keyword);
     }
 }

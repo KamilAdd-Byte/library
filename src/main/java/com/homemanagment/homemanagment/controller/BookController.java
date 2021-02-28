@@ -8,10 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -68,11 +67,18 @@ public class BookController {
         return "redirect:/index";
     }
     @GetMapping("/update/{id}")
-    public String updateBookById (@PathVariable("id") long id,Book book,Model model){
-        service.updateBookById(id, book);
+    public String updateBookById (@PathVariable("id") long id, Model model){
+        service.findBookByID(id);
         model.addAttribute("message","Pomyślnie edytowano książkę!");
-        model.addAttribute("book",service.findBook(id, book));
+        model.addAttribute("book",service.findBookByID(id));
         return "update_book";
     }
+    @RequestMapping("/search")
+    public ModelAndView searchBookByTitle (@RequestParam String keyword) {
+        ModelAndView mav = new ModelAndView("search");
+        List<Book> result = service.search(keyword);
+        mav.addObject("result",result);
 
+        return mav;
+    }
 }
