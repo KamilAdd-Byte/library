@@ -38,20 +38,20 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public Book findBookByID(long id) {
+    public Book findBookByID(int id) {
         Optional<Book> book = repository.findById(id);
             return book.get();
     }
 
     @Override
     @Transactional
-    public void removeBookById(long id, Book book) {
+    public void removeBookById(int id, Book book) {
         this.repository.deleteById(id);
     }
 
     @Override
     @Transactional
-    public Book updateBookById(long id) {
+    public Book updateBookById(int id) {
         Optional<Book> book = repository.findById(id);
         return book.get();
     }

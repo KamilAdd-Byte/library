@@ -38,12 +38,6 @@ public class BookController {
     public String showAllBooks(Model model){
        return findPaginated(1,model,"title","asc");
     }
-//    @GetMapping("/")
-//    public String showOnBooks(Model model){
-//        model.addAttribute("listAllBook",repository.findAll());
-//        return "index";
-//    }
-
 
     @GetMapping("/showNewBookForm")
     public String showNewBookForm(Model model){
@@ -68,13 +62,13 @@ public class BookController {
         return "index";
     }
     @GetMapping("/remove/{id}")
-    public String removeBookById (@PathVariable("id") long id,Book book,Model model){
+    public String removeBookById (@PathVariable("id") int id,Book book,Model model){
         service.removeBookById(id,book);
         model.addAttribute("message","Pomyślnie usunięto książkę!");
         return "redirect:/index";
     }
     @GetMapping("/update/{id}")
-    public String updateBookById (@PathVariable("id") long id, Model model){
+    public String updateBookById (@PathVariable("id") int id, Model model){
         service.findBookByID(id);
         model.addAttribute("message","Pomyślnie edytowano książkę!");
         model.addAttribute("book",service.findBookByID(id));

@@ -11,11 +11,11 @@ public interface BookService {
 
     void saveBook(Book book);
 
-    Book findBookByID(long id);
+    Book findBookByID(int id);
 
-    void removeBookById(long id, Book book);
+    void removeBookById(int id, Book book);
 
-    Book updateBookById(long id);
+    Book updateBookById(int id);
 
-    Page<Book> findPaginated(int pageNumber,int pageSize, String sortField, String sortDirection);
+    Page<Book> findPaginated(int pageNumber,int pageSize,String sortField, String sortDirection);
 }

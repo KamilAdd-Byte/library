@@ -103,7 +103,7 @@ class BookServiceImplTest {
         //when
         session.beginTransaction();
         bookService.saveBook(expected);
-        long id = expected.getId();
+        int id = expected.getId();
         session.getTransaction().commit();
        Book result = bookService.findBookByID(id);
         //then
@@ -122,7 +122,7 @@ class BookServiceImplTest {
         expected.setIsbn("44456765434");
         //when
         bookService.saveBook(expected);
-        long id = expected.getId();
+        int id = expected.getId();
 
         bookService.removeBookById(id,expected);
         //then
@@ -149,7 +149,7 @@ class BookServiceImplTest {
         bookService.saveBook(expected);
         bookService.updateBookById(expected.getId());
 
-        long id = expected.getId();
+        int id = expected.getId();
 
         Book result = bookService.findBookByID(id);
         result.setAuthor("Frank");

@@ -15,8 +15,8 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Book implements Comparable<Book>{
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Size(min = 1, max = 20,message = "Tytuł nie może być pusty")
     @Column(name = "title",nullable = false)

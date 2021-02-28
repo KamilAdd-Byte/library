@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BookDao extends JpaRepository<Book,Long> {
+public interface BookDao extends JpaRepository<Book,Integer> {
 
     @Query(value = "SELECT b FROM Book b WHERE b.title=?1")
     List<Book> searchBookByTitle (@Param("keyword") String title);
