@@ -4,6 +4,7 @@ import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.service.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,8 +36,7 @@ public class BookController {
     }
     @GetMapping("/")
     public String showAllBooks(Model model){
-        model.addAttribute("listAllBook",repository.findAll());
-        return "index";
+       return findPaginated(1,model);
     }
     @GetMapping("/showNewBookForm")
     public String showNewBookForm(Model model){
@@ -80,5 +80,20 @@ public class BookController {
         mav.addObject("result",result);
 
         return mav;
+    }
+
+    @GetMapping("/page/{pageNumber}")
+    public String findPaginated(@PathVariable(value = "pageNumber") int pageNumber,Model model){
+        int pageSize = 5;
+
+        Page<Book> page = service.findPaginated(pageNumber,pageSize);
+        List<Book> bookList = page.getContent();
+
+        model.addAttribute("currentPage",pageNumber);
+        model.addAttribute("totalPages",page.getTotalPages());
+        model.addAttribute("totalItems",page.getTotalElements());
+        model.addAttribute("listBooks",bookList);
+
+        return "index";
     }
 }
