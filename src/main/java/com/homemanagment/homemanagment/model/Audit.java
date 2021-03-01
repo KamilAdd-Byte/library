@@ -1,6 +1,7 @@
 package com.homemanagment.homemanagment.model;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.annotation.Bean;
 
 import javax.persistence.Embeddable;
@@ -15,31 +16,20 @@ import java.util.Objects;
 @Embeddable
 @Getter
 class Audit {
-    private LocalDate createOn;
-    private LocalDate updateOn;
+    private LocalDateTime createOn;
+    private LocalDateTime updateOn;
     @PrePersist
     public void prePersist(){
         DateTimeFormatter dTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime localDateTime = LocalDateTime.now();
         dTF.format(localDateTime);
-        createOn = LocalDateTime.now().toLocalDate();
+        createOn = LocalDateTime.now();
     }
     @PreUpdate
     public void preUpdate(){
-        updateOn = LocalDate.now();
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Audit)) return false;
-        Audit audit = (Audit) o;
-        return Objects.equals(createOn, audit.createOn) && Objects.equals(updateOn, audit.updateOn);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(createOn, updateOn);
+        DateTimeFormatter dTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        dTF.format(localDateTime);
+        updateOn = LocalDateTime.now();
     }
 }

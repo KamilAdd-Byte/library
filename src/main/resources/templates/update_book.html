@@ -33,7 +33,9 @@
 		<h1 align="center">Domowa biblioteka</h1>
 	</div>
 	<h2 style="font: message-box">Wprowadź informacje o książce</h2>
-	<form action="#" th:action="@{/save_book}" th:object="${book}" method="POST">
+	<form action="#" th:action="@{/save_book}" th:object="${book}" method="post">
+
+		<input type="hidden" th:field = "*{id}">
 		<p th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title errors</p>
 		<input type="text" th:field="*{title}"
 			   placeholder="Tytuł książki" class="form-control mb-4 col-4">

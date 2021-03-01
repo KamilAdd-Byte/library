@@ -36,21 +36,17 @@
 		<!--tu przyciski-->
 		<thead>
 		<tr>
-			<th>ID książki</th>
-			<th>Data dodania</th>
-			<th>Tytuł książki</th>
 			<th>Autor książki</th>
-			<th>Opis książki</th>
-			<th>Numer ISBN</th>
+			<th>Tytuł książki</th>
+			<th>Lokalizacja</th>
 			<th>Opcje</th>
 			<!--				<th>Kategoria</th>-->
 		</tr>
 		</thead>
 		<tbody>
-		<tr th:align="center" th:each="book: ${result}" var="book">
-			<td th:text="${book.title}"></td>
+		<tr th:align="center" th:each="book: ${keyword}" var="book">
 			<td th:text="${book.author}"></td>
-			<td th:text="${book.description}"></td>
+			<td th:text="${book.title}"></td>
 			<td th:text="${book.localization}"></td>
 
 

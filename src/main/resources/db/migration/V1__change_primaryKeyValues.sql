@@ -8,7 +8,3 @@ create table book
     isbn         varchar(13)  not null,
     localization int
 )
-alter table book
-    add column created_on datetime null;
-alter table book
-    add column updated_on datetime null;

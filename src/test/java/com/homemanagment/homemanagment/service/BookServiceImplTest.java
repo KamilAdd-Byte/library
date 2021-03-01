@@ -147,7 +147,7 @@ class BookServiceImplTest {
         update.setIsbn("44456765434");
         //when
         bookService.saveBook(expected);
-        bookService.updateBookById(expected.getId());
+        bookService.updateBookById(expected.getId(),update);
 
         int id = expected.getId();
 

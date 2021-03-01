@@ -1,7 +1,6 @@
 package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.BookComparator;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +51,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public Book updateBookById(int id) {
-        Optional<Book> book = repository.findById(id);
-        return book.get();
+    public void updateBookById(int id, Book book) {
+        this.repository.findById(id);
         //TODO Update method!!!! Override and create new book instead update
     }
 

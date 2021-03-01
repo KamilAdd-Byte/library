@@ -5,15 +5,15 @@ import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.service.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class BookController {
@@ -69,18 +69,15 @@ public class BookController {
     }
     @GetMapping("/update/{id}")
     public String updateBookById (@PathVariable("id") int id, Model model){
-        service.findBookByID(id);
+        Book book = service.findBookByID(id);
         model.addAttribute("message","Pomyślnie edytowano książkę!");
-        model.addAttribute("book",service.findBookByID(id));
+        model.addAttribute("book",book);
         return "update_book";
     }
-    @RequestMapping("/search")
-    public ModelAndView searchBookByTitle (@RequestParam String keyword) {
-        ModelAndView mav = new ModelAndView("search");
-        List<Book> result = service.search(keyword);
-        mav.addObject("result",result);
-
-        return mav;
+    @GetMapping("/search")
+    public String searchBookByTitle (@RequestParam String keyword, Model model) {
+        model.addAttribute("keyword",service.search(keyword));
+        return "search";
     }
 
     @GetMapping("/page/{pageNumber}")
