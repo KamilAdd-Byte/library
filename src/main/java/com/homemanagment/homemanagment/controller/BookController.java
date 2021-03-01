@@ -36,7 +36,7 @@ public class BookController {
     }
     @GetMapping("/")
     public String showAllBooks(Model model){
-       return findPaginated(1,model,"title","asc");
+       return findPaginated(1,model,"title","asc","keyword");
     }
 
     @GetMapping("/showNewBookForm")
@@ -83,12 +83,13 @@ public class BookController {
     @GetMapping("/page/{pageNumber}")
     public String findPaginated(@PathVariable(value = "pageNumber") int pageNumber,Model model,
              @RequestParam("sortField") String sortfield,
-             @RequestParam("sortDir") String sortDir){
+             @RequestParam("sortDir") String sortDir,String keyword){
         //local variable how book on one page
         int pageSize = 5;
         //create page reference and get bookList to page getContent method
         Page<Book> page = service.findPaginated(pageNumber,pageSize,sortfield,sortDir);
         List<Book> bookList = page.getContent();
+        List<Book> search = service.search(keyword);
         //paginated attribute
         model.addAttribute("currentPage",pageNumber);
         model.addAttribute("totalPages",page.getTotalPages());
@@ -98,6 +99,8 @@ public class BookController {
         model.addAttribute("sortField",sortfield);
         model.addAttribute("sortDirection",sortDir);
         model.addAttribute("reverseSortDirection",sortDir.equals("asc") ? "desc" : "asc");
+
+        model.addAttribute("keyword",search);
         return "index";
     }
 }
