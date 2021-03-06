@@ -32,7 +32,7 @@
 		<h1 align="center">Domowa biblioteka</h1>
 	</div>
 	<h2 style="font: message-box">Wprowadź informacje o książce</h2>
-	<p th:if="validationMessage">Default validation message</p>
+	<p th:if="validationMessage"></p>
 	<form action="#" method="POST" th:action="@{/save_book}" th:object="${book}">
 		<p th:errors="*{title}" th:if="${#fields.hasErrors('title')}">Title errors</p>
 		<input class="form-control mb-4 col-4" placeholder="Tytuł książki"
