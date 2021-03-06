@@ -18,11 +18,11 @@ public class Book implements Comparable<Book>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Size(min = 1, max = 20,message = "Tytuł nie może być pusty")
+    @Size(min = 1, max = 40,message = "Tytuł nie może być pusty")
     @Column(name = "title",nullable = false)
     private String title;
 
-    @Size(min = 2, max = 20,message = "Autor nie może zawierać pustego pola. Minimalnie dwa znaki")
+    @Size(min = 2, max = 40,message = "Autor nie może zawierać pustego pola. Minimalnie dwa znaki")
     @Column(name = "author",nullable = false)
     private String author;
 
