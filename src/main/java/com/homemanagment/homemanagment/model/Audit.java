@@ -3,6 +3,7 @@ package com.homemanagment.homemanagment.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.annotation.Bean;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Embeddable;
 import javax.persistence.PrePersist;
@@ -24,12 +25,18 @@ class Audit {
         LocalDateTime localDateTime = LocalDateTime.now();
         dTF.format(localDateTime);
         createOn = LocalDateTime.now();
+        createOn.format(dTF);
     }
-    @PreUpdate
-    public void preUpdate(){
+
+    private void formatDate() {
         DateTimeFormatter dTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime localDateTime = LocalDateTime.now();
         dTF.format(localDateTime);
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        formatDate();
         updateOn = LocalDateTime.now();
     }
 }

@@ -11,6 +11,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -30,10 +34,18 @@ public class BookController {
     public String showFormListAllBooks(Model model){
         model.addAttribute("listAllBook",repository.findAll());
         model.addAttribute("message","Usunięto z bazy");
+        model.addAttribute("standardDate", new Date());
+        model.addAttribute("localDateTime", LocalDateTime.now());
+        model.addAttribute("localDate", LocalDate.now());
+        model.addAttribute("timestamp", Instant.now());
         return "index";
     }
     @GetMapping("/")
     public String showAllBooks(Model model){
+        model.addAttribute("standardDate", new Date());
+        model.addAttribute("localDateTime", LocalDateTime.now());
+        model.addAttribute("localDate", LocalDate.now());
+        model.addAttribute("timestamp", Instant.now());
        return findPaginated(1,model,"title","asc","keyword");
     }
 
