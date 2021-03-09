@@ -24,39 +24,49 @@
             color: white;
             text-align: center;
         }
+		.Bdc\(red\){
+            border-color: red !important;
+		}
+
 	</style>
 </head>
 <body>
-<div id="container" th:align="center">
+<div id="container">
 	<div id="logo">
-		<h1 align="center">Domowa biblioteka</h1>
-	</div>
+		<a class="navbar-brand">
+			<img alt="" class="d-inline-block align-top"
+				 height="30" color="white" src="https://freepikpsd.com/wp-content/uploads/2020/04/book-icon-png-white-Images-Free-Transparent.png" width="30">
+			Privet Home Library - Add book
+		</a>
 	<h2 style="font: message-box">Wprowadź informacje o książce</h2>
-	<p th:if="validationMessage"></p>
-	<form action="#" method="POST" th:action="@{/save_book}" th:object="${book}">
-		<p th:errors="*{title}" th:if="${#fields.hasErrors('title')}">Title errors</p>
-		<input class="form-control mb-4 col-4" placeholder="Tytuł książki"
-			   th:field="*{title}" type="text">
-		<p th:errors="*{author}" th:if="${#fields.hasErrors('author')}"></p>
-		<input class="form-control mb-4 col-4" placeholder="Autor książki"
-			   th:field="*{author}" type="text">
-		<input class="form-control mb-4 col-4" placeholder="Opis książki"
-			   th:field="*{description}" type="text">
-		<p th:errors="*{isbn}" th:if="${#fields.hasErrors('isbn')}">Title errors</p>
-		<input class="form-control mb-4 col-4" placeholder="Numer ISBN"
-			   th:field="*{isbn}" type="text">
-		<input class="form-control mb-4 col-4" placeholder="Lokalizacja na regale"
-			   th:field="*{localization}" type="text">
-		<button class="bg-success btn-lg" type="submit">Dodaj</button>
-	</form>
-	<div id="navi">
-		<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}"> Wróć na stronę główną</a>
-	</div>
-</div>
-<div id="footer">
-	&copy Home Management System
-	<br>
-	Wszelkie prawa zastrzeżone @autor KamilAdd-Byte
+		<div align="center">
+			<p th:if="validationMessage"></p>
+			<form action="#" method="POST" th:action="@{/save_book}" th:object="${book}">
+				<p th:errorclass="'Bdc(red)'" th:errors="*{title}" th:if="${#fields.hasErrors('title')}">Title errors</p>
+				<input th:errorclass="'Bdc(red)'" size="100%" th:align="center" class="form-control mb-4 col-4" placeholder="Tytuł książki"
+					   th:field="*{title}" type="text">
+				<p th:errors="*{author}" th:if="${#fields.hasErrors('author')}"></p>
+				<input th:errorclass="'Bdc(red)'" class="form-control mb-3 col-4" placeholder="Autor książki"
+					   th:field="*{author}" type="text">
+				<input th:errorclass="'Bdc(red)'" class="form-control mb-4 col-4" placeholder="Opis książki"
+					   th:field="*{description}" type="text">
+				<p th:errors="*{isbn}" th:if="${#fields.hasErrors('isbn')}">Title errors</p>
+				<input th:errorclass="'Bdc(red)'" class="form-control mb-4 col-4" placeholder="Numer ISBN"
+					   th:field="*{isbn}" type="text">
+				<input class="form-control mb-4 col-4" placeholder="Lokalizacja na regale"
+					   th:field="*{localization}" type="text">
+				<button class="bg-success btn-lg" type="submit">Dodaj</button>
+			</form>
+			<div id="navi">
+				<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}"> Wróć na stronę główną</a>
+			</div>
+		</div>
+		<div id="footer">
+			&copy Home Management System
+			<br>
+			Wszelkie prawa zastrzeżone @autor KamilAdd-Byte
+		</div>
+		</div>
 </div>
 </body>
 </html>
