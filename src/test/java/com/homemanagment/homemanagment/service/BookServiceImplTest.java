@@ -75,7 +75,7 @@ class BookServiceImplTest {
         expected.setIsbn("222323343444");
         expected.setDescription("Example description");
         expected.setLocalization(3);
-        expected.setAudit(expected.getAudit());
+//        expected.setAudit(expected.getAudit());
         //when
         bookService.saveBook(expected);
         Book added = (Book) session.createQuery("from Book book where book.title=:title and book.author=:author and book.isbn=:isbn and book.description=:description and book.localization=:localization")

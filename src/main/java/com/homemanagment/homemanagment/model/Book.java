@@ -39,6 +39,16 @@ public class Book implements Comparable<Book>{
     @Embedded
     private Audit audit = new Audit();
 
+    @Column(name = "lending")
+    private boolean lending;
+
+    @JoinColumn(name = "id_user")
+    @ManyToOne
+    private UserLending userLending;
+
+    public Book(boolean lending) {
+        this.lending = false;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -61,4 +71,6 @@ public class Book implements Comparable<Book>{
             return -1;
         return this.title.compareTo(book.title);
     }
+
+
 }
