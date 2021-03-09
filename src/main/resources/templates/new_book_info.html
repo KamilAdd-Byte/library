@@ -33,7 +33,11 @@
 <body>
 <div id="container" th:align="center">
 	<div id="logo">
-		<h1 align="center">Domowa biblioteka</h1>
+		<a class="navbar-brand">
+			<img alt="" class="d-inline-block align-top"
+				 height="30" color="white" src="https://freepikpsd.com/wp-content/uploads/2020/04/book-icon-png-white-Images-Free-Transparent.png" width="30">
+			Privet Home Library - Info on new book
+		</a>
 	</div>
 	<h2 style="font: message-box">Wprowadzono książkę</h2>
 	<form action="#" method="POST" th:action="@{/index}" th:object="${book}">
