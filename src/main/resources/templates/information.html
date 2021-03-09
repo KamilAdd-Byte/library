@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Privet Library Home - Info</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		  crossorigin="anonymous">
+	<style>
+        #logo {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+
+        #navi {
+            padding: 30px;
+        }
+
+        #footer {
+            clear: both;
+            background-color: black;
+            font-size: 22px;
+            color: white;
+            text-align: center;
+        }
+        .Bdc\(red\){
+            border-color: red !important;
+        }
+
+	</style>
+</head>
+<body>
+<div id="container">
+	<div id="logo">
+		<a class="navbar-brand">
+			<img alt="" class="d-inline-block align-top"
+				 height="30" color="white" src="https://freepikpsd.com/wp-content/uploads/2020/04/book-icon-png-white-Images-Free-Transparent.png" width="30">
+			Privet Home Library - Information
+		</a>
+		<h2 style="font: message-box">Funkcjonalności prywatnej biblioteki</h2>
+		<div align="center">
+			<ul>
+				<li>Sortowanie dostępne klikając na TYTUŁ lub AUTOR</li>
+<!--				<li></li>-->
+<!--				<li></li>-->
+<!--				<li></li>-->
+			</ul>
+			<div id="navi">
+				<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}"> Wróć na stronę główną</a>
+			</div>
+		</div>
+		<div id="footer">
+			&copy Home Management System
+			<br>
+			Wszelkie prawa zastrzeżone @autor KamilAdd-Byte
+		</div>
+	</div>
+</div>
+</body>
+</html>

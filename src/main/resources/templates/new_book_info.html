@@ -41,7 +41,6 @@
 			<!--tu przyciski-->
 			<thead>
 			<tr>
-				<th>ID książki</th>
 				<th>Tytuł książki</th>
 				<th>Autor książki</th>
 				<th>Opis książki</th>
@@ -57,7 +56,6 @@
 				<td th:text="${book.description}"></td>
 				<td th:text="${book.isbn}"></td>
 				<td th:text="${book.localization}"></td>
-
 				<td align="center">
 					<a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-outline-warning"> Edytuj </a>
 					<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger"> Usuń książkę </a>
