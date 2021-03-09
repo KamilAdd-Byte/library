@@ -3,10 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Nowa książka</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-		  crossorigin="anonymous">
-	<link href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_pearl-lustra.min.css" rel="stylesheet">
+	<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<style>
         #logo
@@ -33,11 +31,13 @@
 <body>
 <div id="container" th:align="center">
 	<div id="logo">
+		<nav class="navbar navbar-dark bg-dark" id="navbar">
 		<a class="navbar-brand">
 			<img alt="" class="d-inline-block align-top"
 				 height="30" color="white" src="https://freepikpsd.com/wp-content/uploads/2020/04/book-icon-png-white-Images-Free-Transparent.png" width="30">
 			Privet Home Library - Info on new book
 		</a>
+		</nav>
 	</div>
 	<h2 style="font: message-box">Wprowadzono książkę</h2>
 	<form action="#" method="POST" th:action="@{/index}" th:object="${book}">

@@ -26,11 +26,16 @@
 		}
         #logo
         {
-            padding: 15px;
             background-color: black;
             color: white;
             text-align: center;
         }
+		#navbar{
+			background-color: black;
+		}
+		#sub-navbar{
+			padding: 10px;
+		}
         table
         {
 			padding: 20px;
@@ -54,15 +59,20 @@
 <body>
 <div id="container">
 	<div id="logo">
-		<a class="navbar-brand">
-			<img alt="" class="d-inline-block align-top"
-				 height="30" color="white" src="https://freepikpsd.com/wp-content/uploads/2020/04/book-icon-png-white-Images-Free-Transparent.png" width="30">
-			Privet Home Library
-		</a>
+		<nav class="navbar navbar-black bg-black" id="navbar">
+			<a class="navbar-brand">
+				<img alt="" class="d-inline-block align-top"
+					 height="30" color="white" src="https://freepikpsd.com/wp-content/uploads/2020/04/book-icon-png-white-Images-Free-Transparent.png" width="30">
+				Privet Home Library
 
-		<a th:href="@{/showNewBookForm}"  class="bg-success btn btn-success btn-lg mb-2"> Dodaj książkę </a>
-		<a th:href="@{/information}"  class="bg-warning btn btn-warning btn-lg mb-2"> Info </a>
+			</a>
+		</nav>
+		<div id="sub-navbar">
+			<a align="left" th:href="@{/showNewBookForm}" class="bg-success btn btn-success btn-lg mb-2"> Dodaj książkę </a>
+			<a th:href="@{/information}" class="bg-warning btn btn-warning btn-lg mb-2"> Info </a>
+		</div>
 
+	</div>
 	</div>
 	<div align="center" id="info">
 		<h6 class="btn btn-outline-primary">Lista aktualnych książek w prywatnym zbiorze</h6>
