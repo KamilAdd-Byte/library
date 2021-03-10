@@ -1,0 +1,26 @@
+-- drop table if exists book;
+-- create table book
+-- (
+--     id           int primary key,
+--     title        varchar(25)  not null,
+--     author       varchar(25)  not null,
+--     description  varchar(100) not null,
+--     isbn         varchar(13)  not null,
+--     localization int
+-- );
+-- drop table if exists user_lending;
+-- create table user_lending
+-- (
+--     id           int primary key,
+--     firstName    varchar(30)  not null,
+--     lastName     varchar(25)  not null,
+--     email        varchar(20) not null
+-- );
+-- alter table user_lending
+--     add column id_book int;
+-- alter table user_lending
+--     add foreign key (id_book) references BOOK (ID);
+-- alter table book
+--     add column user_id int;
+-- alter table book
+--     add foreign key (ID_USER) references USER_LENDING (ID);

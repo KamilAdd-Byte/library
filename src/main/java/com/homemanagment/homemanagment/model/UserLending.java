@@ -28,6 +28,9 @@ public class UserLending {
     @Email
     private String email;
 
+    @ManyToOne
+    @JoinColumn(name = "id_book")
+    private Book book;
 }
 
 
