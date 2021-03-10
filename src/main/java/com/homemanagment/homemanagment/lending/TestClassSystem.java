@@ -2,6 +2,7 @@ package com.homemanagment.homemanagment.lending;
 
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.system.HomeLibrary;
 
 import java.util.List;
 
@@ -12,8 +13,12 @@ public class TestClassSystem {
         max.setEmail("max@wp.pl");
         max.setFirstName("Max");
         max.setLastName("Max");
-
+        UserLending bart = new UserLending();
+        bart.setEmail("bart@wp.pl");
+        bart.setFirstName("Bart");
+        bart.setLastName("Bart");
         System.out.println(max);
+        System.out.println(bart);
 
         System.out.println("-------------Book----------------");
         Book bookLending = new Book();
@@ -29,29 +34,24 @@ public class TestClassSystem {
         System.out.println(bookLending2);
 
         System.out.println("-------------Library-Lending---------------");
-        Library library = new Library();
-        library.lending(max,bookLending);
-        System.out.println("-------------Library-List_Lending---------------");
-
-        List<Book> allLendingCollection = library.allLendingCollection();
-        System.out.println(allLendingCollection);
-
+        HomeLibrary hl = new HomeLibrary();
+//        hl.lendingBook(max,bookLending);
         System.out.println(bookLending);
-
-        System.out.println("-------------User-Bart---------------");
-
-        UserLending bart = new UserLending();
-        bart.setEmail("bart@wp.pl");
-        bart.setFirstName("Bart");
-        bart.setLastName("Bart");
-
-        System.out.println(bart);
-
-        System.out.println("-------------User-Bart-lending-------------");
-        library.lending(bart,bookLending2);
-
+//        hl.lendingBook(bart,bookLending2);
         System.out.println("-------------Library-List_Lending---------------");
-        library.allLendingCollection();
-        System.out.println(allLendingCollection);
+//        List<Book> books = hl.getLendingBookList();
+//        for (Book book : books) {
+//            System.out.println(book);
+//        }
+        System.out.println("-------------Ponowne wypożyczenie---------------");
+//        hl.lendingBook(max,bookLending);
+
+//        System.out.println("-------------Zwracanie książki---------------");
+//        hl.recoveredBook(max,bookLending);
+//        System.out.println(bookLending);
+//        List<Book> books1 = hl.getLendingBookList();
+//        for (Book book1 : books) {
+//            System.out.println(book1);
+//        }
     }
 }
