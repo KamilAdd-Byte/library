@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserLendingRepository extends JpaRepository<UserLending,Integer> {
+
 }

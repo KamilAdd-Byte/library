@@ -30,12 +30,23 @@ public class UserLending {
     @Email
     private String email;
 
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "book_list_id")
     @OneToMany
     private List<Book> bookUserList;
 
     public List<Book> addOneBookLending (Book book) {
         bookUserList.add(book);
         return bookUserList;
+    }
+
+    public void lendingBook(Book book){
+        try {
+            this.bookUserList.add(book);
+            System.out.println("Ksiązke udało sie wypożyczyć i dopisać do listy użytkownika");
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            System.out.println("Dodanie do listy nieudane");
+        }
+
     }
 }
