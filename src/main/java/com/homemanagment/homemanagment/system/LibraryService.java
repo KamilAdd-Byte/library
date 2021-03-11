@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LibraryService implements LendingSystem {
@@ -67,7 +68,7 @@ public class LibraryService implements LendingSystem {
     }
 
     @Override
-    public void lendingBook(UserLending userLending, Book book) {
+    public void lendingBook(UserLending userLending, final Book book) {
         if (!checkBookIsLending(book)) {
             System.err.println("Status wypożyczenia: "+book.isLending());
         } else {
@@ -76,6 +77,7 @@ public class LibraryService implements LendingSystem {
             operationSetParametersUser(userLending, book);
             System.out.println("Status wypożyczenia: "+book.isLending());
         }
+
     }
 
     private void operationSetParametersUser(UserLending userLending, Book book) {

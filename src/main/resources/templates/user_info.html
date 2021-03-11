@@ -2,7 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>Użytkownicy</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		  crossorigin="anonymous">
 </head>
 <body>
 <div>
@@ -25,8 +29,11 @@
 		</tr>
 		</tbody>
 	</table>
-	<a th:href="@{/user/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Dodaj użytkownika</a>
 
+	<div id="navi">
+		<a th:href="@{/user/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Dodaj użytkownika</a>
+		<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}"> Wróć na stronę główną</a>
+	</div>
 </div>
 </body>
 </html>

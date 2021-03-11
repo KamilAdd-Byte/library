@@ -29,29 +29,35 @@ public class LibraryController {
         this.service = service;
         this.userService = userService;
     }
-//    @GetMapping("/lending")
-//    public String getAllLendingBooks(Model model){
-//       model.addAttribute("listLendingBooks",homeLibrary.getLendingBookList());
+//    @PostMapping("/lending")
+//    public String getAllLendingBooks(@ModelAttribute("book") Book book,  @ModelAttribute("user") UserLending userLending, Model model){
+//       model.addAttribute("listLendingBooks",libraryService.getListLendingBooks());
+//       libraryService.lendingBook(userLending, book );
 //       return "/lending";
 //    }
-//    @GetMapping("/lending")
+//    @GetMapping("/lending/lending")
 //    public String showFormLendingBook(@ModelAttribute("user") UserLending userLending,
 //                                      @ModelAttribute("book") Book book,
-//                                      @ModelAttribute("library") HomeLibrary homeLibrary, Model model){
+//                                      Model model){
 //        model.addAttribute("book",book);
 //        model.addAttribute("user",userLending);
-//        model.addAttribute("lending",homeLibrary.lendingBook(userLending, book.getId(),book));
+//        model.addAttribute("lending",libraryService.lendingBook(userLending,book));
 //        return "/lending";
 //    }
-    @GetMapping("/lending/lending/{id}")
+    @GetMapping("/lending/{id}")
     public String lendingBookById(@PathVariable("id") int id,
                                   @ModelAttribute("user")UserLending userLending, Model model){
         Book book = service.findBookByID(id);
         model.addAttribute("book",book);
         model.addAttribute("listUser",userService.allUserList());
-        return "lending";
+        model.addAttribute("user",userLending);
+//        libraryService.lendingBook(userLending,book);
+       return "/lending";
 
     }
 
-
+//    @PostMapping("/lending/book")
+//    public String lending(@PathVariable("book") Book book,@ModelAttribute("user") UserLending userLending, Model model){
+//        libraryService.lendingBook(userLending, book);
+//    }
 }
