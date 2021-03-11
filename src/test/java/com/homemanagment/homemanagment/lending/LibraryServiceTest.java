@@ -5,15 +5,14 @@ import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.UserLendingDao;
 import com.homemanagment.homemanagment.service.BookService;
 import com.homemanagment.homemanagment.system.LibraryService;
-import org.glassfish.hk2.api.messaging.MessageReceiver;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Repeat;
-
 import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,6 +28,16 @@ class LibraryServiceTest {
 
     @Autowired
     LibraryService libraryService;
+
+    @BeforeEach
+    void setUp(){
+       libraryService.removeAllBooks();
+
+    }
+    @AfterEach
+    void cleanUp(){
+        libraryService.removeAllBooks();
+    }
 
     @Test
     @DisplayName("should if new book is not lending")
@@ -90,7 +99,7 @@ class LibraryServiceTest {
         newBook5.setAuthor("foo");
         newBook5.setIsbn("22344526543");
         //when
-        libraryService.removeAllBooks();
+        libraryService.removeAllBooks();//Wyczyszczenie listy!
         libraryService.addBookToLendingList(newBook1);
         libraryService.addBookToLendingList(newBook2);
         libraryService.addBookToLendingList(newBook3);
@@ -119,7 +128,34 @@ class LibraryServiceTest {
         //then
         assertTrue(bookLending.isLending());
     }
+    @Test
+    @DisplayName("should no lending book because book is lending")
+    void shouldNoLendingBookToUserBecauseBookIsLending(){
+        //given
+        Book hamcrest = new Book();
+        hamcrest.setTitle("First lending");
+        hamcrest.setAuthor("Author");
+        hamcrest.setIsbn("2234456543");
 
+        UserLending max = new UserLending();
+        max.setEmail("max@wp.pl");
+        max.setFirstName("Max");
+        max.setLastName("Max");
+
+        UserLending bart = new UserLending();
+        bart.setEmail("bart@wp.pl");
+        bart.setFirstName("Bart");
+        bart.setLastName("Bart");
+        //when
+        libraryService.lendingBook(max,hamcrest);
+        libraryService.lendingBook(bart,hamcrest);
+        //then
+
+        assertTrue(hamcrest.isLending());
+        assertThat(libraryService.getListLendingBooks(),hasSize(1));
+    }
+    
+    
 //    @Test
 //    @DisplayName("should book lending to user")
 //    void shouldLendingBookToUserAndCheckCollectionsNoEmpty(){
