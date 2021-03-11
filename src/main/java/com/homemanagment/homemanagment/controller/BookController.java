@@ -1,10 +1,9 @@
 package com.homemanagment.homemanagment.controller;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.service.BookServiceImpl;
-import com.homemanagment.homemanagment.system.HomeLibrary;
+import com.homemanagment.homemanagment.system.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -29,12 +28,12 @@ public class BookController {
     private final BookServiceImpl service;
 
     @Autowired
-    private final HomeLibrary homeLibrary;
+    private final LibraryService libraryService;
 
-    public BookController(final BookDao repository, final BookServiceImpl service, final HomeLibrary homeLibrary) {
+    public BookController(final BookDao repository, final BookServiceImpl service, final LibraryService libraryService) {
         this.repository = repository;
         this.service = service;
-        this.homeLibrary = homeLibrary;
+        this.libraryService = libraryService;
     }
 
     @GetMapping("/index")

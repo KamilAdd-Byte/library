@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface BookDao extends JpaRepository<Book,Integer> {
 
-    @Query(value = "SELECT * FROM Book b where b.title=?1",nativeQuery = true)
-    List<Book> searchBookByTitle (@Param("title") String title);
+//    @Query(value = "SELECT * FROM Book b where b.title=?1",nativeQuery = true)
+//    List<Book> searchBookByTitle (@Param("title") String title);
 }

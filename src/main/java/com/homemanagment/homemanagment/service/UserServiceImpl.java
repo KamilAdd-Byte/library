@@ -1,7 +1,7 @@
 package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.UserLending;
-import com.homemanagment.homemanagment.repositories.UserLendingRepository;
+import com.homemanagment.homemanagment.repositories.UserLendingDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     @Autowired
-    private UserLendingRepository repository;
+    private UserLendingDao repository;
 
     @Override
     public List<UserLending> getAllUser() {

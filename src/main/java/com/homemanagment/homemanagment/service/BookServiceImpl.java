@@ -65,7 +65,12 @@ public class BookServiceImpl implements BookService {
         return this.repository.findAll(pageable);
     }
 
-    public List<Book> search(String keyword){
-        return repository.searchBookByTitle(keyword);
+    @Override
+    public List<Book> search(String keyword) {
+        return null;
     }
+
+//    public List<Book> search(String keyword){
+//        return repository.searchBookByTitle(keyword);
+//    }
 }

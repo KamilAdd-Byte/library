@@ -50,6 +50,14 @@ public class Book implements Comparable<Book>{
         this.lending = false;
     }
 
+    public UserLending getUserLending() {
+        return userLending;
+    }
+
+    public void setUserLending(UserLending userLending) {
+        this.userLending = userLending;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
