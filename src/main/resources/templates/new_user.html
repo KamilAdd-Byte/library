@@ -5,7 +5,8 @@
 	<title>Wypożyczający</title>
 </head>
 <body>
-<form action="#" th:action="@{/add_user}" th:object="${user}" method="post">
+<h2>Dane użytkownika</h2>
+<form action="#" th:action="@{/user/save_user}" th:object="${user}" method="post">
 	<h2>Dane</h2>
 	<input type="text" th:field="*{firstName}"
 		   placeholder="Imię" class="form-control mb-4 col-4">

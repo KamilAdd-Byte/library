@@ -153,38 +153,7 @@ class LibraryServiceTest {
         assertTrue(hamcrest.isLending());
         assertThat(libraryService.getListLendingBooks(),hasSize(1));
     }
-    
-    
-//    @Test
-//    @DisplayName("should book lending to user")
-//    void shouldLendingBookToUserAndCheckCollectionsNoEmpty(){
-//        Book bookLending = new Book();
-//        bookLending.setTitle("First lending");
-//        bookLending.setAuthor("Author");
-//        bookLending.setIsbn("2234456543");
-//        Book bookLending2 = new Book();
-//        bookLending2.setTitle("Too lending");
-//        bookLending2.setAuthor("Rossenberg");
-//        bookLending2.setIsbn("44456665435");
-//
-//        UserLending max = new UserLending();
-//        max.setEmail("max@wp.pl");
-//        max.setFirstName("Max");
-//        max.setLastName("Max");
-//        UserLending bart = new UserLending();
-//        bart.setEmail("bart@wp.pl");
-//        bart.setFirstName("Bart");
-//        bart.setLastName("Bart");
-//        System.out.println(max);
-//        System.out.println(bart);
-//
-//        LibraryService hl = new LibraryService();
-//        //when
-//
-//        //then
-//
-//    }
-//
+
     @Test
     @DisplayName("should try recover book from user")
     void shouldTryRecoveredBookFromUser(){

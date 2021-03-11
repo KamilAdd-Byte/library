@@ -14,6 +14,8 @@ public class LibraryService implements LendingSystem {
 
     private List<Book> listLendingBooks = new ArrayList<>();
 
+    private List<UserLending> userLendingList = new ArrayList<>();
+
     @Autowired
     private UserLendingDao userRepo;
 
