@@ -99,7 +99,6 @@ class LibraryServiceTest {
         newBook5.setAuthor("foo");
         newBook5.setIsbn("22344526543");
         //when
-        libraryService.removeAllBooks();//Wyczyszczenie listy!
         libraryService.addBookToLendingList(newBook1);
         libraryService.addBookToLendingList(newBook2);
         libraryService.addBookToLendingList(newBook3);
@@ -186,29 +185,26 @@ class LibraryServiceTest {
 //
 //    }
 //
-//    @Test
-//    @DisplayName("should if book is lending to recovered is no lending")
-//    void shouldLendingStatusIsFalseToRecoveredBook(){
-//        //given
-//        Book bookLending = new Book();
-//        bookLending.setTitle("First lending");
-//        bookLending.setAuthor("Author");
-//        bookLending.setIsbn("2234456543");
-//
-//        UserLending bart = new UserLending();
-//        bart.setEmail("bart@wp.pl");
-//        bart.setFirstName("Bart");
-//        bart.setLastName("Bart");
-//
-//        LibraryService hl = new LibraryService();
-//
-//        //when
-//        hl.lendingBook(bart, bookLending.getId(), bookLending);
-//        hl.recoveredBook(bart,bookLending);
-//
-//        //then
-//        assertFalse(bookLending.isLending());
-//        assertThat(hl.getLendingBookList(),hasSize(0));
-//    }
+    @Test
+    @DisplayName("should try recover book from user")
+    void shouldTryRecoveredBookFromUser(){
+        //given
+        Book bookLending = new Book();
+        bookLending.setTitle("First lending");
+        bookLending.setAuthor("Author");
+        bookLending.setIsbn("2234456543");
+
+        UserLending bart = new UserLending();
+        bart.setEmail("bart@wp.pl");
+        bart.setFirstName("Bart");
+        bart.setLastName("Bart");
+
+        //when
+       libraryService.lendingBook(bart,bookLending);
+       libraryService.recoveredBook(bart,bookLending);
+        //then
+       assertThat(bookLending.isLending(),is(false));
+
+    }
 
 }

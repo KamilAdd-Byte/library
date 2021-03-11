@@ -40,7 +40,7 @@ public class LibraryService implements LendingSystem {
         if (!book.isLending()) {
             listLendingBooks.add(book);
         } else
-            System.out.println("Nie można wypozyczyć!");
+            System.out.println("Nie można wypożyczyć!");
     }
 
     @Override
@@ -69,16 +69,35 @@ public class LibraryService implements LendingSystem {
         if (!checkBookIsLending(book)) {
             System.err.println("Status wypożyczenia: "+book.isLending());
         } else {
-            saveNewUser(userLending);
-            book.setUserLending(userLending);
-            addBookToLendingList(book);
-            book.setLending(true);
+            userRepo.save(userLending);
+            operationSetParametersBook(userLending, book);
+            operationSetParametersUser(userLending, book);
             System.out.println("Status wypożyczenia: "+book.isLending());
         }
     }
 
+    private void operationSetParametersUser(UserLending userLending, Book book) {
+        userLending.addBookToUserCollection(book);
+        userLending.getSizeCollectionLendingBooks();
+    }
+
+    private void operationSetParametersBook(UserLending userLending, Book book) {
+        book.setUserLending(userLending);
+        addBookToLendingList(book);
+        book.setLending(true);
+    }
+
     @Override
     public void recoveredBook(UserLending userLending, Book book) {
+        if (!checkBookIsLending(book)){
+            book.setLending(false);
+            book.setUserLending(null);
+            userLending.removeBookToUserCollection(book);
+            System.out.println("Status wypożyczenia: "+ book.isLending());
+        }else {
+            System.err.println("Błąd zwracania!");
+        }
+
     }
 
     @Override
