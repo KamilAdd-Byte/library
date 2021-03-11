@@ -7,6 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -28,9 +29,8 @@ public class UserLending {
     @Email
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "id_book")
-    private Book book;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Set<Book> lendingBooks;
 }
 
 

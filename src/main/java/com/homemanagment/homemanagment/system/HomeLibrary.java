@@ -11,22 +11,27 @@ import java.util.List;
 @Service
 public class HomeLibrary implements LendingSystem{
 
-    private final List<Book>lendingBookList = new ArrayList<>();
-
     @Autowired
     private BookDao repository;
+
+    private final List<Book>lendingBookList = new ArrayList<>();
+
+    public HomeLibrary() {
+    }
 
     public List<Book> getLendingBookList(){
         return lendingBookList;
     }
+
     @Override
-    public void lendingBook(UserLending userLending, Book book) {
+    public void lendingBook(UserLending userLending, int id, Book book) {
         if (!book.isLending()){
             book.setLending(true);
             lendingBookList.add(book);
             book.setUserLending(userLending);
         }else
             System.out.println("Book actual is lending");
+
     }
 
     @Override

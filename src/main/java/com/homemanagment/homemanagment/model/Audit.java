@@ -16,6 +16,7 @@ import java.util.Objects;
 
 @Embeddable
 @Getter
+public
 class Audit {
     private LocalDateTime createOn;
     private LocalDateTime updateOn;

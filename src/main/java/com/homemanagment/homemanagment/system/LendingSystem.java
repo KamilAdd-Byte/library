@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface LendingSystem {
-    void lendingBook (UserLending userLending, Book book);
+    void lendingBook (UserLending userLending, int id,Book book);
     void recoveredBook (UserLending userLending, Book book);
 }

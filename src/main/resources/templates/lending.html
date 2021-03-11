@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>New book</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		  crossorigin="anonymous">
+	<style>
+        #logo
+        {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+        #navi
+        {
+            padding: 30px;
+        }
+        #footer
+        {
+            clear: both;
+            background-color: black;
+            font-size: 22px;
+            color: white;
+            text-align: center;
+        }
+	</style>
+</head>
+<body>
+<div id="container"  th:align="center">
+	<div id="logo">
+		<h1 align="center">Domowa biblioteka</h1>
+	</div>
+	<h2 style="font: message-box">Wprowadź informacje o książce</h2>
+	<form action="#" method="POST" th:action="@{/lending}" th:object="${book}">
+		<table th:border="2"class="table table-striped table-responsive-lg">
+			<!--tu przyciski-->
+			<thead>
+			<tr>
+				<th>Tytuł książki</th>
+				<th>Autor książki</th>
+				<th>Opis książki</th>
+				<th>Status</th>
+
+				<!--				<th>Kategoria</th>-->
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:align="center" th:field="${book}">
+				<td th:text="${book.title}"></td>
+				<td th:text="${book.author}"></td>
+				<td th:text="${book.description}"></td>
+				<td th:text="${book.isLending()}"></td>
+				<td>
+					<a th:href="@{/showNewUserForm}">Wypożycz</a>-->
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<form action="#" th:action="@{/add_user}" th:object="${user}" method="post">
+			<h2>Dane</h2>
+			<input type="text" th:field="*{firstName}"
+				   placeholder="Imię" class="form-control mb-4 col-4">
+
+			<input type="text" th:field="*{lastName}"
+				   placeholder="Nazwisko" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{email}"
+				   placeholder="E-mail (optional)" class="form-control mb-4 col-4">
+			<button class="bg-success btn-lg" type="submit">Dodaj wypożyczającego</button>
+		</form>
+	</form>
+
+
+	</form>
+	<div id="navi">
+		<a th:href="@{/}" class="bg-dark btn btn-outline-primary" th:align="center"> Wróć na stronę główną</a>
+	</div>
+</div>
+<div id="footer">
+	&copy Home Management System
+	<br>
+	Wszelkie prawa zastrzeżone @autor KamilAdd-Byte
+</div>
+</body>
+</html>
+
+
+
+

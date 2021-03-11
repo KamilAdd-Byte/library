@@ -5,12 +5,13 @@ import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.system.HomeLibrary;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Repeat;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
-
+@SpringBootTest
 class HomeLibraryTest {
 
     @Test
@@ -61,7 +62,7 @@ class HomeLibraryTest {
 
         HomeLibrary hl = new HomeLibrary();
         //when
-        hl.lendingBook(max,bookLending);
+        hl.lendingBook(max,bookLending.getId(),bookLending);
         //then
         assertTrue(bookLending.isLending());
         assertThat(hl.getLendingBookList(),hasSize(1));
@@ -84,7 +85,7 @@ class HomeLibraryTest {
         HomeLibrary hl = new HomeLibrary();
 
         //when
-        hl.lendingBook(bart,bookLending);
+        hl.lendingBook(bart, bookLending.getId(), bookLending);
         hl.recoveredBook(bart,bookLending);
 
         //then
