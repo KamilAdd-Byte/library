@@ -43,7 +43,7 @@ public class Book implements Comparable<Book>{
     private boolean lending;
 
     @JoinColumn(name = "id_user")
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @OneToOne(cascade = CascadeType.DETACH)
     private UserLending userLending;
 
     public Book(boolean lending) {
@@ -79,6 +79,4 @@ public class Book implements Comparable<Book>{
             return -1;
         return this.title.compareTo(book.title);
     }
-
-
 }
