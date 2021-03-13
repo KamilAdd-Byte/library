@@ -2,6 +2,8 @@ package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.Audit;
 import com.homemanagment.homemanagment.model.Book;
+import com.homemanagment.homemanagment.model.CategoryBook;
+import com.homemanagment.homemanagment.model.StatusLending;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
@@ -76,17 +78,22 @@ class BookServiceImplTest {
         expected.setIsbn("222323343444");
         expected.setDescription("Example description");
         expected.setLocalization(3);
+//        expected.setStatusLending(StatusLending.NO_LENDING);
+        expected.setCategoryBook(CategoryBook.SAILING);
 
         //when
         bookService.saveBook(expected);
         Book added = (Book) session.createQuery("from Book book where book.title=:title and book.author=:author" +
-                " and book.isbn=:isbn and book.description=:description and book.localization=:localization")
+                " and book.isbn=:isbn and book.description=:description and book.localization=:localization and book.categoryBook=:categoryBook")
                 .setParameter("title",expected.getTitle())
                 .setParameter("author",expected.getAuthor())
                 .setParameter("isbn",expected.getIsbn())
                 .setParameter("description",expected.getDescription())
                 .setParameter("localization",expected.getLocalization())
+//                .setParameter("statusLending",expected.getStatusLending())
+                .setParameter("categoryBook",expected.getCategoryBook())
                 .getSingleResult();
+        System.out.println(expected.toString());
         //then
         Assertions.assertEquals(expected.getId(),added.getId());
     }

@@ -39,7 +39,7 @@
 			</a>
 		</nav>
 		<div id="sub-navbar">
-			<a th:href="@{/user/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Dodaj</a>
+			<a th:href="@{/userLending/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Dodaj</a>
 			<a th:href="@{/information}" class="bg-warning btn btn-warning btn-lg mb-2"> Info </a>
 		</div>
 
@@ -67,36 +67,37 @@
 			</tr>
 			</tbody>
 		</table>
-		<form>
-			<table th:border="2"class="table table-striped table-responsive-lg">
-				<!--tu przyciski-->
-				<thead>
-				<tr>
-					<th>Imię</th>
-					<th>Nazwisko</th>
-					<th>E-mail</th>
-					<th>Wypożycz</th>
 
-					<!--				<th>Kategoria</th>-->
-				</tr>
-				</thead>
-				<tbody>
-				<tr th:align="center" th:each="user: ${listUser}">
-					<td th:text="${user.firstName}"></td>
-					<td th:text="${user.lastName}"></td>
-					<td th:text="${user.email}"></td>
-					<td>
-						<form>
-							<input type="checkbox" name="lending" value="lending">Wypożycz
-						</form>
-					</td>
-				</tr>
-				</tbody>
-			</table>
-			<button class="bg-success btn-lg" type="submit">Wypożycz</button>
-		</form>
+
 	</form>
+	<form action="#" th:action="@{/lending}" method="post">
+		<table th:border="2"class="table table-striped table-responsive-lg">
+			<!--tu przyciski-->
+			<thead>
+			<tr>
+				<th>Imię</th>
+				<th>Nazwisko</th>
+				<th>E-mail</th>
+				<th>Wypożycz</th>
 
+				<!--				<th>Kategoria</th>-->
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:align="center" th:each="userLending: ${list}">
+				<td th:text="${userLending.firstName}"></td>
+				<td th:text="${userLending.lastName}"></td>
+				<td th:text="${userLending.email}"></td>
+				<td>
+					<form action="#" th:action="@{/lending}" method="post">
+						<input type="checkbox">Wypożycz
+					</form>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<button class="bg-success btn-lg" type="submit">Wypożycz</button>
+	</form>
 	<div id="navi">
 		<a th:href="@{/}" class="bg-dark btn btn-outline-primary" th:align="center"> Wróć na stronę główną</a>
 	</div>

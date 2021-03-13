@@ -55,6 +55,18 @@
 					   th:field="*{isbn}" type="text">
 				<input class="form-control mb-4 col-4" placeholder="Lokalizacja na regale"
 					   th:field="*{localization}" type="text">
+				<fieldset>
+					<legend>Kategoria książki</legend>
+					<input th:field="*{categoryBook}" name="categoryBook" value="EDUCATION" type="radio" id="1"> <label for="1"> Pedagogika</label>
+					<input th:field="*{categoryBook}" name="categoryBook" value="CRIMINAL" type="radio" id="2"> <label for="2"> Kryminał</label>
+					<input th:field="*{categoryBook}" name="categoryBook" value="FANTASTIC" type="radio" id="3"> <label for="3"> Fantastyka</label>
+					<input th:field="*{categoryBook}" name="categoryBook" value="SAILING" type="radio" id="4"> <label for="4"> Żeglarstwo</label>
+					<input th:field="*{categoryBook}" name="categoryBook" value="PSYCHOLOGIST" type="radio" id="5"> <label for="5"> Psychologia</label>
+					<input th:field="*{categoryBook}" name="categoryBook" value="POETRY" type="radio" id="6"> <label for="6"> Poezja</label>
+					<input th:field="*{categoryBook}" name="categoryBook" value="PROGRAMMING" type="radio" id="7"> <label for="7"> Programowanie</label>
+					<input th:field="*{categoryBook}" name="categoryBook" value="KIDS" type="radio" id="8"> <label for="8"> Dzieci</label>
+					<input th:field="*{categoryBook}" name="categoryBook" value="OTHERS" type="radio" id="9"> <label for="9"> Inna</label>
+				</fieldset>
 				<button class="bg-success btn-lg" type="submit">Dodaj</button>
 			</form>
 			<div id="navi">

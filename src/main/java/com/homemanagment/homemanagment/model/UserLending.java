@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -16,49 +13,34 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 public class UserLending {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(unique = true,name = "id")
     private int id;
 
-    @Size(min = 2, max = 30)
     private String firstName;
 
-    @Size(min = 2, max = 30)
     private String lastName;
 
-    @Email
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<Book> collectionLendingBook = new HashSet<>();
+    @OneToOne
+    @JoinColumn(name = "id_lending")
+    private LendingBooks lendingBooks;
 
-    public void addBookToUserCollection(Book book){
-        try {
-            collectionLendingBook.add(book);
-            System.out.println("Dodano do kolekcji użytkownika");
-        } catch (NullPointerException e){
-            e.printStackTrace();
-            System.err.println("Nie dodano do kolekcji!");
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserLending)) return false;
+        UserLending userLending = (UserLending) o;
+        return id == userLending.id && Objects.equals(firstName, userLending.firstName) && Objects.equals(lastName, userLending.lastName) && Objects.equals(email, userLending.email);
     }
 
-    public void removeBookToUserCollection(Book book){
-        try {
-            collectionLendingBook.remove(book);
-            System.out.println("Książka usunięta z kolekcji użytkownika");
-        }catch (NullPointerException e){
-            e.printStackTrace();
-            System.err.println("Nie udało się usunac z kolekcji");
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email);
     }
-
-    public void getSizeCollectionLendingBooks(){
-        for (int i = 0; i < collectionLendingBook.size(); i++) {
-            System.out.println("Książek wypożyczonych: " + collectionLendingBook.size());
-        }
-    }
-
 }
 
 

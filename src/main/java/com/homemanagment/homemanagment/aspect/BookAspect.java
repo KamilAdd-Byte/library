@@ -21,7 +21,7 @@ public class BookAspect {
     public void logBookInfoAfterExecuteServiceMethod(JoinPoint joinPoint){
         Object[] args = joinPoint.getArgs();
         System.out.println("Book method executed");
-        joinPoint.getSignature();
+        joinPoint.getSignature().toString();
         Arrays.toString(args);
     }
 

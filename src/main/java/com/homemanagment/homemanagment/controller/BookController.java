@@ -1,9 +1,9 @@
 package com.homemanagment.homemanagment.controller;
 
 import com.homemanagment.homemanagment.model.Book;
+import com.homemanagment.homemanagment.model.CategoryBook;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.service.BookServiceImpl;
-import com.homemanagment.homemanagment.system.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -27,13 +27,10 @@ public class BookController {
     @Autowired
     private final BookServiceImpl service;
 
-    @Autowired
-    private final LibraryService libraryService;
 
-    public BookController(final BookDao repository, final BookServiceImpl service, final LibraryService libraryService) {
+    public BookController(final BookDao repository, final BookServiceImpl service) {
         this.repository = repository;
         this.service = service;
-        this.libraryService = libraryService;
     }
 
     @GetMapping("/index")
@@ -60,11 +57,12 @@ public class BookController {
     public String showNewBookForm(Model model) {
         Book book = new Book();
         model.addAttribute("book", book);
+        model.addAttribute("category",book.getCategoryBook());
         return "new_book";
     }
 
     @PostMapping(value = "/save_book")
-    public String saveNewBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult) {
+    public String saveNewBook(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult,Model model) {
         if (bindingResult.hasErrors()) {
             List<ObjectError> objectErrorList = bindingResult.getAllErrors();
             objectErrorList.forEach(objectError -> System.out.println(objectError.getDefaultMessage()));
@@ -124,4 +122,5 @@ public class BookController {
         model.addAttribute("keyword", search);
         return "index";
     }
+
 }

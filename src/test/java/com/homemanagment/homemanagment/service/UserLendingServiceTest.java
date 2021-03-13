@@ -1,6 +1,5 @@
 package com.homemanagment.homemanagment.service;
 
-import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,9 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
-class UserServiceTest {
+class UserLendingServiceTest {
 
     @Autowired
     BookService bookService;

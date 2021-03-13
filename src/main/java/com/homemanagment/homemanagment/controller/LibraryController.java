@@ -2,9 +2,10 @@ package com.homemanagment.homemanagment.controller;
 
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.repositories.UserDao;
 import com.homemanagment.homemanagment.service.BookServiceImpl;
 import com.homemanagment.homemanagment.service.UserServiceImpl;
-import com.homemanagment.homemanagment.system.LibraryService;
+import com.homemanagment.homemanagment.system.LibraryHomeSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,50 +15,31 @@ import org.springframework.web.bind.annotation.*;
 public class LibraryController {
 
     @Autowired
-    private final LibraryService libraryService;
+    private final UserServiceImpl userService;
 
     @Autowired
     private final BookServiceImpl service;
 
+    private final UserDao userRepository;
 
     @Autowired
-    private final UserServiceImpl userService;
+    private final LibraryHomeSystem hs;
 
-    public LibraryController(final LibraryService libraryService, final BookServiceImpl service,
-                             final UserServiceImpl userService) {
-        this.libraryService = libraryService;
-        this.service = service;
+    public LibraryController(final UserServiceImpl userService, final BookServiceImpl service, UserDao userRepository, LibraryHomeSystem hs) {
         this.userService = userService;
+        this.service = service;
+        this.userRepository = userRepository;
+        this.hs = hs;
     }
-//    @PostMapping("/lending")
-//    public String getAllLendingBooks(@ModelAttribute("book") Book book,  @ModelAttribute("user") UserLending userLending, Model model){
-//       model.addAttribute("listLendingBooks",libraryService.getListLendingBooks());
-//       libraryService.lendingBook(userLending, book );
-//       return "/lending";
-//    }
-//    @GetMapping("/lending/lending")
-//    public String showFormLendingBook(@ModelAttribute("user") UserLending userLending,
-//                                      @ModelAttribute("book") Book book,
-//                                      Model model){
-//        model.addAttribute("book",book);
-//        model.addAttribute("user",userLending);
-//        model.addAttribute("lending",libraryService.lendingBook(userLending,book));
-//        return "/lending";
-//    }
+
     @GetMapping("/lending/{id}")
     public String lendingBookById(@PathVariable("id") int id,
-                                  @ModelAttribute("user")UserLending userLending, Model model){
+                                  @ModelAttribute("user") UserLending userLending, Model model){
         Book book = service.findBookByID(id);
         model.addAttribute("book",book);
-        model.addAttribute("listUser",userService.allUserList());
-        model.addAttribute("user",userLending);
-//        libraryService.lendingBook(userLending,book);
+        model.addAttribute("list",userRepository.findAll());
+        model.addAttribute("user", userLending);
        return "/lending";
-
     }
 
-//    @PostMapping("/lending/book")
-//    public String lending(@PathVariable("book") Book book,@ModelAttribute("user") UserLending userLending, Model model){
-//        libraryService.lendingBook(userLending, book);
-//    }
 }

@@ -1,0 +1,31 @@
+package com.homemanagment.homemanagment.model;
+
+import lombok.ToString;
+
+@ToString
+public enum CategoryBook {
+    CRIMINAL("Kryminał"),
+    PSYCHOLOGIST("Psychologia"),
+    PROGRAMMING("Programowanie"),
+    FANTASTIC("Fantastyka"),
+    SAILING("Żeglarstwo"),
+    ROMANTIC("Romans"),
+    POETRY("Poezja"),
+    EDUCATION("Pedagogika, edukacja"),
+    KIDS("Dla dzieci"),
+    OTHERS("Inne");
+
+    public String description;
+
+    CategoryBook(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+}

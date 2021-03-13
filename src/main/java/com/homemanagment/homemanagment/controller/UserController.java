@@ -1,7 +1,7 @@
 package com.homemanagment.homemanagment.controller;
 
 import com.homemanagment.homemanagment.model.UserLending;
-import com.homemanagment.homemanagment.repositories.UserLendingDao;
+import com.homemanagment.homemanagment.repositories.UserDao;
 import com.homemanagment.homemanagment.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,15 +16,15 @@ public class UserController {
     @Autowired
     private final UserServiceImpl userService;
     @Autowired
-    private final UserLendingDao repository;
+    private final UserDao repository;
 
-    public UserController(final UserServiceImpl service, final UserLendingDao repository) {
+    public UserController(final UserServiceImpl service, final UserDao repository) {
         this.userService = service;
         this.repository = repository;
     }
     @GetMapping("/user_info")
     public String getAllUser(Model model){
-        model.addAttribute("listAllUser",userService.allUserList());
+        model.addAttribute("listAllUser",repository.findAll());
         return "user_info";
     }
 

@@ -22,16 +22,16 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr th:align="center" th:each="user: ${listAllUser}">
-			<td th:text="${user.firstName}"></td>
-			<td th:text="${user.lastName}"></td>
-			<td th:text="${user.email}"></td>
+		<tr th:align="center" th:each="userLending: ${listAllUser}">
+			<td th:text="${userLending.firstName}"></td>
+			<td th:text="${userLending.lastName}"></td>
+			<td th:text="${userLending.email}"></td>
 		</tr>
 		</tbody>
 	</table>
 
 	<div id="navi">
-		<a th:href="@{/user/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Dodaj użytkownika</a>
+		<a th:href="@{/userLending/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Dodaj użytkownika</a>
 		<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}"> Wróć na stronę główną</a>
 	</div>
 </div>
