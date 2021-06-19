@@ -33,7 +33,7 @@ public class LibraryRestController {
     ResponseEntity<?> lendingBook(@ModelAttribute("book")Book book,
                                   @ModelAttribute("user") UserLending userLending, Model model){
         model.addAttribute("listAllUser",userRepository.findAll());
-        userService.lendingBook(book);
+        userService.lendingBook(book,userLending);
         return ResponseEntity.noContent().build();
     }
 }

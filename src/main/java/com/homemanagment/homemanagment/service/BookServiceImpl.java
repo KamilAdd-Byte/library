@@ -25,7 +25,7 @@ public class BookServiceImpl implements BookService {
     private UserServiceImpl userService;
 
     @Autowired
-    LibraryHomeSystem lsh;
+    LendingBookService lendingBookService;
 
     @Autowired
     SessionFactory sessionFactory;
@@ -65,9 +65,9 @@ public class BookServiceImpl implements BookService {
     }
 
     // Metoda w servisie łącząca usera i book
-    @Override
-    public void lendingBook(Book book, UserLending userLending) {
-        lsh.lendingBook(userLending,book);
+    @Transactional
+    public void lendingBook(Book book,UserLending userLending){
+        lendingBookService.createNewLending(book, userLending);
     }
 
     @Override

@@ -1,12 +1,15 @@
 package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.Book;
+import com.homemanagment.homemanagment.model.StatusLending;
 import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.repositories.UserDao;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BookDao bookRepository;
 
+    @Autowired
+    private LendingBookService lendingBookService;
 
     @Override
     public List<UserLending> allUsers() {
@@ -31,17 +36,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void addUser(UserLending userLending) {
         this.userRepository.save(userLending);
     }
+
     @Override
+    @Transactional
     public void removeUser(UserLending userLending) {
         this.userRepository.delete(userLending);
     }
 
     @Override
-    public void lendingBook(Book book) {
+    @Transactional
+    public void lendingBook(Book book,UserLending userLending) {
        booksLendingList.add(book);
+
+       book.setUserLending(userLending);
+       book.setStatusLending(StatusLending.LENDING);
     }
 
     @Override
@@ -53,10 +65,5 @@ public class UserServiceImpl implements UserService {
             booksHistoryList.add(book);
         }
         return result;
-    }
-
-    @Override
-    public void addBookToUserCollection(Book bookLending) {
-        booksLendingList.add(bookLending);
     }
 }

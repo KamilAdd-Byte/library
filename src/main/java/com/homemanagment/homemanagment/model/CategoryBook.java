@@ -1,8 +1,10 @@
 package com.homemanagment.homemanagment.model;
 
+import lombok.Getter;
 import lombok.ToString;
 
 @ToString
+@Getter
 public enum CategoryBook {
     CRIMINAL("Kryminał"),
     PSYCHOLOGIST("Psychologia"),
@@ -25,7 +27,4 @@ public enum CategoryBook {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

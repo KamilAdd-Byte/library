@@ -39,7 +39,7 @@
 			</a>
 		</nav>
 		<div id="sub-navbar">
-			<a th:href="@{/userLending/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Dodaj</a>
+			<a th:href="@{/user/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Dodaj</a>
 			<a th:href="@{/information}" class="bg-warning btn btn-warning btn-lg mb-2"> Info </a>
 		</div>
 
@@ -63,7 +63,7 @@
 				<td th:text="${book.title}"></td>
 				<td th:text="${book.author}"></td>
 				<td th:text="${book.description}"></td>
-				<td th:text="${book.isLending()}"></td>
+				<td th:text="${book.statusLending}"></td>
 			</tr>
 			</tbody>
 		</table>
@@ -89,7 +89,7 @@
 				<td th:text="${userLending.lastName}"></td>
 				<td th:text="${userLending.email}"></td>
 				<td>
-					<form action="#" th:action="@{/lending}" method="post">
+					<form action="#">
 						<input type="checkbox">Wypożycz
 					</form>
 				</td>

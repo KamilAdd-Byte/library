@@ -25,8 +25,8 @@ public class BookRestController {
          return "Done!";
         }
 
-    @PostMapping("/lending")
-    public void lendingBook (@RequestBody UserLending userLending, @RequestBody Book book){
-        service.lendingBook(book, userLending);
-    }
+//    @PostMapping("/lending")
+//    public void lendingBook (@RequestBody UserLending userLending, @RequestBody Book book){
+//        service.lendingBook(book, userLending);
+//    }
 }

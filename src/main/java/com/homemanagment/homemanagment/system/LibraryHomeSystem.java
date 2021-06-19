@@ -1,12 +1,15 @@
 package com.homemanagment.homemanagment.system;
 
 import com.homemanagment.homemanagment.model.Book;
+import com.homemanagment.homemanagment.model.LendingBooks;
 import com.homemanagment.homemanagment.model.UserLending;
-import com.homemanagment.homemanagment.repositories.BookDao;
+import com.homemanagment.homemanagment.repositories.LendingBooksDao;
+import com.homemanagment.homemanagment.service.BookServiceImpl;
 import com.homemanagment.homemanagment.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -14,35 +17,31 @@ public class LibraryHomeSystem implements LendingSystem{
 
     private final Map<Integer, UserLending> users = new HashMap<>();
 
-    UserServiceImpl userService;
-
-    private BookDao bookRepository;
+    private final LendingBooksDao lendingBooksRepository;
+    private final BookServiceImpl bookService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public LibraryHomeSystem(UserServiceImpl userService, BookDao bookRepository) {
+    public LibraryHomeSystem(LendingBooksDao lendingBooksRepository, BookServiceImpl bookService, UserServiceImpl userService) {
+        this.lendingBooksRepository = lendingBooksRepository;
+        this.bookService = bookService;
         this.userService = userService;
-        this.bookRepository = bookRepository;
     }
 
     @Override
-    public void addBookToHistoryList(Book book) {
-
+    public List<LendingBooks> allLendingBooks() {
+        return lendingBooksRepository.findAll();
     }
 
     @Override
-    public void addBookToLendingList(Book book) {
-
+    public void addLendingOperation(LendingBooks lendingBooks) {
+        this.lendingBooksRepository.save(lendingBooks);
     }
 
-    @Override
-    public boolean checkBookIsLending(Book book) {
-        return false;
-    }
 
     @Override
-    public void lendingBook(UserLending userLending, Book book){
+    public void lendingBook(Book book) {
 
-            userService.lendingBook(book);
     }
 
     @Override
@@ -54,6 +53,4 @@ public class LibraryHomeSystem implements LendingSystem{
     public void removeAllBooks() {
 
     }
-
-
 }

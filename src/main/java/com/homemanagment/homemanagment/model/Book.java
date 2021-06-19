@@ -45,7 +45,26 @@ public class Book implements Comparable<Book> {
     @Enumerated(EnumType.STRING)
     private CategoryBook categoryBook;
 
+    @OneToOne
+    @JoinColumn(name = "id")
+    private UserLending userLending;
 
+    public StatusLending getStatusLending() {
+        return statusLending;
+    }
+
+    public void setStatusLending(StatusLending statusLending) {
+        this.statusLending = statusLending;
+    }
+
+    public UserLending getUserLending() {
+        return userLending;
+    }
+
+    public void setUserLending(UserLending userLending) {
+        userLending.getId();
+        this.userLending = userLending;
+    }
 
     @Override
     public int compareTo(Book book) {

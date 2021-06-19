@@ -57,7 +57,6 @@ public class BookController {
     public String showNewBookForm(Model model) {
         Book book = new Book();
         model.addAttribute("book", book);
-        model.addAttribute("category",book.getCategoryBook());
         return "new_book";
     }
 

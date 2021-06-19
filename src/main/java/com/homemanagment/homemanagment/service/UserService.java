@@ -11,8 +11,7 @@ public interface UserService {
     List<UserLending> allUsers();
     void addUser(UserLending userLending);
     void removeUser(UserLending userLending);
-    void  lendingBook(Book book);
+    void lendingBook(Book book,UserLending userLending);
     boolean recoveredBook (Book book);
 
-    void addBookToUserCollection(Book bookLending);
 }

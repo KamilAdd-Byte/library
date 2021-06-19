@@ -25,7 +25,7 @@ public class UserLending {
 
     private String email;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_lending")
     private LendingBooks lendingBooks;
 

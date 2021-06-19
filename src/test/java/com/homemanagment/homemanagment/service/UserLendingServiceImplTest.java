@@ -41,7 +41,7 @@ class UserLendingServiceImplTest {
         max.setLastName("Max");
         //when
         UserServiceImpl userService = new UserServiceImpl();
-        userService.addBookToUserCollection(bookLending);
+
         List<Book> booksLendingList = userService.getBooksLendingList();
 
         assertThat(booksLendingList,hasSize(1));
@@ -59,7 +59,7 @@ class UserLendingServiceImplTest {
         max.setFirstName("Max");
         max.setLastName("Max");
         //when
-        userService.lendingBook(bookLending);
+        userService.lendingBook(bookLending,max);
         System.out.println(bookLending);
 
 
