@@ -33,6 +33,7 @@ public class LendingBookServiceImpl implements LendingBookService {
     public List<LendingBooks> allLendingBooksList() {
         return lendingRepository.findAll();
     }
+
     @Override
     @Transactional
     public void addLendingOperation(UserLending userLending,Book book){
