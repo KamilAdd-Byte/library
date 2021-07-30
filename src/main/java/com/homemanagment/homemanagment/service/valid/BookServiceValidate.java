@@ -1,4 +1,4 @@
-package com.homemanagment.homemanagment.service;
+package com.homemanagment.homemanagment.service.valid;
 
 import com.homemanagment.homemanagment.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;

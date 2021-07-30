@@ -1,7 +1,10 @@
-package com.homemanagment.homemanagment.service;
+package com.homemanagment.homemanagment.service.impl;
 
 import com.homemanagment.homemanagment.model.Book;
+import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.BookDao;
+import com.homemanagment.homemanagment.service.BookService;
+import com.homemanagment.homemanagment.service.LendingBookService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +23,14 @@ public class BookServiceImpl implements BookService {
     private BookDao repository;
 
     @Autowired
+    private UserServiceImpl userService;
+
+    @Autowired
+    LendingBookService lendingBookService;
+
+    @Autowired
     SessionFactory sessionFactory;
+
 
     @Override
     @Transactional
@@ -56,6 +65,12 @@ public class BookServiceImpl implements BookService {
         //TODO Update method!!!! Override and create new book instead update
     }
 
+    // Metoda w servisie łącząca usera i book
+    @Transactional
+    public void lendingBook(Book book,UserLending userLending){
+        lendingBookService.createNewLending(book, userLending);
+    }
+
     @Override
     public Page<Book> findPaginated(int pageNumber, int pageSize, String sortField, String sortDirection) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
@@ -65,7 +80,18 @@ public class BookServiceImpl implements BookService {
         return this.repository.findAll(pageable);
     }
 
-    public List<Book> search(String keyword){
-        return repository.searchBookByTitle(keyword);
+    public void letLendingOneBook (UserLending userLending, Book book){
+        repository.findById(book.getId());
+
     }
+
+
+    @Override
+    public List<Book> search(String keyword) {
+        return null;
+    }
+
+//    public List<Book> search(String keyword){
+//        return repository.searchBookByTitle(keyword);
+//    }
 }

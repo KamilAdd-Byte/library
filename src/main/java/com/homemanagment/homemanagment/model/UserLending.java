@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -16,26 +13,34 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 public class UserLending {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(unique = true,name = "id")
     private int id;
 
-    @Size(min = 2,max = 30)
     private String firstName;
 
-    @Size(min = 2,max = 30)
     private String lastName;
 
-    @Email
     private String email;
 
-    @JoinColumn(name = "book_id")
-    @OneToMany
-    private List<Book> bookUserList;
+    @ManyToOne
+    @JoinColumn(name = "id_lending")
+    private LendingBooks lendingBooks;
 
-    public List<Book> addOneBookLending (Book book) {
-        bookUserList.add(book);
-        return bookUserList;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserLending)) return false;
+        UserLending userLending = (UserLending) o;
+        return id == userLending.id && Objects.equals(firstName, userLending.firstName) && Objects.equals(lastName, userLending.lastName) && Objects.equals(email, userLending.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email);
     }
 }
+
+

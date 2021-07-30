@@ -1,9 +1,9 @@
 package com.homemanagment.homemanagment.repositories;
 
-import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.LendingBooks;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserLendingRepository extends JpaRepository<UserLending,Integer> {
+public interface LendingBooksDao extends JpaRepository<LendingBooks,Integer> {
 }

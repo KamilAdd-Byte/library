@@ -1,4 +1,4 @@
-package com.homemanagment.homemanagment.controller;
+package com.homemanagment.homemanagment.controller.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

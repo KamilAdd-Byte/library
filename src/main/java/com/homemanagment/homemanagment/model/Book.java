@@ -1,21 +1,24 @@
 package com.homemanagment.homemanagment.model;
 
+import com.homemanagment.homemanagment.model.type.CategoryBook;
+import com.homemanagment.homemanagment.model.type.StatusLending;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-public class Book implements Comparable<Book>{
+public class Book implements Comparable<Book> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_book",nullable = false)
     private int id;
 
     @Size(min = 1, max = 40,message = "Tytuł nie może być pusty")
@@ -39,28 +42,32 @@ public class Book implements Comparable<Book>{
     @Embedded
     private Audit audit = new Audit();
 
-    @Column(name = "lending")
-    private boolean lending;
+    @Enumerated(EnumType.STRING)
+    private StatusLending statusLending;
 
-    @JoinColumn(name = "id_user")
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Please select category book")
+    private CategoryBook categoryBook;
+
+    @OneToOne
+    @JoinColumn(name = "id")
     private UserLending userLending;
 
-    public Book(boolean lending) {
-        this.lending = false;
+    public StatusLending getStatusLending() {
+        return statusLending;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Book)) return false;
-        Book book = (Book) o;
-        return id == book.id && localization == book.localization && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(isbn, book.isbn) && Objects.equals(description, book.description) && Objects.equals(audit, book.audit);
+    public void setStatusLending(StatusLending statusLending) {
+        this.statusLending = statusLending;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, author, isbn, description, localization, audit);
+    public UserLending getUserLending() {
+        return userLending;
+    }
+
+    public void setUserLending(UserLending userLending) {
+        userLending.getId();
+        this.userLending = userLending;
     }
 
     @Override

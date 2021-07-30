@@ -1,6 +1,7 @@
 package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.Book;
+import com.homemanagment.homemanagment.model.type.CategoryBook;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
@@ -8,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BookServiceImplTest {
@@ -75,18 +73,24 @@ class BookServiceImplTest {
         expected.setIsbn("222323343444");
         expected.setDescription("Example description");
         expected.setLocalization(3);
-//        expected.setAudit(expected.getAudit());
+//        expected.setStatusLending(StatusLending.NO_LENDING);
+        expected.setCategoryBook(CategoryBook.SAILING);
+
         //when
         bookService.saveBook(expected);
-        Book added = (Book) session.createQuery("from Book book where book.title=:title and book.author=:author and book.isbn=:isbn and book.description=:description and book.localization=:localization")
+        Book added = (Book) session.createQuery("from Book book where book.title=:title and book.author=:author" +
+                " and book.isbn=:isbn and book.description=:description and book.localization=:localization and book.categoryBook=:categoryBook")
                 .setParameter("title",expected.getTitle())
                 .setParameter("author",expected.getAuthor())
                 .setParameter("isbn",expected.getIsbn())
                 .setParameter("description",expected.getDescription())
                 .setParameter("localization",expected.getLocalization())
+//                .setParameter("statusLending",expected.getStatusLending())
+                .setParameter("categoryBook",expected.getCategoryBook())
                 .getSingleResult();
+        System.out.println(expected.toString());
         //then
-        Assertions.assertEquals(expected,added);
+        Assertions.assertEquals(expected.getId(),added.getId());
     }
 
     @Test
@@ -107,7 +111,7 @@ class BookServiceImplTest {
         session.getTransaction().commit();
        Book result = bookService.findBookByID(id);
         //then
-        Assertions.assertEquals(expected,result);
+        Assertions.assertEquals(expected.getId(),result.getId());
     }
 
     @Test

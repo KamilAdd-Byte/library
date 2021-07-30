@@ -1,4 +1,4 @@
-package com.homemanagment.homemanagment.controller;
+package com.homemanagment.homemanagment.controller.exception;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

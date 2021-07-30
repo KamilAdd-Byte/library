@@ -83,8 +83,6 @@
 		<thead>
 		<tr align="center">
 			<th>ID książki</th>
-			<th>Data dodania</th>
-			<th>Data modyfikacji</th>
 			<th>
 				<a th:href="@{'/page/' + ${currentPage} + '?sortField=title&sortDir='
 				+ ${reverseSortDirection}}">Tytuł książki</a>
@@ -96,6 +94,8 @@
 			<th>Opis książki</th>
 			<th>Numer ISBN</th>
 			<th>Lokalizacja</th>
+			<th>Kategoria</th>
+			<th>Data dodania</th>
 			<th>Opcje</th>
 			<!--				<th>Kategoria</th>-->
 		</tr>
@@ -103,17 +103,18 @@
 		<tbody>
 		<tr th:align="center" th:each="book: ${listAllBooks}">
 			<td th:text="${book.id}"></td>
-			<td type="datetime-local" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" th:text="${book.getAudit().createOn}"></td>
-			<td type="datetime-local" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" th:text="${book.getAudit().updateOn}"></td>
 			<td th:text="${book.title}"></td>
 			<td th:text="${book.author}"></td>
 			<td th:text="${book.description}"></td>
 			<td th:text="${book.isbn}"></td>
 			<td th:text="${book.localization}"></td>
+			<td th:text="${book.categoryBook.description}"></td>
+			<td th:text="${book.getAudit().createOn}"></td>
 
 			<td align="center">
 				<a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-outline-warning">Edytuj</a>
 				<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Usuń</a>
+				<a th:href="@{/lending/{id}(id =${book.id})}">Wypożycz</a>
 			</td>
 		</tr>
 		</tbody>
