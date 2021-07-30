@@ -102,6 +102,7 @@ class BookServiceImplTest {
         expected.setAuthor("bar");
         expected.setIsbn("55434343444");
         expected.setDescription("Example description");
+        expected.setCategoryBook(CategoryBook.SAILING);
         expected.setLocalization(3);
         expected.setAudit(expected.getAudit());
         //when
@@ -123,6 +124,7 @@ class BookServiceImplTest {
         expected.setTitle("Wyczyny kałamarnicy");
         expected.setLocalization(3);
         expected.setDescription("Powieść fantastyczno naukowa");
+        expected.setCategoryBook(CategoryBook.CRIMINAL);
         expected.setIsbn("44456765434");
         //when
         bookService.saveBook(expected);
@@ -148,6 +150,7 @@ class BookServiceImplTest {
         update.setTitle("Wyczyny");
         update.setLocalization(4);
         update.setDescription("Powieść fantastyczno naukowa");
+        expected.setCategoryBook(CategoryBook.CRIMINAL);
         update.setIsbn("44456765434");
         //when
         bookService.saveBook(expected);
@@ -160,6 +163,8 @@ class BookServiceImplTest {
         result.setTitle("Barka");
         result.setDescription("Fantastic book");
         result.setLocalization(5);
+        expected.setCategoryBook(CategoryBook.CRIMINAL);
+
         result.setIsbn("55556765444");
         //then
         Assertions.assertEquals(expected.getClass(),result.getClass());

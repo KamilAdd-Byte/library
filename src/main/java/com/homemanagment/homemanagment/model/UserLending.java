@@ -25,9 +25,9 @@ public class UserLending {
 
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "id_lending")
-    private LendingBooks lendingBooks;
+    @OneToOne
+    @JoinColumn(name = "id_book")
+    private Book book;
 
     @Override
     public boolean equals(Object o) {

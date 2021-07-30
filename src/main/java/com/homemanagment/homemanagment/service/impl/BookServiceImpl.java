@@ -80,18 +80,20 @@ public class BookServiceImpl implements BookService {
         return this.repository.findAll(pageable);
     }
 
+
+
     public void letLendingOneBook (UserLending userLending, Book book){
         repository.findById(book.getId());
 
     }
 
-
     @Override
     public List<Book> search(String keyword) {
+        try {
+            return repository.searchBookByTitle(keyword);
+        } catch (NullPointerException e) {
+            e.getStackTrace();
+        }
         return null;
     }
-
-//    public List<Book> search(String keyword){
-//        return repository.searchBookByTitle(keyword);
-//    }
 }

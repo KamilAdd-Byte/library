@@ -1,7 +1,6 @@
 package com.homemanagment.homemanagment.service.impl;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.LendingBooks;
 import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.repositories.LendingBooksDao;
@@ -30,19 +29,17 @@ public class LendingBookServiceImpl implements LendingBookService {
 
     @Override
     @Transactional
-    public List<LendingBooks> allLendingBooksList() {
+    public List<Book> allLendingBooksList() {
         return lendingRepository.findAll();
     }
 
     @Override
     @Transactional
-    public void addLendingOperation(UserLending userLending,Book book){
-        int userLendingId = userLending.getId();
-        int bookId = book.getId();
-        userRepository.findById(userLendingId);
-        bookRepository.findById(bookId);
+    public void recoverBook(UserLending userLending, Book book) {
 
     }
+
+
     @Override
     @Transactional
     public void createNewLending(Book book, UserLending userLending) {
