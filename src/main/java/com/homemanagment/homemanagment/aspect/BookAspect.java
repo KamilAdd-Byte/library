@@ -9,7 +9,7 @@ import java.util.Arrays;
 @Aspect
 @Component
 public class BookAspect {
-    @Before("execution(* com.homemanagment.homemanagment.service.BookServiceImpl.*(..))")
+    @Before("execution(* com.homemanagment.homemanagment.service.impl.BookServiceImpl.*(..))")
     public void logBookInfoBeforeExecuteServiceMethod(JoinPoint joinPoint){
         Object[] args = joinPoint.getArgs();
         System.out.println("Log before %s with args: %s\n");

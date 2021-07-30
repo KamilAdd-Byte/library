@@ -4,7 +4,7 @@ import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.repositories.UserDao;
-import com.homemanagment.homemanagment.service.UserServiceImpl;
+import com.homemanagment.homemanagment.service.impl.UserServiceImpl;
 import com.homemanagment.homemanagment.system.LibraryHomeSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

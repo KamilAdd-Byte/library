@@ -1,10 +1,12 @@
-package com.homemanagment.homemanagment.service;
+package com.homemanagment.homemanagment.service.impl;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.StatusLending;
+import com.homemanagment.homemanagment.model.type.StatusLending;
 import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.repositories.UserDao;
+import com.homemanagment.homemanagment.service.LendingBookService;
+import com.homemanagment.homemanagment.service.UserService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

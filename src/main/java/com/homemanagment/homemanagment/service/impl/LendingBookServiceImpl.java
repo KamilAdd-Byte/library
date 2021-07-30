@@ -1,4 +1,4 @@
-package com.homemanagment.homemanagment.service;
+package com.homemanagment.homemanagment.service.impl;
 
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.LendingBooks;
@@ -6,6 +6,7 @@ import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.repositories.LendingBooksDao;
 import com.homemanagment.homemanagment.repositories.UserDao;
+import com.homemanagment.homemanagment.service.LendingBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class LendingBookServiceImpl implements LendingBookService{
+public class LendingBookServiceImpl implements LendingBookService {
 
     @Autowired
     private LendingBooksDao lendingRepository;

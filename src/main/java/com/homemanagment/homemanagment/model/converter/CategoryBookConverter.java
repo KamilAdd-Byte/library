@@ -1,6 +1,6 @@
-package com.homemanagment.homemanagment.converter;
+package com.homemanagment.homemanagment.model.converter;
 
-import com.homemanagment.homemanagment.model.CategoryBook;
+import com.homemanagment.homemanagment.model.type.CategoryBook;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

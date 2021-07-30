@@ -1,11 +1,12 @@
 package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.*;
+import com.homemanagment.homemanagment.model.type.CategoryBook;
+import com.homemanagment.homemanagment.model.type.StatusLending;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class LendingBookServiceImplTest {
 

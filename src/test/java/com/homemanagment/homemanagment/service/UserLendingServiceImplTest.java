@@ -2,6 +2,7 @@ package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

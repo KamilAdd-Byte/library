@@ -1,9 +1,8 @@
 package com.homemanagment.homemanagment.restController;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.BookDao;
-import com.homemanagment.homemanagment.service.BookServiceImpl;
+import com.homemanagment.homemanagment.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

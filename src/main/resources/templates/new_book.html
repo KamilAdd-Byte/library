@@ -57,6 +57,7 @@
 					   th:field="*{localization}" type="text">
 				<fieldset>
 					<legend>Kategoria książki</legend>
+					<p th:errors="*{categoryBook}" th:if="${#fields.hasErrors('categoryBook')}">Title errors</p>
 					<input th:field="*{categoryBook}" name="categoryBook" value="EDUCATION" type="radio" id="1"> <label for="1"> Pedagogika</label>
 					<input th:field="*{categoryBook}" name="categoryBook" value="CRIMINAL" type="radio" id="2"> <label for="2"> Kryminał</label>
 					<input th:field="*{categoryBook}" name="categoryBook" value="FANTASTIC" type="radio" id="3"> <label for="3"> Fantastyka</label>

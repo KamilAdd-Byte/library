@@ -1,9 +1,10 @@
-package com.homemanagment.homemanagment.service;
+package com.homemanagment.homemanagment.service.impl;
 
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.BookDao;
-import com.homemanagment.homemanagment.system.LibraryHomeSystem;
+import com.homemanagment.homemanagment.service.BookService;
+import com.homemanagment.homemanagment.service.LendingBookService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

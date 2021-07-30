@@ -1,10 +1,13 @@
 package com.homemanagment.homemanagment.model;
 
+import com.homemanagment.homemanagment.model.type.CategoryBook;
+import com.homemanagment.homemanagment.model.type.StatusLending;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -43,6 +46,7 @@ public class Book implements Comparable<Book> {
     private StatusLending statusLending;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Please select category book")
     private CategoryBook categoryBook;
 
     @OneToOne

@@ -1,4 +1,4 @@
-package com.homemanagment.homemanagment.model;
+package com.homemanagment.homemanagment.model.type;
 
 import lombok.Getter;
 import lombok.ToString;

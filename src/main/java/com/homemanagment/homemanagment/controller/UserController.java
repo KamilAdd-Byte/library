@@ -2,7 +2,7 @@ package com.homemanagment.homemanagment.controller;
 
 import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.UserDao;
-import com.homemanagment.homemanagment.service.UserServiceImpl;
+import com.homemanagment.homemanagment.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

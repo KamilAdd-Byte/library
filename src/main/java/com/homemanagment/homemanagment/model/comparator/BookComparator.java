@@ -1,4 +1,6 @@
-package com.homemanagment.homemanagment.model;
+package com.homemanagment.homemanagment.model.comparator;
+
+import com.homemanagment.homemanagment.model.Book;
 
 import java.util.Comparator;
 
