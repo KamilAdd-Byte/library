@@ -63,33 +63,47 @@
 				<td th:text="${book.title}"></td>
 				<td th:text="${book.author}"></td>
 				<td th:text="${book.description}"></td>
-<!--				<td th:text="${book.bookStatus}"></td>-->
+				<td th:text="${book.bookStatus}"></td>
 			</tr>
 			</tbody>
 		</table>
-
-
 	</form>
+	<table th:border="2"class="table table-striped table-responsive-lg">
+		<!--tu przyciski-->
+		<thead>
+		<tr>
+			<th>Imię</th>
+			<th>Nazwisko</th>
+			<th>E-mail</th>
 
-		<form action="#" method="post" th:action="@{/save_book}" th:object="${borrower}">
-			<input class="form-control mb-4 col-4" placeholder="Title" th:field="*{firstName}" type="text">
-			<input class="form-control mb-4 col-4" placeholder="Author" th:field="*{lastName}" type="text">
-			<input class="form-control mb-4 col-4" placeholder="Description" th:field="*{email}" type="text">
-			<button class="bg-primary btn-lg" type="submit"> Wypożycz </button>
-		</form>
+			<!--				<th>Kategoria</th>-->
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:align="center" th:each="userLending: ${allUsers}">
+			<td th:text="${userLending.firstName}"></td>
+			<td th:text="${userLending.lastName}"></td>
+			<td th:text="${userLending.email}"></td>
+		</tr>
+		</tbody>
+	</table>
+
+
 
 	<div id="navi">
 		<a th:href="@{/}" class="bg-dark btn btn-outline-primary" th:align="center"> Wróć na stronę główną</a>
 	</div>
-	<div id="footer">
-		&copy Home Management System
-		<br>
-		Wszelkie prawa zastrzeżone @autor KamilAdd-Byte
-	</div>
+</div>
+<div id="footer">
+	&copy Home Management System
+	<br>
+	Wszelkie prawa zastrzeżone @autor KamilAdd-Byte
 </div>
 </body>
 </html>
 
 
 
-
+© 2021 GitHub, Inc.
+Terms
+Privacy

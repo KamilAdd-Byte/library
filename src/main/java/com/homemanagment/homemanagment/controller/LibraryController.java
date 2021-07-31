@@ -9,10 +9,7 @@ import com.homemanagment.homemanagment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LibraryController {
@@ -25,11 +22,12 @@ public class LibraryController {
         this.userService = userService;
     }
 
-    @PutMapping("/lending/{id}/borrowed")
+    @GetMapping("/lending/{id}")
     public String lendingBookById(@PathVariable("id") int id,
                                   @ModelAttribute("user") UserLending userLending, Model model) {
        Book book = bookService.findBookByID(id);
         model.addAttribute("book",book);
+        model.addAttribute("allUsers",userService.allUsers());
         model.addAttribute("borrower",userLending);
        book.setBookStatus(BookStatus.BORROWED);
         //TODO
