@@ -16,7 +16,7 @@ public class UserLending {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true,name = "id")
+    @Column(unique = true,name = "user_id")
     private int id;
 
     private String firstName;
@@ -27,20 +27,9 @@ public class UserLending {
 
     @OneToOne
     @JoinColumn(name = "id_book")
-    private Book book;
+    private Book lendingBooks;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserLending)) return false;
-        UserLending userLending = (UserLending) o;
-        return id == userLending.id && Objects.equals(firstName, userLending.firstName) && Objects.equals(lastName, userLending.lastName) && Objects.equals(email, userLending.email);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email);
-    }
 }
 
 

@@ -109,7 +109,7 @@
 			<td th:text="${book.isbn}"></td>
 			<td th:text="${book.localization}"></td>
 			<td th:text="${book.categoryBook.description}"></td>
-			<td th:text="${book.getAudit().createOn}"></td>
+			<td th:text="${book.audit.getCreateOn()}"></td>
 
 			<td align="center">
 				<a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-outline-warning">Edytuj</a>

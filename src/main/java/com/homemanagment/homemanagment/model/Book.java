@@ -50,11 +50,11 @@ public class Book implements Comparable<Book> {
     private CategoryBook categoryBook;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     private UserLending userLending;
 
     public StatusLending getStatusLending() {
-        return statusLending;
+        return StatusLending.NO_LENDING;
     }
 
     public void setStatusLending(StatusLending statusLending) {

@@ -4,7 +4,6 @@ import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.service.BookService;
-import com.homemanagment.homemanagment.service.LendingBookService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,8 +24,6 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private UserServiceImpl userService;
 
-    @Autowired
-    LendingBookService lendingBookService;
 
     @Autowired
     SessionFactory sessionFactory;
@@ -65,11 +62,7 @@ public class BookServiceImpl implements BookService {
         //TODO Update method!!!! Override and create new book instead update
     }
 
-    // Metoda w servisie łącząca usera i book
-    @Transactional
-    public void lendingBook(Book book,UserLending userLending){
-        lendingBookService.createNewLending(book, userLending);
-    }
+
 
     @Override
     public Page<Book> findPaginated(int pageNumber, int pageSize, String sortField, String sortDirection) {

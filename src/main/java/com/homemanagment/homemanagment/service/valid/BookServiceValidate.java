@@ -3,7 +3,6 @@ package com.homemanagment.homemanagment.service.valid;
 import com.homemanagment.homemanagment.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.validation.Validator;
 import java.util.HashSet;
 import java.util.Set;

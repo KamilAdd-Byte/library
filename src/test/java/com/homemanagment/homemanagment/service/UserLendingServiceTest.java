@@ -1,12 +1,11 @@
 package com.homemanagment.homemanagment.service;
 
+import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.type.CategoryBook;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -23,6 +22,7 @@ class UserLendingServiceTest {
     SessionFactory sessionFactory;
 
     Session session;
+
 
     @BeforeEach
     void setUp(){
@@ -41,11 +41,8 @@ class UserLendingServiceTest {
     }
 
     @Test
-    void getAllUser() {
-    }
-
-    @Test
-    void addUser() {
+    @DisplayName("should add new user")
+    void shouldAddNewUser() {
         //given
         UserLending expected = new UserLending();
         expected.setFirstName("bar");
@@ -69,5 +66,48 @@ class UserLendingServiceTest {
 
     @Test
     void removeUser() {
+        //TODO implementation remove method
+    }
+
+//    @Test
+//    void shouldAddBookToUserCollection() {
+//        //given
+//        Book bookLending = new Book();
+//        bookLending.setTitle("First lending");
+//        bookLending.setAuthor("Author");
+//        bookLending.setIsbn("2234456543");
+//
+//        UserLending max = new UserLending();
+//        max.setEmail("max@wp.pl");
+//        max.setFirstName("Max");
+//        max.setLastName("Max");
+//        //when
+//        UserServiceImpl userService = new UserServiceImpl();
+//
+//        List<Book> booksLendingList = userService.getBooksLendingList();
+//
+//        assertThat(booksLendingList,hasSize(1));
+//    }
+    @Test
+    @DisplayName("should lending exists book by user")
+    void shouldLendingBookByUser(){
+        //given
+        Book bookLending = new Book();
+        bookLending.setTitle("First lending");
+        bookLending.setAuthor("Author");
+        bookLending.setIsbn("22344565434");
+        bookLending.setCategoryBook(CategoryBook.SAILING);
+
+        UserLending max = new UserLending();
+        max.setEmail("max@wp.pl");
+        max.setFirstName("Max");
+        max.setLastName("Max");
+        //when
+        UserLending userLending = userService.lendingBook(bookLending);
+
+
+        System.out.println(bookLending);
+
+
     }
 }
