@@ -103,8 +103,6 @@ class UserLendingServiceTest {
         max.setFirstName("Max");
         max.setLastName("Max");
         //when
-        UserLending userLending = userService.lendingBook(bookLending);
-
 
         System.out.println(bookLending);
 

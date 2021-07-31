@@ -2,6 +2,7 @@ package com.homemanagment.homemanagment.service.impl;
 
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.type.BookStatus;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.service.BookService;
 import org.hibernate.SessionFactory;
@@ -19,7 +20,7 @@ import java.util.Optional;
 public class BookServiceImpl implements BookService {
 
     @Autowired
-    private BookDao repository;
+    private BookDao bookRepository;
 
     @Autowired
     private UserServiceImpl userService;
@@ -32,37 +33,42 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public List<Book> allBooks() {
-        return repository.findAll();
+        return bookRepository.findAll();
     }
 
     @Override
     @Transactional
     public void saveBook(Book book) {
-        this.repository.save(book);
+        this.bookRepository.save(book);
     }
 
     @Override
     @Transactional
     public Book findBookByID(int id) {
-        Optional<Book> book = repository.findById(id);
+        Optional<Book> book = bookRepository.findById(id);
         return book.get();
     }
-
 
     @Override
     @Transactional
     public void removeBookById(int id, Book book) {
-        this.repository.deleteById(id);
+        this.bookRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public void updateBookById(int id, Book book) {
-        this.repository.findById(id);
+        this.bookRepository.findById(id);
         //TODO Update method!!!! Override and create new book instead update
     }
 
-
+    @Override
+    public Book lendBook(int id, UserLending borrower) {
+        Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        book.setBookStatus(BookStatus.BORROWED);
+        book.setBorrower(borrower);
+        return bookRepository.save(book);
+    }
 
     @Override
     public Page<Book> findPaginated(int pageNumber, int pageSize, String sortField, String sortDirection) {
@@ -70,20 +76,13 @@ public class BookServiceImpl implements BookService {
              Sort.by(sortField).descending();
 
         Pageable pageable = PageRequest.of(pageNumber -1,pageSize,sort);
-        return this.repository.findAll(pageable);
-    }
-
-
-
-    public void letLendingOneBook (UserLending userLending, Book book){
-        repository.findById(book.getId());
-
+        return this.bookRepository.findAll(pageable);
     }
 
     @Override
     public List<Book> search(String keyword) {
         try {
-            return repository.searchBookByTitle(keyword);
+            return bookRepository.searchBookByTitle(keyword);
         } catch (NullPointerException e) {
             e.getStackTrace();
         }

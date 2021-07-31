@@ -73,7 +73,7 @@ class BookServiceImplTest {
         expected.setIsbn("222323343444");
         expected.setDescription("Example description");
         expected.setLocalization(3);
-//        expected.setStatusLending(StatusLending.NO_LENDING);
+//        expected.setStatusLending(BookStatus.NO_LENDING);
         expected.setCategoryBook(CategoryBook.SAILING);
 
         //when

@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
-import java.util.*;
 
 @Entity
 @Getter
@@ -24,11 +23,6 @@ public class UserLending {
     private String lastName;
 
     private String email;
-
-    @OneToOne
-    @JoinColumn(name = "id_book")
-    private Book lendingBooks;
-
 
 }
 

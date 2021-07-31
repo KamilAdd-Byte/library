@@ -3,18 +3,16 @@ package com.homemanagment.homemanagment.model.type;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.persistence.Embeddable;
-
 @ToString
 @Getter
-public enum StatusLending {
+public enum BookStatus {
 
-    LENDING ("wypożyczona"),
-    NO_LENDING ("do wypożyczenia");
+    AVAILABLE("do wypożyczenia"),
+    BORROWED ("wypożyczona");
 
     private final String description;
 
-    StatusLending(final String description) {
+    BookStatus(final String description) {
         this.description = description;
     }
 }
