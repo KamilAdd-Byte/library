@@ -53,8 +53,9 @@ public class Book implements Comparable<Book> {
     @JoinColumn(name = "user_id")
     private UserLending borrower;
 
+
     public BookStatus getBookStatus() {
-        return BookStatus.AVAILABLE;
+        return bookStatus;
     }
 
     public void setBookStatus(BookStatus bookStatus) {

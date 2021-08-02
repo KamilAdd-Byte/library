@@ -10,7 +10,7 @@ import java.util.List;
 public interface BookService {
     List<Book> allBooks();
 
-    void saveBook(Book book);
+    Book saveBook(Book book);
 
     Book findBookByID(int id);
 

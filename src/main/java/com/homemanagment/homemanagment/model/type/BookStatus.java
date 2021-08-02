@@ -6,13 +6,6 @@ import lombok.ToString;
 @ToString
 @Getter
 public enum BookStatus {
-
-    AVAILABLE("do wypożyczenia"),
-    BORROWED ("wypożyczona");
-
-    private final String description;
-
-    BookStatus(final String description) {
-        this.description = description;
-    }
+    AVAILABLE,
+    BORROWED
 }
