@@ -68,90 +68,22 @@
 			</a>
 		</nav>
 		<div id="sub-navbar">
-			<a align="left" th:href="@{/showNewBookForm}" class="bg-success btn btn-success btn-lg mb-2"> Dodaj książkę </a>
+			<a align="left" class="bg-success btn btn-success btn-lg mb-2" th:href="@{/management}"> Managment </a>
 			<a th:href="@{/information}" class="bg-warning btn btn-warning btn-lg mb-2"> Info </a>
 		</div>
 
 	</div>
+	<div>
+		<h1>Zarządzaj swoimi domowymi zasobami</h1>
+		Dodaj swoje ulubione książki, gry planszowe i konsolowe i trzymaj je w jednym miejscu.<br>
+		Możesz także wprowadzać zmiany lub całkowicie usuwać zapisane dane z bazy<br>
+		<br>
+		Dzięki tej aplikacji szybko znajdziesz na liście to, czego szukasz.
+
+
 	</div>
-	<div align="center" id="info">
-		<h6 class="btn btn-outline-primary">Lista aktualnych książek w prywatnym zbiorze</h6>
 	</div>
-	<h2 th:align="center" color="#FF0650" th:if="${message != null}" th:text="${message}"></h2>
-	<table th:border="2"class="table table-striped table-responsive-lg">
-		<!--tu przyciski-->
-		<thead>
-		<tr align="center">
-			<th>ID książki</th>
-			<th>
-				<a th:href="@{'/page/' + ${currentPage} + '?sortField=title&sortDir='
-				+ ${reverseSortDirection}}">Tytuł książki</a>
-				</th>
-			<th>
-				<a th:href="@{'/page/' + ${currentPage} + '?sortField=author&sortDir='
-				+ ${reverseSortDirection}}">Autor książki</a>
-			</th>
-			<th>Opis książki</th>
-			<th>Numer ISBN</th>
-			<th>Lokalizacja</th>
-			<th>Kategoria</th>
-			<th>Data dodania</th>
-			<th>Status</th>
-			<th>Opcje</th>
-			<!--				<th>Kategoria</th>-->
-		</tr>
-		</thead>
-		<tbody>
-		<tr th:align="center" th:each="book: ${listAllBooks}">
-			<td th:text="${book.id}"></td>
-			<td th:text="${book.title}"></td>
-			<td th:text="${book.author}"></td>
-			<td th:text="${book.description}"></td>
-			<td th:text="${book.isbn}"></td>
-			<td th:text="${book.localization}"></td>
-			<td th:text="${book.categoryBook.description}"></td>
-			<td th:text="${book.audit.createOn}"></td>
-			<td th:text="${book.getBookStatus()}"></td>
-			<td align="center">
-				<a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-outline-warning">Edytuj</a>
-				<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Usuń</a>
-				<a th:href="@{/lending/{id}(id =${book.id})}">Wypożycz</a>
-			</td>
-		</tr>
-		</tbody>
-	</table>
-	<div th:if="${totalPages > 1}">
-		<div class="row col-sm-10">
-			<div class="col-sm-2">
-				Total rows: [[${totalItems}]]
-			</div>
-			<div class="col-sm-1">
-				<span th:each="i:${#numbers.sequence(1,totalPages)}">
-					<a th:if="${currentPage != i}" th:href="@{'/page/'+ ${i} + '?sortField=' + ${sortField} + '&sortDir='
-					+ ${sortDirection}}">[[${i}]]</a>
-					<span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;&nbsp;
-				</span>
-			</div>
-			<div class="col-sm-1">
-				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField='
-				+ ${sortField} + '&sortDir=' + ${sortDirection}}">Następna</a>
-				<span th:unless="${currentPage < totalPages}">Następna</span>
-			</div>
-			<div class="col-sm-1">
-				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField='
-				+ ${sortField} + '&sortDir=' + ${sortDirection}}">Poprzednia</a>
-				<span th:unless="${currentPage < totalPages}">Poprzednia</span>
-			</div>
-		</div>
-	</div>
-</div>	<!--tu tabela-->
-<div align="center" id="search">
-	<h2>Wyszukiwarka</h2>
-	<form method="get" action="search">
-		<input type="text" name="keyword"/>
-		<input type="submit" value="Szukaj"/>
-	</form>
-</div>
+
 <div id="footer">
 	&copy Home Management System
 	<br>

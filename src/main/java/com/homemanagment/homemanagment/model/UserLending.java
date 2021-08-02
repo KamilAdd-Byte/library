@@ -26,6 +26,8 @@ public class UserLending {
 
     private String email;
 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Book> books;
 }
 
 

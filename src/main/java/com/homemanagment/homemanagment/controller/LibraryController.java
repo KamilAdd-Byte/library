@@ -44,7 +44,7 @@ public class LibraryController {
         model.addAttribute("book", book);
         model.addAttribute("allUsers", userService.allUsers());
         model.addAttribute("borrower", userLending);
-        return "/index";
+        return "management";
 
     }
 }

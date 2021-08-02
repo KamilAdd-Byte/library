@@ -39,7 +39,9 @@
 			</a>
 		</nav>
 		<div id="sub-navbar">
-			<a th:href="@{/user/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Dodaj</a>
+			<a th:href="@{/user/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Add new borrow</a>
+			<a th:href="@{/user_info}" class="bg-dark btn btn-outline-primary" th:align="center">Your borrowed friends</a>
+
 			<a th:href="@{/information}" class="bg-warning btn btn-warning btn-lg mb-2"> Info </a>
 		</div>
 
@@ -86,7 +88,7 @@
 			<td th:text="${userLending.email}"></td>
 			<td align="center">
 				<a th:href="@{/lending/{id}/borrower (id=${book.id})}" class="btn btn-outline-warning">Borrow</a>
-<!--				<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Aviable</a>-->
+				<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Remove user</a>
 <!--				<a th:href="@{/lending/{id}(id =${book.id})}">Wypożycz</a>-->
 			</td>
 		</tr>
