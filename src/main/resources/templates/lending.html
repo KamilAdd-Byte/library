@@ -59,11 +59,11 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr th:align="center" th:field="${book}">
-				<td th:text="${book.title}"></td>
-				<td th:text="${book.author}"></td>
-				<td th:text="${book.description}"></td>
-				<td th:text="${book.bookStatus}"></td>
+			<tr th:align="center" th:object="${book}">
+				<td th:text="*{title}"></td>
+				<td th:text="*{author}"></td>
+				<td th:text="*{description}"></td>
+				<td th:text="*{bookStatus}"></td>
 			</tr>
 			</tbody>
 		</table>
@@ -85,7 +85,7 @@
 			<td th:text="${userLending.lastName}"></td>
 			<td th:text="${userLending.email}"></td>
 			<td align="center">
-				<a th:href="@{/lending/{id}(id=${book.id})}" class="btn btn-outline-warning">Borrow</a>
+				<a th:href="@{/lending/{id}/borrower (id=${book.id})}" class="btn btn-outline-warning">Borrow</a>
 <!--				<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Aviable</a>-->
 <!--				<a th:href="@{/lending/{id}(id =${book.id})}">Wypożycz</a>-->
 			</td>

@@ -5,20 +5,21 @@ import javax.persistence.Embeddable;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.time.*;
+import java.util.Date;
 
 @Embeddable
 @Getter
 public
 class Audit {
-    private LocalDateTime createOn;
-    private LocalDateTime updateOn;
+    private Date createOn;
+    private Date updateOn;
 
     @PrePersist
     public void prePersist(){
-        createOn = LocalDateTime.now();
+        createOn = new Date();
     }
     @PreUpdate
     public void preUpdate(){
-        updateOn = LocalDateTime.now();
+        updateOn = new Date();
     }
 }

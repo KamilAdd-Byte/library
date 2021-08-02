@@ -22,21 +22,29 @@ public class LibraryController {
         this.userService = userService;
     }
 
-    @PutMapping("/lending/{id}")
+    @GetMapping("/lending")
+    public String lending (Model model){
+        model.addAttribute("allUsers",userService.allUsers());
+      return "/lending";
+    }
+    @GetMapping("/lending/{id}")
     public String lendingBookById(@PathVariable("id") int id,
                                   @ModelAttribute UserLending userLending, Model model) {
        Book book = bookService.findBookByID(id);
-        bookService.lendBook(id,userLending);
         model.addAttribute("book",book);
         model.addAttribute("allUsers",userService.allUsers());
         model.addAttribute("borrower",userLending);
         return "/lending";
     }
-    @GetMapping("/lending/{id}")
-    public String lendingBookByIdForUser(@PathVariable("id") int id,
-                                  @ModelAttribute("user") UserLending userLending, Model model) {
+    @GetMapping("/lending/{id}/borrower")
+    public String lendBookById(@PathVariable("id") int id,
+                                  @ModelAttribute UserLending userLending, Model model) {
         Book book = bookService.findBookByID(id);
+        bookService.lendBook(id,userLending);
+        model.addAttribute("book", book);
+        model.addAttribute("allUsers", userService.allUsers());
+        model.addAttribute("borrower", userLending);
+        return "/index";
 
-        return "redirect:/";
     }
 }
