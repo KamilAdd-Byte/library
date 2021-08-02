@@ -32,18 +32,17 @@ public class BookController {
         this.service = service;
     }
 
-    @GetMapping("/index")
+    @GetMapping("/management/all")
     public String showFormListAllBooks(Model model) {
         model.addAttribute("listAllBook", repository.findAll());
-        model.addAttribute("message", "Usunięto z bazy");
         model.addAttribute("standardDate", new Date());
         model.addAttribute("localDateTime", LocalDateTime.now());
         model.addAttribute("localDate", LocalDate.now());
         model.addAttribute("timestamp", Instant.now());
-        return "index";
+        return "management";
     }
 
-    @GetMapping("/")
+    @GetMapping("/management")
     public String showAllBooks(Model model) {
         model.addAttribute("standardDate", new Date());
         model.addAttribute("localDateTime", LocalDateTime.now());
@@ -73,14 +72,14 @@ public class BookController {
     @GetMapping(value = "/new_book_info")
     public String showNewBook(Model model) {
         model.addAttribute("book", new Book());
-        return "index";
+        return "management";
     }
 
     @GetMapping("/remove/{id}")
     public String removeBookById(@PathVariable("id") int id, Book book, Model model) {
         service.removeBookById(id, book);
         model.addAttribute("message", "Pomyślnie usunięto książkę!");
-        return "redirect:/";
+        return "management";
     }
 
     @GetMapping("/update/{id}")
@@ -118,7 +117,7 @@ public class BookController {
         model.addAttribute("reverseSortDirection", sortDir.equals("asc") ? "desc" : "asc");
 
         model.addAttribute("keyword", search);
-        return "index";
+        return "management";
     }
 
 }

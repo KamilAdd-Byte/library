@@ -1,17 +1,16 @@
 package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.Book;
-
+import com.homemanagment.homemanagment.model.UserLending;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-
-
 @Service
 public interface BookService {
     List<Book> allBooks();
 
-    void saveBook(Book book);
+    Book saveBook(Book book);
 
     Book findBookByID(int id);
 
@@ -19,6 +18,7 @@ public interface BookService {
 
     void updateBookById(int id, Book book);
 
+    Book lendBook (int id, UserLending borrower);
 
     Page<Book> findPaginated(int pageNumber,int pageSize,String sortField, String sortDirection);
 

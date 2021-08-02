@@ -2,9 +2,9 @@ package com.homemanagment.homemanagment.service.impl;
 
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.type.BookStatus;
 import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.service.BookService;
-import com.homemanagment.homemanagment.service.LendingBookService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,19 +14,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
 
     @Autowired
-    private BookDao repository;
+    private BookDao bookRepository;
 
     @Autowired
     private UserServiceImpl userService;
 
-    @Autowired
-    LendingBookService lendingBookService;
 
     @Autowired
     SessionFactory sessionFactory;
@@ -35,40 +32,43 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public List<Book> allBooks() {
-        return repository.findAll();
+        return bookRepository.findAll();
     }
 
     @Override
     @Transactional
-    public void saveBook(Book book) {
-        this.repository.save(book);
+    public Book saveBook(Book book) {
+        book.setBookStatus(BookStatus.AVAILABLE);
+       return this.bookRepository.save(book);
     }
 
     @Override
     @Transactional
     public Book findBookByID(int id) {
-        Optional<Book> book = repository.findById(id);
-        return book.get();
+        Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return book;
     }
-
 
     @Override
     @Transactional
     public void removeBookById(int id, Book book) {
-        this.repository.deleteById(id);
+        this.bookRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public void updateBookById(int id, Book book) {
-        this.repository.findById(id);
+        this.bookRepository.findById(id);
         //TODO Update method!!!! Override and create new book instead update
     }
 
-    // Metoda w servisie łącząca usera i book
+    @Override
     @Transactional
-    public void lendingBook(Book book,UserLending userLending){
-        lendingBookService.createNewLending(book, userLending);
+    public Book lendBook(int id, UserLending borrower) {
+        Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        book.setBookStatus(BookStatus.BORROWED);
+        book.setBorrower(borrower);
+        return bookRepository.save(book);
     }
 
     @Override
@@ -77,21 +77,16 @@ public class BookServiceImpl implements BookService {
              Sort.by(sortField).descending();
 
         Pageable pageable = PageRequest.of(pageNumber -1,pageSize,sort);
-        return this.repository.findAll(pageable);
+        return this.bookRepository.findAll(pageable);
     }
-
-    public void letLendingOneBook (UserLending userLending, Book book){
-        repository.findById(book.getId());
-
-    }
-
 
     @Override
     public List<Book> search(String keyword) {
+        try {
+            return bookRepository.searchBookByTitle(keyword);
+        } catch (NullPointerException e) {
+            e.getStackTrace();
+        }
         return null;
     }
-
-//    public List<Book> search(String keyword){
-//        return repository.searchBookByTitle(keyword);
-//    }
 }

@@ -38,25 +38,25 @@
 				 height="30" color="white" src="https://freepikpsd.com/wp-content/uploads/2020/04/book-icon-png-white-Images-Free-Transparent.png" width="30">
 			Privet Home Library - Add book
 		</a>
-	<h2 style="font: message-box">Wprowadź informacje o książce</h2>
+	<h2 style="font: message-box">Enter book information</h2>
 		<div align="center">
 			<p th:if="validationMessage"></p>
 			<form action="#" method="POST" th:action="@{/save_book}" th:object="${book}">
 				<p th:errorclass="'Bdc(red)'" th:errors="*{title}" th:if="${#fields.hasErrors('title')}">Title errors</p>
-				<input th:errorclass="'Bdc(red)'" size="100%" th:align="center" class="form-control mb-4 col-4" placeholder="Tytuł książki"
+				<input th:errorclass="'Bdc(red)'" size="100%" th:align="center" class="form-control mb-4 col-4" placeholder="Title"
 					   th:field="*{title}" type="text">
 				<p th:errors="*{author}" th:if="${#fields.hasErrors('author')}"></p>
-				<input th:errorclass="'Bdc(red)'" class="form-control mb-3 col-4" placeholder="Autor książki"
+				<input th:errorclass="'Bdc(red)'" class="form-control mb-3 col-4" placeholder="Author"
 					   th:field="*{author}" type="text">
-				<input th:errorclass="'Bdc(red)'" class="form-control mb-4 col-4" placeholder="Opis książki"
+				<input th:errorclass="'Bdc(red)'" class="form-control mb-4 col-4" placeholder="Description"
 					   th:field="*{description}" type="text">
 				<p th:errors="*{isbn}" th:if="${#fields.hasErrors('isbn')}">Title errors</p>
-				<input th:errorclass="'Bdc(red)'" class="form-control mb-4 col-4" placeholder="Numer ISBN"
+				<input th:errorclass="'Bdc(red)'" class="form-control mb-4 col-4" placeholder="Number ISBN"
 					   th:field="*{isbn}" type="text">
-				<input class="form-control mb-4 col-4" placeholder="Lokalizacja na regale"
+				<input class="form-control mb-4 col-4" placeholder="Localization in your rack"
 					   th:field="*{localization}" type="text">
 				<fieldset>
-					<legend>Kategoria książki</legend>
+					<legend>Select category book</legend>
 					<p th:errors="*{categoryBook}" th:if="${#fields.hasErrors('categoryBook')}">Title errors</p>
 					<input th:field="*{categoryBook}" name="categoryBook" value="EDUCATION" type="radio" id="1"> <label for="1"> Pedagogika</label>
 					<input th:field="*{categoryBook}" name="categoryBook" value="CRIMINAL" type="radio" id="2"> <label for="2"> Kryminał</label>
@@ -68,10 +68,10 @@
 					<input th:field="*{categoryBook}" name="categoryBook" value="KIDS" type="radio" id="8"> <label for="8"> Dzieci</label>
 					<input th:field="*{categoryBook}" name="categoryBook" value="OTHERS" type="radio" id="9"> <label for="9"> Inna</label>
 				</fieldset>
-				<button class="bg-success btn-lg" type="submit">Dodaj</button>
+				<button class="bg-success btn-lg" type="submit">Add book</button>
 			</form>
 			<div id="navi">
-				<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}"> Wróć na stronę główną</a>
+				<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}">Home page</a>
 			</div>
 		</div>
 		<div id="footer">

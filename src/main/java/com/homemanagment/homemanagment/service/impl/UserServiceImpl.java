@@ -1,13 +1,10 @@
 package com.homemanagment.homemanagment.service.impl;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.type.StatusLending;
 import com.homemanagment.homemanagment.model.UserLending;
-import com.homemanagment.homemanagment.repositories.BookDao;
 import com.homemanagment.homemanagment.repositories.UserDao;
-import com.homemanagment.homemanagment.service.LendingBookService;
+import com.homemanagment.homemanagment.service.BookService;
 import com.homemanagment.homemanagment.service.UserService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,22 +12,22 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Service
-@Getter
 public class UserServiceImpl implements UserService {
 
-    private final List<Book> booksHistoryList = new ArrayList<>();
-    private final List<Book> booksLendingList = new ArrayList<>();
+    private List<Book> booksHistoryList;
+    private List<Book> booksLendingList;
 
     @Autowired
     private UserDao userRepository;
 
     @Autowired
-    private BookDao bookRepository;
+    private BookService bookService;
 
-    @Autowired
-    private LendingBookService lendingBookService;
+    public UserServiceImpl(List<Book> booksHistoryList, List<Book> booksLendingList) {
+        this.booksHistoryList = booksHistoryList;
+        this.booksLendingList = booksLendingList;
+    }
 
     @Override
     public List<UserLending> allUsers() {
@@ -45,27 +42,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void removeUser(UserLending userLending) {
-        this.userRepository.delete(userLending);
+    public void removeUser(int id,UserLending userLending) {
+        this.userRepository.deleteById(id);
     }
-
     @Override
     @Transactional
-    public void lendingBook(Book book,UserLending userLending) {
-       booksLendingList.add(book);
+    public List<Book> userBooks (UserLending userLending){
+        this.booksLendingList = new ArrayList<>();
+        //TODO
+        return booksLendingList;
+}
 
-       book.setUserLending(userLending);
-       book.setStatusLending(StatusLending.LENDING);
-    }
-
-    @Override
-    public boolean recoveredBook(Book book) {
-        boolean result = false;
-        if (booksLendingList.contains(book)){
-            booksLendingList.remove(book);
-            result = true;
-            booksHistoryList.add(book);
-        }
-        return result;
-    }
 }

@@ -2,19 +2,93 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Wypożyczający</title>
+	<title>Borrower</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<link href="awsm_theme_pearl-lusta.min.css" media= "(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" rel="stylesheet">
+
+	<style>
+        #container {
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #navi {
+            padding: 10px;
+        }
+        #menu {
+            padding: 5px;
+            background-color: #cd10db;
+            color: white;
+            letter-spacing: 4px;
+            font-size: 22px;
+            text-align: center;
+        }
+        #title{
+            float: right;
+            background-position: right;
+        }
+        #description{
+            animation-duration: inherit;
+            padding: 10px;
+        }
+        #content {
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        input[type="text"] {
+            display: block;
+            width: 100%;
+        }
+
+        #empty {
+            padding: 20px;
+        }
+
+        #footer {
+            clear: both;
+            padding: 20px;
+            background-color: cornflowerblue;
+            font-size: 22px;
+            color: black;
+            text-align: center;
+        }
+
+        .h6{
+            size: 14px;
+            color: #e51c23;
+        }
+        .Bd {
+            border: solid 1px white;
+        }
+
+        .Bdc\(red\) {
+            border-color: red !important;
+        }
+	</style>
 </head>
 <body>
-<h2>Dane użytkownika</h2>
-<form action="#" th:action="@{/user/save_user}" th:object="${user}" method="post">
-	<h2>Dane</h2>
-	<input type="text" th:field="*{firstName}"
-		   placeholder="Imię" class="form-control mb-4 col-4">
+<div id="container">
+	<div id="content">
+		<h2>Add borrower</h2>
+		<form action="#" th:action="@{/user/save_user}" th:object="${user}" method="post">
+			<h2>Dane</h2>
+			<input type="text" th:field="*{firstName}"
+				   placeholder="Imię" class="form-control mb-4 col-4">
 
-	<input type="text" th:field="*{lastName}"
-		   placeholder="Nazwisko" class="form-control mb-4 col-4">
-	<input type="text" th:field="*{email}"
-		   placeholder="E-mail (optional)" class="form-control mb-4 col-4">
-	<button class="bg-success btn-lg" type="submit">Dodaj wypożyczającego</button>
-</form>
+			<input type="text" th:field="*{lastName}"
+				   placeholder="Nazwisko" class="form-control mb-4 col-4">
+			<input type="text" th:field="*{email}"
+				   placeholder="E-mail (optional)" class="form-control mb-4 col-4">
+			<button class="bg-success btn-lg" type="submit">Dodaj wypożyczającego</button>
+		</form>
+	</div>
+	<div id="footer">
+		&copy Home Management System
+		<br>
+		Wszelkie prawa zastrzeżone @autor KamilAdd-Byte
+	</div>
+
+</div>
+
 

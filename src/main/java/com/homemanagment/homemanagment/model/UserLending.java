@@ -5,7 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,7 +17,7 @@ public class UserLending {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true,name = "id")
+    @Column(unique = true,name = "user_id")
     private int id;
 
     private String firstName;
@@ -25,22 +26,8 @@ public class UserLending {
 
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "id_lending")
-    private LendingBooks lendingBooks;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserLending)) return false;
-        UserLending userLending = (UserLending) o;
-        return id == userLending.id && Objects.equals(firstName, userLending.firstName) && Objects.equals(lastName, userLending.lastName) && Objects.equals(email, userLending.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email);
-    }
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Book> books;
 }
 
 

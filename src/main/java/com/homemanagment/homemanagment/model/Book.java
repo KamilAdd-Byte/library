@@ -1,7 +1,7 @@
 package com.homemanagment.homemanagment.model;
 
+import com.homemanagment.homemanagment.model.type.BookStatus;
 import com.homemanagment.homemanagment.model.type.CategoryBook;
-import com.homemanagment.homemanagment.model.type.StatusLending;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,31 +43,31 @@ public class Book implements Comparable<Book> {
     private Audit audit = new Audit();
 
     @Enumerated(EnumType.STRING)
-    private StatusLending statusLending;
+    private BookStatus bookStatus;
 
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Please select category book")
     private CategoryBook categoryBook;
 
-    @OneToOne
-    @JoinColumn(name = "id")
-    private UserLending userLending;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "user_id")
+    private UserLending borrower;
 
-    public StatusLending getStatusLending() {
-        return statusLending;
+
+    public BookStatus getBookStatus() {
+        return bookStatus;
     }
 
-    public void setStatusLending(StatusLending statusLending) {
-        this.statusLending = statusLending;
+    public void setBookStatus(BookStatus bookStatus) {
+        this.bookStatus = bookStatus;
     }
 
-    public UserLending getUserLending() {
-        return userLending;
+    public UserLending getBorrower() {
+        return borrower;
     }
 
-    public void setUserLending(UserLending userLending) {
-        userLending.getId();
-        this.userLending = userLending;
+    public void setBorrower(UserLending borrower) {
+        this.borrower = borrower;
     }
 
     @Override

@@ -1,31 +1,29 @@
 package com.homemanagment.homemanagment.restController;
 
 import com.homemanagment.homemanagment.model.Book;
+import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.BookDao;
-import com.homemanagment.homemanagment.service.impl.BookServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.homemanagment.homemanagment.service.BookService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
-@RequestMapping("/book")
+@RequestMapping("/lending")
 public class BookRestController {
 
-    private final BookDao repository;
-    private final BookServiceImpl service;
+    private final BookDao bookRepository;
+    private final BookService bookService;
 
-    @Autowired
-    public BookRestController(final BookDao repository, final BookServiceImpl service) {
-        this.repository = repository;
-        this.service = service;
+    public BookRestController(final BookDao bookRepository, final BookService bookService) {
+        this.bookRepository = bookRepository;
+        this.bookService = bookService;
     }
-    @PostMapping("/add")
-    public String addBook(@RequestBody Book book){
-        service.saveBook(book);
-         return "Done!";
-        }
 
-//    @PostMapping("/lending")
-//    public void lendingBook (@RequestBody UserLending userLending, @RequestBody Book book){
-//        service.lendingBook(book, userLending);
-//    }
+
+
+    @PostMapping("/lending/{id}/borrower")
+    public ResponseEntity<Book> lendingBook (@PathVariable("id") int id, @RequestBody UserLending userLending){
+        Book borrowed = bookService.findBookByID(id);
+        borrowed = bookService.lendBook(id, userLending);
+        return ResponseEntity.ok().body(borrowed);
+    }
 }
