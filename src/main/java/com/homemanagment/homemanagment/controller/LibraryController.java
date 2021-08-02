@@ -22,16 +22,21 @@ public class LibraryController {
         this.userService = userService;
     }
 
-    @GetMapping("/lending/{id}")
+    @PutMapping("/lending/{id}")
     public String lendingBookById(@PathVariable("id") int id,
-                                  @ModelAttribute("user") UserLending userLending, Model model) {
+                                  @ModelAttribute UserLending userLending, Model model) {
        Book book = bookService.findBookByID(id);
+        bookService.lendBook(id,userLending);
         model.addAttribute("book",book);
         model.addAttribute("allUsers",userService.allUsers());
         model.addAttribute("borrower",userLending);
-       book.setBookStatus(BookStatus.BORROWED);
-        //TODO
         return "/lending";
     }
+    @GetMapping("/lending/{id}")
+    public String lendingBookByIdForUser(@PathVariable("id") int id,
+                                  @ModelAttribute("user") UserLending userLending, Model model) {
+        Book book = bookService.findBookByID(id);
 
+        return "redirect:/";
+    }
 }

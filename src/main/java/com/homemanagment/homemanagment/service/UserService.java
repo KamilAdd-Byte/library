@@ -6,6 +6,6 @@ import java.util.List;
 public interface UserService {
     List<UserLending> allUsers();
     void addUser(UserLending userLending);
-    void removeUser(UserLending userLending);
+    void removeUser(int id,UserLending userLending);
 
 }

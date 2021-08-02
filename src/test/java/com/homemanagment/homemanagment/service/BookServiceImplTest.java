@@ -1,12 +1,14 @@
 package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.Book;
+import com.homemanagment.homemanagment.model.type.BookStatus;
 import com.homemanagment.homemanagment.model.type.CategoryBook;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,22 +75,22 @@ class BookServiceImplTest {
         expected.setIsbn("222323343444");
         expected.setDescription("Example description");
         expected.setLocalization(3);
-//        expected.setStatusLending(BookStatus.NO_LENDING);
+        expected.setBookStatus(BookStatus.AVAILABLE);
         expected.setCategoryBook(CategoryBook.SAILING);
 
         //when
         bookService.saveBook(expected);
         Book added = (Book) session.createQuery("from Book book where book.title=:title and book.author=:author" +
-                " and book.isbn=:isbn and book.description=:description and book.localization=:localization and book.categoryBook=:categoryBook")
-                .setParameter("title",expected.getTitle())
-                .setParameter("author",expected.getAuthor())
-                .setParameter("isbn",expected.getIsbn())
-                .setParameter("description",expected.getDescription())
-                .setParameter("localization",expected.getLocalization())
-//                .setParameter("statusLending",expected.getStatusLending())
+                        " and book.isbn=:isbn and book.description=:description and book.localization=:localization and book.bookStatus=:bookStatus and book.categoryBook=:categoryBook")
+                .setParameter("title", expected.getTitle())
+                .setParameter("author", expected.getAuthor())
+                .setParameter("isbn", expected.getIsbn())
+                .setParameter("description", expected.getDescription())
+                .setParameter("localization", expected.getLocalization())
+                .setParameter("bookStatus", expected.getBookStatus())
                 .setParameter("categoryBook",expected.getCategoryBook())
                 .getSingleResult();
-        System.out.println(expected.toString());
+
         //then
         Assertions.assertEquals(expected.getId(),added.getId());
     }
@@ -152,6 +154,7 @@ class BookServiceImplTest {
         update.setDescription("Powieść fantastyczno naukowa");
         expected.setCategoryBook(CategoryBook.CRIMINAL);
         update.setIsbn("44456765434");
+
         //when
         bookService.saveBook(expected);
         bookService.updateBookById(expected.getId(),update);

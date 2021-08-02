@@ -45,7 +45,7 @@
 
 	</div>
 	<h2 style="font: message-box">Książka do wypożyczenia</h2>
-	<form action="#" method="POST" th:action="@{/lending}" th:object="${book}">
+	<form action="#" method="POST" th:action="@{/save_book}" th:object="${book}">
 		<table th:border="9"class="table table-striped table-responsive-lg">
 			<!--tu przyciski-->
 			<thead>
@@ -75,8 +75,8 @@
 			<th>Imię</th>
 			<th>Nazwisko</th>
 			<th>E-mail</th>
+			<th> Option </th>
 
-			<!--				<th>Kategoria</th>-->
 		</tr>
 		</thead>
 		<tbody>
@@ -84,6 +84,11 @@
 			<td th:text="${userLending.firstName}"></td>
 			<td th:text="${userLending.lastName}"></td>
 			<td th:text="${userLending.email}"></td>
+			<td align="center">
+				<a th:href="@{/lending/{id}(id=${book.id})}" class="btn btn-outline-warning">Borrow</a>
+<!--				<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Aviable</a>-->
+<!--				<a th:href="@{/lending/{id}(id =${book.id})}">Wypożycz</a>-->
+			</td>
 		</tr>
 		</tbody>
 	</table>

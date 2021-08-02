@@ -9,8 +9,11 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+
 @SpringBootTest
-class UserLendingServiceTest {
+class BookLendingServiceTest {
 
     @Autowired
     BookService bookService;
@@ -44,10 +47,7 @@ class UserLendingServiceTest {
     @DisplayName("should add new user")
     void shouldAddNewUser() {
         //given
-        UserLending expected = new UserLending();
-        expected.setFirstName("bar");
-        expected.setLastName("foo");
-        expected.setEmail("foo@wp.pl");
+        UserLending expected = createNewUser();
 
         //when
         userService.addUser(expected);
@@ -60,34 +60,34 @@ class UserLendingServiceTest {
 
                 .getSingleResult();
         //then
+        assertThat(added.getFirstName()).isEqualTo("bar");
         Assertions.assertEquals(expected.getId(),added.getId());
 
     }
 
-    @Test
-    void removeUser() {
-        //TODO implementation remove method
+    private UserLending createNewUser() {
+        UserLending expected = new UserLending();
+        expected.setFirstName("bar");
+        expected.setLastName("foo");
+        expected.setEmail("foo@wp.pl");
+        return expected;
     }
 
-//    @Test
-//    void shouldAddBookToUserCollection() {
-//        //given
-//        Book bookLending = new Book();
-//        bookLending.setTitle("First lending");
-//        bookLending.setAuthor("Author");
-//        bookLending.setIsbn("2234456543");
-//
-//        UserLending max = new UserLending();
-//        max.setEmail("max@wp.pl");
-//        max.setFirstName("Max");
-//        max.setLastName("Max");
-//        //when
-//        UserServiceImpl userService = new UserServiceImpl();
-//
-//        List<Book> booksLendingList = userService.getBooksLendingList();
-//
-//        assertThat(booksLendingList,hasSize(1));
-//    }
+    @Test
+    @DisplayName("should remove user by id")
+    void shouldRemoveUserById() {
+        //given
+        UserLending expected = createNewUser();
+        //when
+        userService.addUser(expected);
+        int expectedId = expected.getId();
+
+        userService.removeUser(expectedId,expected);
+
+        //then
+        Assertions.assertThrows(Exception.class, () -> userService.removeUser(expectedId,expected));
+    }
+
     @Test
     @DisplayName("should lending exists book by user")
     void shouldLendingBookByUser(){
@@ -98,13 +98,15 @@ class UserLendingServiceTest {
         bookLending.setIsbn("22344565434");
         bookLending.setCategoryBook(CategoryBook.SAILING);
 
-        UserLending max = new UserLending();
-        max.setEmail("max@wp.pl");
-        max.setFirstName("Max");
-        max.setLastName("Max");
+        UserLending max = createNewUser();
         //when
 
-        System.out.println(bookLending);
+        bookService.saveBook(bookLending);
+        userService.addUser(max);
+        bookService.lendBook(bookLending.getId(), max);
+
+        System.out.println(bookLending.getBookStatus());
+
 
 
     }

@@ -53,6 +53,21 @@ public class Book implements Comparable<Book> {
     @JoinColumn(name = "user_id")
     private UserLending borrower;
 
+    public BookStatus getBookStatus() {
+        return BookStatus.AVAILABLE;
+    }
+
+    public void setBookStatus(BookStatus bookStatus) {
+        this.bookStatus = bookStatus;
+    }
+
+    public UserLending getBorrower() {
+        return borrower;
+    }
+
+    public void setBorrower(UserLending borrower) {
+        this.borrower = borrower;
+    }
 
     @Override
     public int compareTo(Book book) {

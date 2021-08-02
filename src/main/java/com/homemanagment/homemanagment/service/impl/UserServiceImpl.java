@@ -38,9 +38,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void removeUser(UserLending userLending) {
-        this.userRepository.delete(userLending);
+    public void removeUser(int id,UserLending userLending) {
+        this.userRepository.deleteById(id);
     }
-
 
 }
