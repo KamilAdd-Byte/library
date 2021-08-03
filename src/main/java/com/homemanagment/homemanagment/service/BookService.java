@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface BookService {
     List<Book> allBooks();
 
@@ -19,6 +19,8 @@ public interface BookService {
     void updateBookById(int id, Book book);
 
     Book lendBook (int id, UserLending borrower);
+
+    void giveBackBook(int id, UserLending borrower);
 
     Page<Book> findPaginated(int pageNumber,int pageSize,String sortField, String sortDirection);
 

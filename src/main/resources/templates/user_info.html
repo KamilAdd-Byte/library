@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Użytkownicy</title>
+	<title>Borrowers</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -14,25 +14,27 @@
 		<!--tu przyciski-->
 		<thead>
 		<tr>
-			<th>Imię</th>
-			<th>Nazwisko</th>
+			<th>First name</th>
+			<th>Last name</th>
 			<th>E-mail</th>
+			<th>List all books</th>
 
-			<!--				<th>Kategoria</th>-->
 		</tr>
 		</thead>
 		<tbody>
-		<tr th:align="center" th:each="userLending: ${listAllUser}">
-			<td th:text="${userLending.firstName}"></td>
-			<td th:text="${userLending.lastName}"></td>
-			<td th:text="${userLending.email}"></td>
+		<tr th:align="center" th:each="user: ${listAllBorrower}">
+			<td hidden th:text="${user.id}"></td>
+			<td th:text="${user.firstName}"></td>
+			<td th:text="${user.lastName}"></td>
+			<td th:text="${user.email}"></td>
+			<td th:text="${user.books}"></td>
 		</tr>
 		</tbody>
 	</table>
 
 	<div id="navi">
-		<a th:href="@{/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Dodaj użytkownika</a>
-		<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/lending}"> Lending managment</a>
+
+		<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/management}"> Managment</a>
 	</div>
 </div>
 </body>

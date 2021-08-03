@@ -5,13 +5,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
+@ToString
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 public class UserLending {
 
@@ -20,14 +19,28 @@ public class UserLending {
     @Column(unique = true,name = "user_id")
     private int id;
 
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
+
 
     private String email;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Book> books;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "all_books")
+    private Set<Book> books;
+
+
+    public void addBook(Book book){
+        if (books == null){
+            books = new HashSet<>();
+        }
+        books.add(book);
+    }
+
+
 }
 
 

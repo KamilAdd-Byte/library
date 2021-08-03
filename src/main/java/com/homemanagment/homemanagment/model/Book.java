@@ -18,18 +18,18 @@ import javax.validation.constraints.Size;
 public class Book implements Comparable<Book> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_book",nullable = false)
+    @Column(name = "id_book", nullable = false)
     private int id;
 
-    @Size(min = 1, max = 40,message = "Tytuł nie może być pusty")
-    @Column(name = "title",nullable = false)
+    @Size(min = 1, max = 40, message = "Tytuł nie może być pusty")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Size(min = 2, max = 40,message = "Autor nie może zawierać pustego pola. Minimalnie dwa znaki")
-    @Column(name = "author",nullable = false)
+    @Size(min = 2, max = 40, message = "Autor nie może zawierać pustego pola. Minimalnie dwa znaki")
+    @Column(name = "author", nullable = false)
     private String author;
 
-    @Size(min = 10, max = 13,message = "Numer ISBN nie może zawierać pustego pola. Minimalnie 10 znaków")
+    @Size(min = 10, max = 13, message = "Numer ISBN nie może zawierać pustego pola. Minimalnie 10 znaków")
     @Column(name = "isbn")
     private String isbn;
 
@@ -49,7 +49,7 @@ public class Book implements Comparable<Book> {
     @NotNull(message = "Please select category book")
     private CategoryBook categoryBook;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserLending borrower;
 
@@ -78,6 +78,4 @@ public class Book implements Comparable<Book> {
             return -1;
         return this.title.compareTo(book.title);
     }
-
-
 }

@@ -17,7 +17,7 @@ public class BookAspect {
         Arrays.toString(args);
     }
 
-    @After("execution(* com.homemanagment.homemanagment.repositories.BookDao.*(..))")
+    @After("execution(* com.homemanagment.homemanagment.repositories.BookRepository.*(..))")
     public void logBookInfoAfterExecuteServiceMethod(JoinPoint joinPoint){
         Object[] args = joinPoint.getArgs();
         System.out.println("Book method executed");

@@ -3,8 +3,9 @@ package com.homemanagment.homemanagment.service.impl;
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.model.type.BookStatus;
-import com.homemanagment.homemanagment.repositories.BookDao;
+import com.homemanagment.homemanagment.repositories.BookRepository;
 import com.homemanagment.homemanagment.service.BookService;
+import com.homemanagment.homemanagment.service.UserService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,16 +14,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class BookServiceImpl implements BookService {
 
     @Autowired
-    private BookDao bookRepository;
+    private BookRepository bookRepository;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
 
     @Autowired
@@ -38,7 +42,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public Book saveBook(Book book) {
-        book.setBookStatus(BookStatus.AVAILABLE);
+       book.setBookStatus(BookStatus.AVAILABLE);
        return this.bookRepository.save(book);
     }
 
@@ -67,9 +71,36 @@ public class BookServiceImpl implements BookService {
     public Book lendBook(int id, UserLending borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         book.setBookStatus(BookStatus.BORROWED);
-        book.setBorrower(borrower);
+        setBorrower(borrower, book);
         return bookRepository.save(book);
     }
+
+    private void setBorrower(UserLending borrower, Book book) {
+        book.setBorrower(borrower);
+        addBookToUserList(borrower, book);
+    }
+
+    private void addBookToUserList(UserLending borrower, Book book) {
+        Set<Book> books = borrower.getBooks();
+        if (books==null){
+            books = new HashSet<>();
+        }
+        boolean add = books.add(book);
+
+        if (add==true){
+            borrower.setBooks(books);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void giveBackBook(int id, UserLending borrower) {
+        Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        book.setBookStatus(BookStatus.AVAILABLE);
+        setBorrower(borrower, book);
+        bookRepository.save(book);
+    }
+
 
     @Override
     public Page<Book> findPaginated(int pageNumber, int pageSize, String sortField, String sortDirection) {

@@ -88,8 +88,8 @@
 			<td th:text="${userLending.email}"></td>
 			<td align="center">
 				<a th:href="@{/lending/{id}/borrower (id=${book.id})}" class="btn btn-outline-warning">Borrow</a>
-				<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Remove user</a>
-<!--				<a th:href="@{/lending/{id}(id =${book.id})}">Wypożycz</a>-->
+
+				<a th:href="@{/giveBackBook/{id}(id =${book.id})}">Give</a>-->
 			</td>
 		</tr>
 		</tbody>
