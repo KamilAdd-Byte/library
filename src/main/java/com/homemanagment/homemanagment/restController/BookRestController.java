@@ -2,7 +2,7 @@ package com.homemanagment.homemanagment.restController;
 
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
-import com.homemanagment.homemanagment.repositories.BookDao;
+import com.homemanagment.homemanagment.repositories.BookRepository;
 import com.homemanagment.homemanagment.service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/lending")
 public class BookRestController {
 
-    private final BookDao bookRepository;
+    private final BookRepository bookRepository;
     private final BookService bookService;
 
-    public BookRestController(final BookDao bookRepository, final BookService bookService) {
+    public BookRestController(final BookRepository bookRepository, final BookService bookService) {
         this.bookRepository = bookRepository;
         this.bookService = bookService;
     }

@@ -1,8 +1,8 @@
 package com.homemanagment.homemanagment.controller;
 
 import com.homemanagment.homemanagment.model.UserLending;
-import com.homemanagment.homemanagment.repositories.UserDao;
-import com.homemanagment.homemanagment.service.impl.UserServiceImpl;
+import com.homemanagment.homemanagment.repositories.UserRepository;
+import com.homemanagment.homemanagment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,18 +13,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
 
-    @Autowired
-    private final UserServiceImpl userService;
-    @Autowired
-    private final UserDao repository;
+    private final UserService userService;
 
-    public UserController(final UserServiceImpl service, final UserDao repository) {
-        this.userService = service;
-        this.repository = repository;
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserController(final UserService userService, final UserRepository userRepository) {
+        this.userService = userService;
+        this.userRepository = userRepository;
     }
+
     @GetMapping("/user_info")
     public String getAllUser(Model model){
-        model.addAttribute("listAllUser",repository.findAll());
+        model.addAttribute("listAllBorrower",userService.allUsers());
         return "user_info";
     }
 
@@ -35,7 +36,9 @@ public class UserController {
     }
     @PostMapping("/user/save_user")
     public String saveUser(@ModelAttribute("user") UserLending userLending, Model model){
+
         userService.addUser(userLending);
+        model.addAttribute("userLending",userLending);
         return "redirect:/user_info";
     }
 }

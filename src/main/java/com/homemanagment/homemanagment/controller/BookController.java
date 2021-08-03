@@ -1,7 +1,8 @@
 package com.homemanagment.homemanagment.controller;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.repositories.BookDao;
+import com.homemanagment.homemanagment.repositories.BookRepository;
+import com.homemanagment.homemanagment.service.BookService;
 import com.homemanagment.homemanagment.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,14 +21,15 @@ import java.util.List;
 
 @Controller
 public class BookController {
-    @Autowired
-    private final BookDao repository;
+
+
+    private final BookRepository repository;
+
+
+    private final BookService service;
 
     @Autowired
-    private final BookServiceImpl service;
-
-
-    public BookController(final BookDao repository, final BookServiceImpl service) {
+    public BookController(final BookRepository repository, final BookService service) {
         this.repository = repository;
         this.service = service;
     }

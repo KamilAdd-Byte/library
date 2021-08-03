@@ -5,8 +5,14 @@ import com.homemanagment.homemanagment.model.UserLending;
 import java.util.List;
 
 public interface UserService {
+
     List<UserLending> allUsers();
+
     void addUser(UserLending userLending);
+
     void removeUser(int id,UserLending userLending);
-    List<Book> userBooks (UserLending userLending);
+
+    UserLending findBookByID(int id);
+
+    void addBookToUserList(UserLending userLending,Book book);
 }

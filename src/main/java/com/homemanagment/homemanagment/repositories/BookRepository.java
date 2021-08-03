@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BookDao extends JpaRepository<Book,Integer> {
+public interface BookRepository extends JpaRepository<Book,Integer> {
 
 
     @Query(value = "FROM Book b where b.title = ?1 ")
