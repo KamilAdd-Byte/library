@@ -85,11 +85,8 @@ public class BookServiceImpl implements BookService {
         if (books==null){
             books = new HashSet<>();
         }
-        boolean add = books.add(book);
+        books.add(book);
 
-        if (add==true){
-            borrower.setBooks(books);
-        }
     }
 
     @Override
@@ -97,7 +94,7 @@ public class BookServiceImpl implements BookService {
     public void giveBackBook(int id, UserLending borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         book.setBookStatus(BookStatus.AVAILABLE);
-        setBorrower(borrower, book);
+        book.setBorrower(null);
         bookRepository.save(book);
     }
 

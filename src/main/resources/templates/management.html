@@ -87,11 +87,11 @@
 		<th>ID książki</th>
 		<th>
 			<a th:href="@{'/page/' + ${currentPage} + '?sortField=title&sortDir='
-				+ ${reverseSortDirection}}">Tytuł książki</a>
+				+ ${reverseSortDirection}}">Tytuł książki V</a>
 		</th>
 		<th>
 			<a th:href="@{'/page/' + ${currentPage} + '?sortField=author&sortDir='
-				+ ${reverseSortDirection}}">Autor książki</a>
+				+ ${reverseSortDirection}}">Autor książki V</a>
 		</th>
 		<th>Opis książki</th>
 		<th>Numer ISBN</th>
@@ -115,9 +115,10 @@
 		<td th:text="${book.audit.createOn}"></td>
 		<td th:text="${book.getBookStatus()}"></td>
 		<td align="center">
-			<a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-outline-warning">Edytuj</a>
-			<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Usuń</a>
-			<a th:href="@{/lending/{id}(id =${book.id})}">Wypożycz</a>
+			<a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-outline-warning">Edit</a>
+			<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Remove</a>
+			<a th:href="@{/lending/{id}(id =${book.id})}" class="btn btn-light">Lend</a>
+			<a th:href="@{/giveBackBook/{id}(id =${book.id})}" class="btn btn-light">Give back</a>
 		</td>
 	</tr>
 	</tbody>
@@ -141,24 +142,29 @@
 		</div>
 		<div class="col-sm-1">
 			<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField='
-				+ ${sortField} + '&sortDir=' + ${sortDirection}}">Poprzednia</a>
-			<span th:unless="${currentPage < totalPages}">Poprzednia</span>
+				+ ${sortField} + '&sortDir=' + ${sortDirection}}">Next</a>
+			<span th:unless="${currentPage < totalPages}">Previous</span>
 		</div>
 	</div>
 </div>
 </div>	<!--tu tabela-->
 <div align="center" id="search">
-	<h2>Wyszukiwarka</h2>
+	<h2>Search by title</h2>
 	<form method="get" action="search">
 		<input type="text" name="keyword"/>
 		<input type="submit" value="Szukaj"/>
 	</form>
 </div>
-<div id="footer">
-	&copy Home Management System
-	<br>
-	Wszelkie prawa zastrzeżone @autor KamilAdd-Byte
-</div>
-</div>
+<footer class="page-footer font-small white">
+	<!-- Copyright -->
+	<div class="footer-copyright text-center py-3">© 2021 Copyright:
+		<a href="https://github.com/KamilAdd-Byte/library-app"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+			<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+		</svg> Home library app project by KamilAdd-Byte</a>
+	</div>
+	<!-- Copyright -->
+</footer>
+<!-- Footer --></div>
+
 </body>
 </html>

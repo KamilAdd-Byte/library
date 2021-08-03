@@ -2,6 +2,7 @@ package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.type.BookStatus;
 import com.homemanagment.homemanagment.model.type.CategoryBook;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -130,6 +131,7 @@ class BookLendingServiceTest {
 
         UserLending max = createNewUser();
         userService.addUser(max);
+
         //when
         System.out.println("Przed wypożyczeniem status: " + addedBook.getBookStatus());
         bookService.lendBook(addedBook.getId(), max);
@@ -140,13 +142,9 @@ class BookLendingServiceTest {
         bookService.giveBackBook(borrowedBook.getId(),max);
         System.out.println("Po zwróceniu status: "+addedBook.getBookStatus());
 
+        //then
 
-
-//        assertNotNull(borrowedBook.getBorrower().getId());
-//        assertEquals(max.getFirstName(),borrowedBook.getBorrower().getFirstName());
+          assertTrue(addedBook.getBookStatus().equals(BookStatus.AVAILABLE));
           assertNotEquals(addedBook.getBookStatus(),borrowedBook.getBookStatus());
     }
-
-
-
 }
