@@ -9,8 +9,8 @@ import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -71,9 +71,9 @@ class BookLendingServiceTest {
 
     private UserLending createNewUser() {
         UserLending expected = new UserLending();
-        expected.setFirstName("bar");
-        expected.setLastName("foo");
-        expected.setEmail("foo@wp.pl");
+        expected.setFirstName("Marceli");
+        expected.setLastName("Szpak");
+        expected.setEmail("marceli@szpak.pl");
         return expected;
     }
 
@@ -106,13 +106,12 @@ class BookLendingServiceTest {
 
         UserLending max = createNewUser();
         userService.addUser(max);
+
         //when
-        System.out.println("Przed wypożyczeniem status: " + addedBook.getBookStatus());
         bookService.lendBook(addedBook.getId(), max);
         Book borrowedBook = bookService.findBookByID(addedBook.getId());
 
-        System.out.println(borrowedBook.getBookStatus());
-        System.out.println("Info o użytkowniku"+max);
+
         assertNotNull(borrowedBook.getBorrower().getId());
         assertEquals(max.getFirstName(),borrowedBook.getBorrower().getFirstName());
         assertEquals(max.getLastName(),borrowedBook.getBorrower().getLastName());
@@ -121,30 +120,51 @@ class BookLendingServiceTest {
     @DisplayName("should give back book")
     void shouldGiveBackBook(){
         //given
+        Book addedBook = createNewBook();
+
+        UserLending max = createNewUser();
+        userService.addUser(max);
+
+        //when
+        bookService.lendBook(addedBook.getId(), max);
+        Book borrowedBook = bookService.findBookByID(addedBook.getId());
+
+        bookService.giveBackBook(borrowedBook.getId(),max);
+
+
+        //then
+          assertTrue(addedBook.getBookStatus().equals(BookStatus.AVAILABLE));
+          assertNotEquals(addedBook.getBookStatus(),borrowedBook.getBookStatus());
+    }
+
+    private Book createNewBook() {
         Book book = new Book();
         book.setTitle("First lending");
         book.setAuthor("Author");
         book.setIsbn("22344565434");
         book.setDescription("Lending book");
         book.setCategoryBook(CategoryBook.SAILING);
-        Book addedBook = bookService.saveBook(book);
+        return bookService.saveBook(book);
+    }
+    @Test
+    @DisplayName("should add book to set user lending")
+    void shouldAddBookToSetUserLending() {
+        //given
+        Book book = createNewBook();
+        UserLending userLending = createNewUser();
 
-        UserLending max = createNewUser();
-        userService.addUser(max);
+        bookService.saveBook(book);
+        userService.addUser(userLending);
 
         //when
-        System.out.println("Przed wypożyczeniem status: " + addedBook.getBookStatus());
-        bookService.lendBook(addedBook.getId(), max);
-        Book borrowedBook = bookService.findBookByID(addedBook.getId());
+        int bookId = book.getId();
 
-        System.out.println("Po wypożyczeniu status: "+borrowedBook.getBookStatus());
+        Book borrowed = bookService.lendBook(bookId, userLending);
 
-        bookService.giveBackBook(borrowedBook.getId(),max);
-        System.out.println("Po zwróceniu status: "+addedBook.getBookStatus());
+        userService.addBookToUserList(userLending,borrowed);
 
-        //then
+        System.out.println(userLending.getBooks());
 
-          assertTrue(addedBook.getBookStatus().equals(BookStatus.AVAILABLE));
-          assertNotEquals(addedBook.getBookStatus(),borrowedBook.getBookStatus());
+
     }
 }

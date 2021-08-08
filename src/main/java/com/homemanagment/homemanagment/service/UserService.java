@@ -12,7 +12,7 @@ public interface UserService {
 
     void removeUser(int id,UserLending userLending);
 
-    UserLending findBookByID(int id);
+    UserLending findUserByID(int id);
 
     void addBookToUserList(UserLending userLending,Book book);
 }

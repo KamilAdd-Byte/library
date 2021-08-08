@@ -39,9 +39,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserLending findBookByID(int id) {
-        UserLending find = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        return find;
+    public UserLending findUserByID(int id) {
+        try {
+            UserLending find = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+            return find;
+        }catch (NullPointerException e){
+            e.getStackTrace();
+        }
+        return null;
     }
 
     @Override
