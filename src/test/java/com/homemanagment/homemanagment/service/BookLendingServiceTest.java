@@ -64,7 +64,7 @@ class BookLendingServiceTest {
 
                 .getSingleResult();
         //then
-        assertThat(added.getFirstName()).isEqualTo("bar");
+        assertThat(added.getFirstName()).isEqualTo("Marceli");
         Assertions.assertEquals(expected.getId(),added.getId());
 
     }
