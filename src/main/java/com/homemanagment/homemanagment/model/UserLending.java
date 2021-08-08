@@ -28,7 +28,7 @@ public class UserLending {
 
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "all_books")
     private Set<Book> books;
 
