@@ -26,7 +26,7 @@ public class UserController {
     @GetMapping("/user_info")
     public String getAllUser(Model model){
         model.addAttribute("listAllBorrower",userService.allUsers());
-        return "user_info";
+        return "/user_info";
     }
 
     @GetMapping("/user/showNewFormUser")
