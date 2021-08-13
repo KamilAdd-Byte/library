@@ -3,7 +3,6 @@ package com.homemanagment.homemanagment.controller;
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.repositories.BookRepository;
 import com.homemanagment.homemanagment.service.BookService;
-import com.homemanagment.homemanagment.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -22,9 +20,7 @@ import java.util.List;
 @Controller
 public class BookController {
 
-
     private final BookRepository repository;
-
 
     private final BookService service;
 
@@ -121,5 +117,4 @@ public class BookController {
         model.addAttribute("keyword", search);
         return "management";
     }
-
 }

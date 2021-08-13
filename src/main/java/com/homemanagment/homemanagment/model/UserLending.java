@@ -12,6 +12,7 @@ import java.util.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "users")
 public class UserLending {
 
     @Id
@@ -40,7 +41,18 @@ public class UserLending {
         books.add(book);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserLending)) return false;
+        UserLending that = (UserLending) o;
+        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(books, that.books);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, books);
+    }
 }
 
 

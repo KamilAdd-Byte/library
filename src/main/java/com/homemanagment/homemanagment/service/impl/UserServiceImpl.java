@@ -41,8 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserLending findUserByID(int id) {
         try {
-            UserLending find = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-            return find;
+            return userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         }catch (NullPointerException e){
             e.getStackTrace();
         }
@@ -55,8 +54,5 @@ public class UserServiceImpl implements UserService {
            Book borrowed = bookService.findBookByID(book.getId());
            userLending.addBook(borrowed);
         }
-
     }
-
-
 }

@@ -17,6 +17,8 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -71,6 +73,7 @@ public class BookServiceImpl implements BookService {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         book.setBookStatus(BookStatus.BORROWED);
         setBorrower(borrower, book);
+        userService.addBookToUserList(borrower,book);//new!
         return bookRepository.save(book);
     }
 
@@ -108,11 +111,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> search(String keyword) {
-        try {
-            return bookRepository.searchBookByTitle(keyword);
-        } catch (NullPointerException e) {
-            e.getStackTrace();
-        }
-        return null;
+        return bookRepository.searchBookByTitle(keyword).stream()
+                .filter(b -> b.getTitle().contains(keyword))
+                .collect(Collectors.toList());
     }
 }

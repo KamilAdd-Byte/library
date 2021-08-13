@@ -15,6 +15,7 @@ import javax.validation.constraints.Size;
 @Setter
 @ToString
 @NoArgsConstructor
+@Table(name = "books")
 public class Book implements Comparable<Book> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
