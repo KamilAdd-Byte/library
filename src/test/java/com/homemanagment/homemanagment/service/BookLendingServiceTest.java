@@ -112,7 +112,6 @@ class BookLendingServiceTest {
         Book borrowedBook = bookService.findBookByID(addedBook.getId());
 
 
-        assertNotNull(borrowedBook.getBorrower().getId());
         assertEquals(max.getFirstName(),borrowedBook.getBorrower().getFirstName());
         assertEquals(max.getLastName(),borrowedBook.getBorrower().getLastName());
     }
@@ -146,25 +145,25 @@ class BookLendingServiceTest {
         book.setCategoryBook(CategoryBook.SAILING);
         return bookService.saveBook(book);
     }
-    @Test
-    @DisplayName("should add book to set user lending")
-    void shouldAddBookToSetUserLending() {
-        //given
-        Book book = createNewBook();
-        UserLending userLending = createNewUser();
-
-        bookService.saveBook(book);
-        userService.addUser(userLending);
-
-        //when
-        int bookId = book.getId();
-
-        Book borrowed = bookService.lendBook(bookId, userLending);
-
-        userService.addBookToUserList(userLending,borrowed);
-
-        System.out.println(userLending.getBooks());
-
-
-    }
+//    @Test
+//    @DisplayName("should add book to set user lending")
+//    void shouldAddBookToSetUserLending() {
+//        //given
+//        Book book = createNewBook();
+//        UserLending userLending = createNewUser();
+//
+//        bookService.saveBook(book);
+//        userService.addUser(userLending);
+//
+//        //when
+//        int bookId = book.getId();
+//
+//        Book borrowed = bookService.lendBook(bookId, userLending);
+//
+//        userService.addBookToUserList(userLending,borrowed);
+//
+//        System.out.println(userLending.getBooks());
+//
+//
+//    }
 }

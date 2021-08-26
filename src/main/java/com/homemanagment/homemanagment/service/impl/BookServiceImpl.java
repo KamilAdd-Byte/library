@@ -73,7 +73,6 @@ public class BookServiceImpl implements BookService {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         book.setBookStatus(BookStatus.BORROWED);
         setBorrower(borrower, book);
-        userService.addBookToUserList(borrower,book);//new!
         return bookRepository.save(book);
     }
 
@@ -95,7 +94,6 @@ public class BookServiceImpl implements BookService {
     public void giveBackBook(int id, UserLending borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         book.setBookStatus(BookStatus.AVAILABLE);
-        book.setBorrower(null);
         bookRepository.save(book);
     }
 
@@ -111,7 +109,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> search(String keyword) {
-        return bookRepository.searchBookByTitle(keyword).stream()
+        Stream<Book> bookStream = bookRepository.searchBookByTitle(keyword).stream();
+        return bookStream
                 .filter(b -> b.getTitle().contains(keyword))
                 .collect(Collectors.toList());
     }

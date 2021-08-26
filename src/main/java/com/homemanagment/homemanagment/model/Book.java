@@ -50,7 +50,7 @@ public class Book implements Comparable<Book> {
     @NotNull(message = "Please select category book")
     private CategoryBook categoryBook;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserLending borrower;
 
