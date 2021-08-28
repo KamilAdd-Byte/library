@@ -88,7 +88,7 @@
 			<td th:text="${userLending.lastName}"></td>
 			<td th:text="${userLending.email}"></td>
 			<td align="center">
-				<a th:href="@{/lending/{id}/borrower (id=${book.id})}" class="btn btn-outline-warning">Borrow</a>
+				<a th:href="@{/lending/{id}/userLending (id=${book.id})}" class="btn btn-outline-warning">Borrow</a>
 			</td>
 		</tr>
 		</tbody>

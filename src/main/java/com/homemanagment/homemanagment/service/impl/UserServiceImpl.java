@@ -3,7 +3,6 @@ package com.homemanagment.homemanagment.service.impl;
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.repositories.UserRepository;
-import com.homemanagment.homemanagment.service.BookService;
 import com.homemanagment.homemanagment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +14,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private BookService bookService;
-
 
     @Override
     @Transactional
@@ -34,25 +29,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void removeUser(int id,UserLending userLending) {
+    public void removeUser(int id, UserLending userLending) {
         this.userRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public UserLending findUserByID(int id) {
-        try {
-            return userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        }catch (NullPointerException e){
-            e.getStackTrace();
-        }
-        return null;
+        return userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
-    @Override
-    public void addBookToUserList(UserLending userLending,Book book) {
-        if (userLending!=null){
-           Book borrowed = bookService.findBookByID(book.getId());
-           userLending.addBook(borrowed);
-        }
-    }
 }

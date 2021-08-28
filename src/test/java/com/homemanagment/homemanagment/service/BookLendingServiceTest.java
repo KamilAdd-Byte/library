@@ -4,16 +4,20 @@ import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
 import com.homemanagment.homemanagment.model.type.BookStatus;
 import com.homemanagment.homemanagment.model.type.CategoryBook;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.HashSet;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@Slf4j
 @SpringBootTest
 class BookLendingServiceTest {
 
@@ -74,6 +78,7 @@ class BookLendingServiceTest {
         expected.setFirstName("Marceli");
         expected.setLastName("Szpak");
         expected.setEmail("marceli@szpak.pl");
+        expected.setBooks(expected.getBooks());
         return expected;
     }
 
@@ -107,13 +112,15 @@ class BookLendingServiceTest {
         UserLending max = createNewUser();
         userService.addUser(max);
 
+
         //when
-        bookService.lendBook(addedBook.getId(), max);
-        Book borrowedBook = bookService.findBookByID(addedBook.getId());
+        int addedBookId = addedBook.getId();
+        Book lendBook = bookService.lendBook(addedBookId, max);
 
+//        max.addBookToUserCollection(lendBook);
 
-        assertEquals(max.getFirstName(),borrowedBook.getBorrower().getFirstName());
-        assertEquals(max.getLastName(),borrowedBook.getBorrower().getLastName());
+        assertThat(lendBook.getBorrower()).isEqualTo(max);
+
     }
     @Test
     @DisplayName("should give back book")
@@ -145,25 +152,23 @@ class BookLendingServiceTest {
         book.setCategoryBook(CategoryBook.SAILING);
         return bookService.saveBook(book);
     }
-//    @Test
-//    @DisplayName("should add book to set user lending")
-//    void shouldAddBookToSetUserLending() {
-//        //given
-//        Book book = createNewBook();
-//        UserLending userLending = createNewUser();
-//
-//        bookService.saveBook(book);
-//        userService.addUser(userLending);
-//
-//        //when
-//        int bookId = book.getId();
-//
-//        Book borrowed = bookService.lendBook(bookId, userLending);
-//
-//        userService.addBookToUserList(userLending,borrowed);
-//
-//        System.out.println(userLending.getBooks());
-//
-//
-//    }
+    @Test
+    @DisplayName("should add book to set user lending")
+    void shouldAddBookToSetUserLending() {
+        //given
+        Book book = createNewBook();
+        UserLending userLending = createNewUser();
+
+        bookService.saveBook(book);
+        userService.addUser(userLending);
+
+        //when
+        int bookId = book.getId();
+
+
+
+        System.out.println(userLending.getBooks());
+
+
+    }
 }

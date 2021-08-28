@@ -23,7 +23,7 @@ public class BookRestController {
     @PostMapping("/lending/{id}/borrower")
     public ResponseEntity<Book> lendingBook (@PathVariable("id") int id, @RequestBody UserLending userLending){
         Book borrowed = bookService.findBookByID(id);
-        borrowed = bookService.lendBook(id, userLending);
+        bookService.lendBook(id, userLending);
         return ResponseEntity.ok().body(borrowed);
     }
 }

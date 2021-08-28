@@ -1,16 +1,18 @@
 package com.homemanagment.homemanagment.model;
 
+import com.homemanagment.homemanagment.model.type.BookStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@ToString
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @Table(name = "users")
 public class UserLending {
@@ -26,19 +28,18 @@ public class UserLending {
     @Column(name = "last_name")
     private String lastName;
 
-
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "all_books")
     private Set<Book> books;
 
-
-    public void addBook(Book book){
-        if (books == null){
+    public void addBookToUserCollection(Book book){
+        if (books==null){
             books = new HashSet<>();
         }
         books.add(book);
+        book.setBookStatus(BookStatus.BORROWED);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class UserLending {
         if (this == o) return true;
         if (!(o instanceof UserLending)) return false;
         UserLending that = (UserLending) o;
-        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(books, that.books);
+        return id == that.id && firstName.equals(that.firstName) && lastName.equals(that.lastName) && Objects.equals(email, that.email) && Objects.equals(books, that.books);
     }
 
     @Override

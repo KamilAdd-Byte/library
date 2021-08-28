@@ -9,6 +9,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -50,7 +51,7 @@ public class Book implements Comparable<Book> {
     @NotNull(message = "Please select category book")
     private CategoryBook categoryBook;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserLending borrower;
 
@@ -78,5 +79,18 @@ public class Book implements Comparable<Book> {
         if (localization > book.localization)
             return -1;
         return this.title.compareTo(book.title);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return id == book.id && localization == book.localization && title.equals(book.title) && author.equals(book.author) && Objects.equals(isbn, book.isbn) && Objects.equals(description, book.description) && Objects.equals(audit, book.audit) && bookStatus == book.bookStatus && categoryBook == book.categoryBook && borrower.equals(book.borrower);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, author, isbn, description, localization, audit, bookStatus, categoryBook, borrower);
     }
 }
