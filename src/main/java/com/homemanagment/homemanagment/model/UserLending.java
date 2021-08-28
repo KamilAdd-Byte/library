@@ -31,15 +31,22 @@ public class UserLending {
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "all_books")
-    private Set<Book> books;
+    @JoinColumn(columnDefinition = "all_books")
+    private Set<Book> books = new HashSet<>();
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 
     public void addBookToUserCollection(Book book){
         if (books==null){
             books = new HashSet<>();
         }
         books.add(book);
-        book.setBookStatus(BookStatus.BORROWED);
     }
 
     @Override
@@ -47,7 +54,7 @@ public class UserLending {
         if (this == o) return true;
         if (!(o instanceof UserLending)) return false;
         UserLending that = (UserLending) o;
-        return id == that.id && firstName.equals(that.firstName) && lastName.equals(that.lastName) && Objects.equals(email, that.email) && Objects.equals(books, that.books);
+        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(books, that.books);
     }
 
     @Override

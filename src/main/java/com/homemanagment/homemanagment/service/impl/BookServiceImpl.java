@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -70,8 +71,9 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public Book lendBook(int id, UserLending borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+//      borrower.addBookToUserCollection(book);
+        book.setBookStatus(BookStatus.BORROWED);
         book.setBorrower(borrower);
-//        borrower.addBookToUserCollection(book);
         return bookRepository.save(book);
     }
 
