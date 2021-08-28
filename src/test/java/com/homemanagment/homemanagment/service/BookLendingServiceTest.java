@@ -10,11 +10,7 @@ import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.HashSet;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
@@ -139,8 +135,9 @@ class BookLendingServiceTest {
 
 
         //then
-          assertTrue(addedBook.getBookStatus().equals(BookStatus.AVAILABLE));
-          assertNotEquals(addedBook.getBookStatus(),borrowedBook.getBookStatus());
+        assertNotNull(borrowedBook);
+        assertEquals(borrowedBook.getBookStatus(), BookStatus.AVAILABLE);
+
     }
 
     private Book createNewBook() {
