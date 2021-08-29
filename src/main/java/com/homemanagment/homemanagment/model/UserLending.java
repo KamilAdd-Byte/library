@@ -30,9 +30,10 @@ public class UserLending {
 
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(columnDefinition = "all_books")
-    private Set<Book> books = new HashSet<>();
+    private Set<Book> books;
+
 
     public Set<Book> getBooks() {
         return books;
@@ -43,10 +44,11 @@ public class UserLending {
     }
 
     public void addBookToUserCollection(Book book){
-        if (books==null){
-            books = new HashSet<>();
+        if (books == null){
+            books = new TreeSet<>();
         }
         books.add(book);
+        book.setBookStatus(BookStatus.BORROWED);
     }
 
     @Override

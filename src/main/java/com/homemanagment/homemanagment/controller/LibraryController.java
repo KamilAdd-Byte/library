@@ -39,13 +39,13 @@ public class LibraryController {
     public String lendBookById(@PathVariable("id") int id,
                                   @ModelAttribute UserLending userLending, Model model) {
         Book book = bookService.findBookByID(id);
-// TODO: 26.08.2021 Nie jest przekazywany USER!!!!
         bookService.lendBook(id,userLending);
+
         model.addAttribute("allUsers",userService.allUsers());
         model.addAttribute("book", book);
         model.addAttribute("borrower", userLending);
+        model.addAttribute("listUserCollectionBooks",userLending.getBooks());
         return "management";
-
     }
 
     @GetMapping("/giveBackBook/{id}")
