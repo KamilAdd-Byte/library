@@ -78,7 +78,8 @@
 			<th>First name</th>
 			<th>Last name</th>
 			<th>E-mail</th>
-			<th>List all books</th>
+			<th>Total books</th>
+			<th>List borrowed books</th>
 
 		</tr>
 		</thead>
@@ -88,11 +89,11 @@
 			<td th:text="${user.firstName}"></td>
 			<td th:text="${user.lastName}"></td>
 			<td th:text="${user.email}"></td>
+			<td th:text="${user.books.size()}"></td>
 			<td th:text="${user.books}"></td>
 		</tr>
 		</tbody>
 	</table>
-
 	<div id="navi">
 		<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/management}"> Bo back to managment</a>
 		<a th:href="@{/user/showNewFormUser}" class="bg-dark btn btn-outline-primary" th:align="center">Add new borrower</a>

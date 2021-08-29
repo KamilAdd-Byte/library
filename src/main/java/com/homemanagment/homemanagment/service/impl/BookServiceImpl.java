@@ -88,8 +88,7 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public Book giveBackBook(int id, UserLending borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        book.setBookStatus(BookStatus.AVAILABLE);
-        book.setBorrower(null);
+        borrower.removeBookToUserCollection(book);
         return bookRepository.save(book);
     }
 

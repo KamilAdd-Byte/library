@@ -30,7 +30,7 @@ public class UserLending {
 
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(columnDefinition = "all_books")
     private Set<Book> books;
 
@@ -47,10 +47,17 @@ public class UserLending {
         if (books == null){
             books = new TreeSet<>();
         }
-        books.add(book);
+        this.books.add(book);
         book.setBookStatus(BookStatus.BORROWED);
     }
 
+    public void removeBookToUserCollection(Book book){
+        if (books == null){
+            books = new TreeSet<>();
+        }
+        this.books.remove(book);
+        book.setBookStatus(BookStatus.AVAILABLE);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

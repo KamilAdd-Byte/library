@@ -2,9 +2,7 @@ package com.homemanagment.homemanagment.model;
 
 import com.homemanagment.homemanagment.model.type.BookStatus;
 import com.homemanagment.homemanagment.model.type.CategoryBook;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,7 +10,6 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
-@ToString
 @NoArgsConstructor
 @Table(name = "books")
 public class Book implements Comparable<Book> {
@@ -155,5 +152,14 @@ public class Book implements Comparable<Book> {
     @Override
     public int hashCode() {
         return Objects.hash(id, title, author, isbn, description, localization, audit, bookStatus, categoryBook, borrower);
+    }
+
+    @Override
+    public String toString() {
+        String result = " Title: " + title;
+        result+= " Author: " + author;
+        result+= " Category: " + categoryBook;
+        result+= " Isbn: " + isbn;
+        return result;
     }
 }
