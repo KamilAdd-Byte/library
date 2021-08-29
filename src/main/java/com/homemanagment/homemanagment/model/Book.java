@@ -2,9 +2,7 @@ package com.homemanagment.homemanagment.model;
 
 import com.homemanagment.homemanagment.model.type.BookStatus;
 import com.homemanagment.homemanagment.model.type.CategoryBook;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,9 +10,6 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@ToString
 @NoArgsConstructor
 @Table(name = "books")
 public class Book implements Comparable<Book> {
@@ -56,6 +51,62 @@ public class Book implements Comparable<Book> {
     private UserLending borrower;
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getLocalization() {
+        return localization;
+    }
+
+    public void setLocalization(int localization) {
+        this.localization = localization;
+    }
+
+    public Audit getAudit() {
+        return audit;
+    }
+
+    public void setAudit(Audit audit) {
+        this.audit = audit;
+    }
+
     public BookStatus getBookStatus() {
         return bookStatus;
     }
@@ -64,13 +115,22 @@ public class Book implements Comparable<Book> {
         this.bookStatus = bookStatus;
     }
 
+    public CategoryBook getCategoryBook() {
+        return categoryBook;
+    }
+
+    public void setCategoryBook(CategoryBook categoryBook) {
+        this.categoryBook = categoryBook;
+    }
+
     public UserLending getBorrower() {
         return borrower;
     }
 
-    public void setBorrower(UserLending borrower) {
-        this.borrower = borrower;
+    public void setBorrower(UserLending userLending){
+        this.borrower = userLending;
     }
+
 
     @Override
     public int compareTo(Book book) {
@@ -92,5 +152,14 @@ public class Book implements Comparable<Book> {
     @Override
     public int hashCode() {
         return Objects.hash(id, title, author, isbn, description, localization, audit, bookStatus, categoryBook, borrower);
+    }
+
+    @Override
+    public String toString() {
+        String result = " Title: " + title;
+        result+= " Author: " + author;
+        result+= " Category: " + categoryBook;
+        result+= " Isbn: " + isbn;
+        return result;
     }
 }

@@ -14,7 +14,7 @@ import java.util.*;
 @Setter
 @ToString
 @NoArgsConstructor
-@Table(name = "users")
+@Table(name = "userLending")
 public class UserLending {
 
     @Id
@@ -31,23 +31,27 @@ public class UserLending {
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "all_books")
+    @JoinColumn(name = "borrower")
     private Set<Book> books;
 
     public void addBookToUserCollection(Book book){
-        if (books==null){
+        if (books == null){
             books = new HashSet<>();
         }
-        books.add(book);
+        this.books.add(book);
         book.setBookStatus(BookStatus.BORROWED);
     }
 
+    public void removeBookToUserCollection(Book book){
+        this.books.remove(book);
+        book.setBookStatus(BookStatus.AVAILABLE);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserLending)) return false;
         UserLending that = (UserLending) o;
-        return id == that.id && firstName.equals(that.firstName) && lastName.equals(that.lastName) && Objects.equals(email, that.email) && Objects.equals(books, that.books);
+        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(books, that.books);
     }
 
     @Override

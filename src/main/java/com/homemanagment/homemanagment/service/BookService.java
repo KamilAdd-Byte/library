@@ -3,8 +3,6 @@ package com.homemanagment.homemanagment.service;
 import com.homemanagment.homemanagment.model.Book;
 import com.homemanagment.homemanagment.model.UserLending;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 public interface BookService {
@@ -20,7 +18,7 @@ public interface BookService {
 
     Book lendBook (int id, UserLending borrower);
 
-    void giveBackBook(int id, UserLending borrower);
+    Book giveBackBook(int id, UserLending borrower);
 
     Page<Book> findPaginated(int pageNumber,int pageSize,String sortField, String sortDirection);
 
