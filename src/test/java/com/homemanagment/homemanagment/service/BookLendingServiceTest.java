@@ -112,13 +112,13 @@ class BookLendingServiceTest {
         //when
         int addedBookId = addedBook.getId();
         Book lendBook = bookService.lendBook(addedBookId, max);
-
+        lendBook.setBorrower(max);
 //        max.addBookToUserCollection(lendBook);
 
         log.info("Max : " + max.toString() + "Collection: " + max.getBooks());
         log.info("Book : " + lendBook.toString());
 
-//        assertThat(lendBook.getBorrower()).isEqualTo(max);
+        assertThat(lendBook.getBorrower()).isEqualTo(max);
 
     }
     @Test

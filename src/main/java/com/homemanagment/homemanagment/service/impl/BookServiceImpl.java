@@ -71,7 +71,6 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public void updateBookById(int id, Book book) {
         this.bookRepository.findById(id);
-        //TODO Update method!!!! Override and create new book instead update
     }
 
     @Override
@@ -79,7 +78,6 @@ public class BookServiceImpl implements BookService {
     public Book lendBook(int id, UserLending borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         borrower.addBookToUserCollection(book);
-
         return bookRepository.save(book);
     }
 

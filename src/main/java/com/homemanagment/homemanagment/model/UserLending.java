@@ -14,7 +14,7 @@ import java.util.*;
 @Setter
 @ToString
 @NoArgsConstructor
-@Table(name = "users")
+@Table(name = "userLending")
 public class UserLending {
 
     @Id
@@ -31,30 +31,18 @@ public class UserLending {
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(columnDefinition = "all_books")
+    @JoinColumn(name = "borrower")
     private Set<Book> books;
-
-
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<Book> books) {
-        this.books = books;
-    }
 
     public void addBookToUserCollection(Book book){
         if (books == null){
-            books = new TreeSet<>();
+            books = new HashSet<>();
         }
         this.books.add(book);
         book.setBookStatus(BookStatus.BORROWED);
     }
 
     public void removeBookToUserCollection(Book book){
-        if (books == null){
-            books = new TreeSet<>();
-        }
         this.books.remove(book);
         book.setBookStatus(BookStatus.AVAILABLE);
     }
