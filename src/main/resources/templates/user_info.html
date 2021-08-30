@@ -78,9 +78,6 @@
 			<th>First name</th>
 			<th>Last name</th>
 			<th>E-mail</th>
-			<th>Total books</th>
-			<th>List borrowed books</th>
-
 		</tr>
 		</thead>
 		<tbody>
@@ -89,8 +86,6 @@
 			<td th:text="${user.firstName}"></td>
 			<td th:text="${user.lastName}"></td>
 			<td th:text="${user.email}"></td>
-			<td th:text="${user.books.size()}"></td>
-			<td th:text="${user.books}"></td>
 		</tr>
 		</tbody>
 	</table>

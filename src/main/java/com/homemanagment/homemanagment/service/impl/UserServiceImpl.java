@@ -50,7 +50,6 @@ public class UserServiceImpl implements UserService {
     public void addBookToUserCollection(UserLending userLending, Book book) {
         UserLending borrower = userRepository.findById(userLending.getId()).orElseThrow(IllegalArgumentException::new);
         Book bookToBorrow = bookRepository.findById(book.getId()).orElseThrow(IllegalArgumentException::new);
-        borrower.addBookToUserCollection(bookToBorrow);
-        this.bookRepository.save(bookToBorrow);
+
     }
 }

@@ -64,11 +64,9 @@ class UserServiceImplTest {
                 .getSingleResult();
 
         //then
-        assertNotNull(added.getBooks());
+
         assertThat(added.getFirstName()).isEqualTo("Marceli");
         Assertions.assertEquals(expected.getId(),added.getId());
-        assertThat(added.getBooks()).as("Books size is: ").hasSize(0);
-
     }
 
     private UserLending createNewUser() {

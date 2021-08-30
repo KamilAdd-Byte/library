@@ -1,18 +1,14 @@
 package com.homemanagment.homemanagment.model;
 
-import com.homemanagment.homemanagment.model.type.BookStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Table(name = "userLending")
 public class UserLending {
@@ -30,33 +26,12 @@ public class UserLending {
 
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "borrower")
-    private Set<Book> books;
-
-    public void addBookToUserCollection(Book book){
-        if (books == null){
-            books = new HashSet<>();
-        }
-        this.books.add(book);
-        book.setBookStatus(BookStatus.BORROWED);
-    }
-
-    public void removeBookToUserCollection(Book book){
-        this.books.remove(book);
-        book.setBookStatus(BookStatus.AVAILABLE);
-    }
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserLending)) return false;
-        UserLending that = (UserLending) o;
-        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(books, that.books);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, books);
+    public String toString() {
+        String result = firstName;
+        result += " " + lastName;
+        result += " e-mail: " + email;
+        return result;
     }
 }
 

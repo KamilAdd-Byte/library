@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -57,8 +58,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public Book findBookByID(int id) {
-        Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        return book;
+        return bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
     @Override
@@ -77,8 +77,20 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public Book lendBook(int id, UserLending borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        borrower.addBookToUserCollection(book);
+        book.setBorrower(borrower);
+        book.setBookStatus(BookStatus.BORROWED);
         return bookRepository.save(book);
+    }
+
+    @Override
+    public List<Book> getBorrowedBooks() {
+        List<Book> bookBorrowedList = bookRepository.findAll().stream()
+                .filter(book -> book.getBookStatus() == BookStatus.BORROWED)
+                .collect(Collectors.toList());
+        if (bookBorrowedList==null){
+            return new ArrayList<>();
+        }
+        return bookBorrowedList;
     }
 
 
@@ -86,7 +98,8 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public Book giveBackBook(int id, UserLending borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        borrower.removeBookToUserCollection(book);
+        book.setBorrower(book.getBorrower());
+        book.setBookStatus(BookStatus.AVAILABLE);
         return bookRepository.save(book);
     }
 

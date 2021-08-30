@@ -41,7 +41,6 @@ public class LibraryController {
         Book book = bookService.findBookByID(id);
         UserLending user = userService.findUserByID(userLending.getId());
         bookService.lendBook(book.getId(), user);
-
         model.addAttribute("allUsers",userService.allUsers());
         model.addAttribute("book", book);
         model.addAttribute("borrower", userLending);

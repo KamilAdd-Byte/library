@@ -80,6 +80,27 @@
 		With this application you will quickly find what you are looking for on the list.<br>
 		Add your friends who borrowed a book from you. This way, no book will be lost.
 	</div>
+	<div>
+		<table th:border="2"class="table table-striped table-responsive">
+			<!--tu przyciski-->
+			<thead>
+			<tr>
+				<th>Title</th>
+				<th>Author</th>
+				<th>Borrower</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:align="center" th:each="book: ${borrowedBooks}">
+				<td hidden th:text="${book.id}"></td>
+				<td th:text="${book.title}"></td>
+				<td th:text="${book.author}"></td>
+				<td th:text="${book.borrower}"></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
 	<footer class="page-footer font-small white">
 		<!-- Copyright -->
 		<div class="footer-copyright text-center py-3">© 2021 Copyright:

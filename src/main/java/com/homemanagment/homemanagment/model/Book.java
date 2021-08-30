@@ -3,7 +3,6 @@ package com.homemanagment.homemanagment.model;
 import com.homemanagment.homemanagment.model.type.BookStatus;
 import com.homemanagment.homemanagment.model.type.CategoryBook;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,8 +10,8 @@ import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
-@Table(name = "books")
-public class Book implements Comparable<Book> {
+@Table(name = "book")
+public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_book", nullable = false)
@@ -46,7 +45,7 @@ public class Book implements Comparable<Book> {
     @NotNull(message = "Please select category book")
     private CategoryBook categoryBook;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserLending borrower;
 
@@ -131,27 +130,17 @@ public class Book implements Comparable<Book> {
         this.borrower = userLending;
     }
 
-
-    @Override
-    public int compareTo(Book book) {
-        if (localization < book.localization)
-            return 1;
-        if (localization > book.localization)
-            return -1;
-        return this.title.compareTo(book.title);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Book)) return false;
         Book book = (Book) o;
-        return id == book.id && localization == book.localization && title.equals(book.title) && author.equals(book.author) && Objects.equals(isbn, book.isbn) && Objects.equals(description, book.description) && Objects.equals(audit, book.audit) && bookStatus == book.bookStatus && categoryBook == book.categoryBook && borrower.equals(book.borrower);
+        return id == book.id && localization == book.localization && title.equals(book.title) && author.equals(book.author) && Objects.equals(isbn, book.isbn) && Objects.equals(description, book.description) && Objects.equals(audit, book.audit) && bookStatus == book.bookStatus && categoryBook == book.categoryBook;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, isbn, description, localization, audit, bookStatus, categoryBook, borrower);
+        return Objects.hash(id, title, author, isbn, description, localization, audit, bookStatus, categoryBook);
     }
 
     @Override
@@ -160,6 +149,7 @@ public class Book implements Comparable<Book> {
         result+= " Author: " + author;
         result+= " Category: " + categoryBook;
         result+= " Isbn: " + isbn;
+        result+= " Borrower: " + borrower;
         return result;
     }
 }

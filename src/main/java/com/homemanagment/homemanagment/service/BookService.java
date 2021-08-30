@@ -18,6 +18,8 @@ public interface BookService {
 
     Book lendBook (int id, UserLending borrower);
 
+    List<Book> getBorrowedBooks();
+
     Book giveBackBook(int id, UserLending borrower);
 
     Page<Book> findPaginated(int pageNumber,int pageSize,String sortField, String sortDirection);
