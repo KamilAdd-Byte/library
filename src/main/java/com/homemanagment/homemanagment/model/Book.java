@@ -45,7 +45,7 @@ public class Book {
     @NotNull(message = "Please select category book")
     private CategoryBook categoryBook;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserLending borrower;
 

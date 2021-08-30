@@ -42,7 +42,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserLending findUserByID(int id) {
-        return userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        UserLending userLending = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return userLending;
     }
 
     @Override
@@ -50,6 +51,5 @@ public class UserServiceImpl implements UserService {
     public void addBookToUserCollection(UserLending userLending, Book book) {
         UserLending borrower = userRepository.findById(userLending.getId()).orElseThrow(IllegalArgumentException::new);
         Book bookToBorrow = bookRepository.findById(book.getId()).orElseThrow(IllegalArgumentException::new);
-
     }
 }

@@ -58,7 +58,8 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public Book findBookByID(int id) {
-        return bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return book;
     }
 
     @Override
@@ -77,7 +78,8 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public Book lendBook(int id, UserLending borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        book.setBorrower(borrower);
+        UserLending userLending = userRepository.findById(borrower.getId()).orElseThrow(IllegalArgumentException::new);
+        book.setBorrower(userLending);
         book.setBookStatus(BookStatus.BORROWED);
         return bookRepository.save(book);
     }
