@@ -10,7 +10,11 @@
 	<style>
         #container
         {
-
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: azure;
+            font-family: Garuda,serif;
         }
         #search
         {
@@ -22,7 +26,7 @@
         #info
         {
             padding: 5px;
-            background-color: deepskyblue;
+            background-color: black;
         }
         #logo
         {
@@ -46,14 +50,9 @@
             pointer-events: auto;
             padding: 15px;
         }
-        #footer
-        {
-            clear: both;
-            background-color: black;
-            font-size: 22px;
-            color: white;
-            text-align: center;
-        }
+        #table{
+            padding: 10px;
+		}
 	</style>
 </head>
 <body>
@@ -64,89 +63,91 @@
 				<img alt="" class="d-inline-block align-top"
 					 height="30" color="white" src="https://freepikpsd.com/wp-content/uploads/2020/04/book-icon-png-white-Images-Free-Transparent.png" width="30">
 				Privet Home Library
-
+				<div id="sub-navbar">
+					<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}">Home page</a>
+					<a align="left" th:href="@{/showNewBookForm}" class="bg-success btn btn-success"> Add new book </a>
+					<a align="left" th:href="@{/user_info}" class="bg-dark btn btn-outline-primary" th:align="center">Your borrowed friends</a>
+				</div>
 			</a>
 		</nav>
-		<div id="sub-navbar">
-			<a align="left" th:href="@{/showNewBookForm}" class="bg-success btn btn-success btn-lg mb-2"> Add new book </a>
-			<a th:href="@{/information}" class="bg-warning btn btn-warning btn-lg mb-2"> Info </a>
-			<a th:href="@{/user_info}" class="bg-dark btn btn-outline-primary btn-lg mb-2" th:align="center">Your borrowed friends</a>
-
-		</div>
-
 	</div>
-</div>
-<div align="center" id="info">
-	<h6 class="btn btn-outline-primary">Privet collections the books</h6>
-</div>
-<h2 th:align="center" color="#FF0650" th:if="${message != null}" th:text="${message}"></h2>
-<table th:border="2"class="table table-striped table-responsive-lg">
-	<!--tu przyciski-->
-	<thead>
-	<tr align="center">
-		<th>ID książki</th>
-		<th>
-			<a th:href="@{'/page/' + ${currentPage} + '?sortField=title&sortDir='
-				+ ${reverseSortDirection}}">Tytuł książki V</a>
-		</th>
-		<th>
-			<a th:href="@{'/page/' + ${currentPage} + '?sortField=author&sortDir='
-				+ ${reverseSortDirection}}">Autor książki V</a>
-		</th>
-		<th>Opis książki</th>
-		<th>Numer ISBN</th>
-		<th>Lokalizacja</th>
-		<th>Kategoria</th>
-		<th>Data dodania</th>
-		<th>Status</th>
-		<th>Opcje</th>
-		<!--				<th>Kategoria</th>-->
-	</tr>
-	</thead>
-	<tbody>
-	<tr th:align="center" th:each="book: ${listAllBooks}">
-		<td th:text="${book.id}"></td>
-		<td th:text="${book.title}"></td>
-		<td th:text="${book.author}"></td>
-		<td th:text="${book.description}"></td>
-		<td th:text="${book.isbn}"></td>
-		<td th:text="${book.localization}"></td>
-		<td th:text="${book.categoryBook.description}"></td>
-		<td th:text="${book.audit.createOn}"></td>
-		<td th:text="${book.getBookStatus()}"></td>
-		<td align="center">
-			<a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-outline-warning">Edit</a>
-			<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Remove</a>
-			<a th:href="@{/lending/{id}(id =${book.id})}" class="btn btn-light">Lend</a>
-			<a th:href="@{/giveBackBook/{id}(id =${book.id})}" class="btn btn-light">Give back</a>
-		</td>
-	</tr>
-	</tbody>
-</table>
-<div th:if="${totalPages > 1}">
-	<div class="row col-sm-10">
-		<div class="col-sm-2">
-			Total rows: [[${totalItems}]]
-		</div>
-		<div class="col-sm-1">
+	<div align="center" id="info">
+		<p class="btn btn-outline-primary"><span><b>This is a list of your books.</b></span> Manage them thanks to the buttons:
+			<br>Edit - editing the book,
+			<br>Remove - removing the book from the database,
+			<br>Borrow - lending a book to a friend or acquaintance,
+			<br>Give - returning the book. </p>
+	</div>
+	<div id="table">
+		<h2 th:align="center" color="#FF0650" th:if="${message != null}" th:text="${message}"></h2>
+		<table th:border="2"class="table table-striped table-responsive-lg">
+			<!--tu przyciski-->
+			<thead>
+			<tr align="center">
+				<th>ID book</th>
+				<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=title&sortDir='
+				+ ${reverseSortDirection}}">Title V</a>
+				</th>
+				<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=author&sortDir='
+				+ ${reverseSortDirection}}">Author V</a>
+				</th>
+				<th>Description</th>
+				<th>ISBN</th>
+				<th>Localization</th>
+				<th>Category</th>
+				<th>Date to added</th>
+				<th>Status</th>
+				<th>Options</th>
+				<!--				<th>Kategoria</th>-->
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:align="center" th:each="book: ${listAllBooks}">
+				<td th:text="${book.id}"></td>
+				<td th:text="${book.title}"></td>
+				<td th:text="${book.author}"></td>
+				<td th:text="${book.description}"></td>
+				<td th:text="${book.isbn}"></td>
+				<td th:text="${book.localization}"></td>
+				<td th:text="${book.categoryBook.description}"></td>
+				<td th:text="${book.audit.createOn}"></td>
+				<td th:text="${book.getBookStatus()}"></td>
+				<td align="center">
+					<a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-outline-warning">Edit</a>
+					<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Remove</a>
+					<a th:href="@{/lending/{id}(id =${book.id})}" class="btn btn-light">Borrow</a>
+					<a th:href="@{/giveBackBook/{id}(id =${book.id})}" class="btn btn-light">Give back</a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:if="${totalPages > 1}">
+		<div class="row col-sm-10">
+			<div class="col-sm-2">
+				Total rows: [[${totalItems}]]
+			</div>
+			<div class="col-sm-1">
 				<span th:each="i:${#numbers.sequence(1,totalPages)}">
 					<a th:if="${currentPage != i}" th:href="@{'/page/'+ ${i} + '?sortField=' + ${sortField} + '&sortDir='
 					+ ${sortDirection}}">[[${i}]]</a>
 					<span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;&nbsp;
 				</span>
-		</div>
-		<div class="col-sm-1">
-			<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField='
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField='
 				+ ${sortField} + '&sortDir=' + ${sortDirection}}">Następna</a>
-			<span th:unless="${currentPage < totalPages}">Następna</span>
-		</div>
-		<div class="col-sm-1">
-			<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField='
+				<span th:unless="${currentPage < totalPages}">Następna</span>
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField='
 				+ ${sortField} + '&sortDir=' + ${sortDirection}}">Next</a>
-			<span th:unless="${currentPage < totalPages}">Previous</span>
+				<span th:unless="${currentPage < totalPages}">Previous</span>
+			</div>
 		</div>
 	</div>
-</div>
 </div>	<!--tu tabela-->
 <div align="center" id="search">
 	<h2>Search by title</h2>
@@ -165,6 +166,6 @@
 	<!-- Copyright -->
 </footer>
 <!-- Footer -->
-
+</div>
 </body>
 </html>

@@ -76,14 +76,14 @@ public class BookController {
     @GetMapping("/remove/{id}")
     public String removeBookById(@PathVariable("id") int id, Book book, Model model) {
         service.removeBookById(id, book);
-        model.addAttribute("message", "Pomyślnie usunięto książkę!");
+        model.addAttribute("message", "Book successfully deleted !");
         return "management";
     }
 
     @GetMapping("/update/{id}")
     public String updateBookById(@PathVariable("id") int id, Model model) {
         Book book = service.findBookByID(id);
-        model.addAttribute("message", "Pomyślnie edytowano książkę!");
+        model.addAttribute("message", "Book successfully update !");
         model.addAttribute("book", book);
         return "update_book";
     }

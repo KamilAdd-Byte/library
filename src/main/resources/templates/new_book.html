@@ -7,31 +7,25 @@
 		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 		  rel="stylesheet">
 	<style>
+        #container
+        {
+            background-color: azure;
+            font-family: Garuda,serif;
+        }
         #logo {
             background-color: black;
             color: white;
             text-align: center;
         }
-
         #navi {
-            padding: 30px;
-        }
-
-        .footer {
-            clear: both;
-            background-color: black;
-            font-size: 22px;
-            color: white;
-            text-align: center;
+            padding: 10px;
         }
 		.Bdc\(red\){
             border-color: red !important;
 		}
-
 		.legend{
 			color: darkcyan;
 		}
-
 	</style>
 </head>
 <body>
@@ -41,12 +35,12 @@
 			<img alt="" class="d-inline-block align-top"
 				 height="30" color="white" src="https://freepikpsd.com/wp-content/uploads/2020/04/book-icon-png-white-Images-Free-Transparent.png" width="30">
 			Privet Home Library - Add book
+			<div align="center" id="navi">
+				<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}">Home page</a>
+			</div>
 		</a>
-		<div id="navi">
-			<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}">Home page</a>
-		</div>
 	</div>
-	<h2 style="font: message-box">Enter book information</h2>
+	<h2 align="center" style="font: message-box">Add book information</h2>
 		<div align="center">
 			<p th:if="validationMessage"></p>
 			<form action="#" method="POST" th:action="@{/save_book}" th:object="${book}">

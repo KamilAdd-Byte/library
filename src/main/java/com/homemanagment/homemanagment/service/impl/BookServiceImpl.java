@@ -58,8 +58,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public Book findBookByID(int id) {
-        Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        return book;
+        return bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
     @Override
