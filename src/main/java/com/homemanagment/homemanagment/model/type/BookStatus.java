@@ -7,5 +7,5 @@ import lombok.ToString;
 @Getter
 public enum BookStatus {
     AVAILABLE,
-    BORROWED
+    BORROWED;
 }

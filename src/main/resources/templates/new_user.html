@@ -25,7 +25,9 @@
             padding: 20px;
             font-size: 16px;
         }
-
+        .Bdc\(red\){
+            border-color: red !important;
+        }
         input[type="text"] {
             display: block;
             width: 100%;
@@ -39,7 +41,7 @@
 		<nav class="navbar navbar-black bg-black" id="navbar">
 			<a class="navbar-brand">
 				<img alt="" class="d-inline-block align-top"
-					 height="30" color="white" src="https://freepikpsd.com/wp-content/uploads/2020/04/book-icon-png-white-Images-Free-Transparent.png" width="30">
+					 height="30" color="white" src="https://www.iconsdb.com/icons/preview/white/book-xxl.png" width="30">
 				Privet Home Library
 				<div id="sub-navbar">
 					<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}">Home page</a>
@@ -51,12 +53,18 @@
 	</div>
 	<div id="content">
 		<h2>Add borrower</h2>
+		<p th:if="validationMessage"></p>
 		<form action="#" th:action="@{/user/save_user}" th:object="${user}" method="post">
+
+			<p th:errorclass="'Bdc(red)'" th:errors="*{firstName}" th:if="${#fields.hasErrors('firstName')}">Title errors</p>
 			<input type="text" th:field="*{firstName}"
 				   placeholder="First name" class="form-control mb-4 col-4">
 
+			<p th:errorclass="'Bdc(red)'" th:errors="*{lastName}" th:if="${#fields.hasErrors('lastName')}">Title errors</p>
 			<input type="text" th:field="*{lastName}"
 				   placeholder="Last name" class="form-control mb-4 col-4">
+
+			<p th:errorclass="'Bdc(red)'" th:errors="*{email}" th:if="${#fields.hasErrors('email')}">Title errors</p>
 			<input type="text" th:field="*{email}"
 				   placeholder="E-mail (optional)" class="form-control mb-4 col-4">
 			<button class="bg-success btn-lg" type="submit">Add borrower</button>
