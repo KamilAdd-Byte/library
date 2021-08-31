@@ -31,12 +31,12 @@ public class LibraryController {
 
     @GetMapping("/lending")
     public String lending (Model model){
-        model.addAttribute("allUsers",userRepository.findAll());
+        model.addAttribute("allUsers",userService.allUsers());
       return "lending";
     }
     @GetMapping("/lending/{id}")
     public String lendingBookById(@PathVariable("id") int id, Model model) {
-        Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        Book book = bookService.findBookByID(id);
         model.addAttribute("book",book);
         model.addAttribute("allUsers",userService.allUsers());
         return "lending";
