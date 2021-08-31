@@ -76,7 +76,7 @@ public class BookController {
     @GetMapping("/remove/{id}")
     public String removeBookById(@PathVariable("id") int id, Book book, Model model) {
         service.removeBookById(id, book);
-        model.addAttribute("message", "Book successfully deleted !");
+        model.addAttribute("message", "Book successfully deleted!");
         return "management";
     }
 

@@ -31,7 +31,7 @@ public class LibraryController {
 
     @GetMapping("/lending")
     public String lending (Model model){
-        model.addAttribute("allUsers",userService.allUsers());
+        model.addAttribute("allUsers",userRepository.findAll());
       return "lending";
     }
     @GetMapping("/lending/{id}")
@@ -50,7 +50,7 @@ public class LibraryController {
 //        user.addBookToUserCollection(book);
         model.addAttribute("allUsers",userService.allUsers());
         model.addAttribute("book", book);
-        model.addAttribute("borrower", userLending);
+        model.addAttribute("borrower", userByID);
         model.addAttribute("message", "Book successfully borrowed! Back to management");
 
         return "lending";
@@ -66,6 +66,6 @@ public class LibraryController {
         model.addAttribute("book",book);
         model.addAttribute("allUsers",userService.allUsers());
         model.addAttribute("borrower",userLending);
-        return "lending";
+        return "giveback_book";
     }
 }

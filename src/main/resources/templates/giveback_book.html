@@ -2,18 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Borrower</title>
+	<title>Library Manager</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
-	<link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-		  rel="stylesheet">
+		  crossorigin="anonymous">
 	<style>
-        #container {
+        #container
+        {
             width: auto;
             margin-left: auto;
             margin-right: auto;
             background-color: azure;
             font-family: Garuda,serif;
+        }
+        #info
+        {
+            padding: 10px;
+            background-color: deepskyblue;
         }
         #logo
         {
@@ -21,16 +27,17 @@
             color: white;
             text-align: center;
         }
-        #content {
-            padding: 20px;
-            font-size: 16px;
+        #navbar{
+            background-color: black;
         }
-
-        input[type="text"] {
-            display: block;
-            width: 100%;
+        #sub-navbar{
+            padding: 10px;
         }
-
+        #successfullyGiveBack {
+			padding: 20px;
+            color: green;
+            font-size: 20px;
+        }
 	</style>
 </head>
 <body>
@@ -42,26 +49,23 @@
 					 height="30" color="white" src="https://freepikpsd.com/wp-content/uploads/2020/04/book-icon-png-white-Images-Free-Transparent.png" width="30">
 				Privet Home Library
 				<div id="sub-navbar">
-					<a class="bg-dark btn btn-outline-primary" th:align="center" th:href="@{/}">Home page</a>
-					<a align="left" th:href="@{/showNewBookForm}" class="bg-success btn btn-success"> Add new book </a>
-					<a align="left" th:href="@{/user_info}" class="bg-dark btn btn-outline-primary" th:align="center">Your borrowed friends</a>
+					<a align="left" class="bg-success btn btn-success btn-lg mb-2" th:href="@{/management}"> Managment </a>
+					<a align="left" th:href="@{/information}" class="bg-warning btn btn-warning btn-lg mb-2"> Info </a>
 				</div>
 			</a>
 		</nav>
 	</div>
-	<div id="content">
-		<h2>Add borrower</h2>
-		<form action="#" th:action="@{/user/save_user}" th:object="${user}" method="post">
-			<input type="text" th:field="*{firstName}"
-				   placeholder="First name" class="form-control mb-4 col-4">
-
-			<input type="text" th:field="*{lastName}"
-				   placeholder="Last name" class="form-control mb-4 col-4">
-			<input type="text" th:field="*{email}"
-				   placeholder="E-mail (optional)" class="form-control mb-4 col-4">
-			<button class="bg-success btn-lg" type="submit">Add borrower</button>
-		</form>
+	<div id="info">
+		<h1>Manage your book collection</h1>
+		Add your favorite books, make changes or completely remove books from your database<br>
+		<br>
+		With this application you will quickly find what you are looking for on the list.<br>
+		Add your friends who borrowed a book from you. This way, no book will be lost.
 	</div>
+	<div id="successfullyGiveBack">
+		<h2 th:align="center"  th:if="${message != null}" th:text="${message}"></h2>
+	</div>
+
 	<footer class="page-footer font-small white">
 		<!-- Copyright -->
 		<div class="footer-copyright text-center py-3">© 2021 Copyright:
@@ -72,7 +76,6 @@
 		<!-- Copyright -->
 	</footer>
 	<!-- Footer -->
-
 </div>
 </body>
-
+</html>
