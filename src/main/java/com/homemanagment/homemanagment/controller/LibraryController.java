@@ -47,6 +47,7 @@ public class LibraryController {
         UserLending userByID = userService.findUserByID(userId);
         bookService.lendBook(bookToBorrow.getId(), userByID);
 //        user.addBookToUserCollection(book);
+        model.addAttribute("allBorrower",userService.allUsers());
         model.addAttribute("book", book);
         model.addAttribute("borrower", userByID);
         model.addAttribute("message", "Book successfully borrowed!"+ userByID.toString()+ " " + book.toString() +" Back to management");
