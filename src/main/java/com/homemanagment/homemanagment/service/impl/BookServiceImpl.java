@@ -52,6 +52,7 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public Book saveBook(Book book) {
        book.setBookStatus(BookStatus.AVAILABLE);
+       book.setBorrower(null);
        return this.bookRepository.save(book);
     }
 
@@ -78,9 +79,9 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public Book lendBook(int id, UserLending borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        UserLending userLending = userRepository.findById(borrower.getId()).orElseThrow(IllegalArgumentException::new);
-        book.setBorrower(userLending);
+        book.setBorrower(borrower);
         book.setBookStatus(BookStatus.BORROWED);
+        borrower.addBookToBorrowerList(book);
         return bookRepository.save(book);
     }
 
@@ -101,6 +102,7 @@ public class BookServiceImpl implements BookService {
     public Book giveBackBook(int id, UserLending borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         book.setBookStatus(BookStatus.AVAILABLE);
+        book.setBorrower(null);
         return bookRepository.save(book);
     }
 

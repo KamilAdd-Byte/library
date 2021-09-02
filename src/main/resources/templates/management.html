@@ -105,6 +105,7 @@
 				<th>Localization</th>
 				<th>Category</th>
 				<th>Status</th>
+				<th>Borrower</th>
 				<th>Options</th>
 				<!--				<th>Kategoria</th>-->
 			</tr>
@@ -119,11 +120,12 @@
 				<td th:text="${book.localization}"></td>
 				<td th:text="${book.categoryBook.description}"></td>
 				<td th:text="${book.bookStatus}"></td>
+				<td th:text="${book.borrower}"></td>
 				<td align="center">
 					<a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-outline-warning">Edit</a>
 					<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Remove</a>
 					<a th:href="@{/lending/{id}(id =${book.id})}" class="btn btn-light">Borrow</a>
-					<a th:href="@{/giveBackBook/{id}(id =${book.id})}" class="btn btn-light">Give back</a>
+					<a th:if="${book.bookStatus.BORROWED}" th:href="@{/giveBackBook/{id}(id =${book.id})}" class="btn btn-light">Give back</a>
 				</td>
 			</tr>
 			</tbody>

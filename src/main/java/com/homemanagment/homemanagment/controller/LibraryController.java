@@ -31,27 +31,25 @@ public class LibraryController {
 
     @GetMapping("/lending")
     public String lending (Model model){
-        model.addAttribute("allUsers",userService.allUsers());
+        model.addAttribute("allBorrower",userService.allUsers());
       return "lending";
     }
     @GetMapping("/lending/{id}")
-    public String lendingBookById(@PathVariable("id") int id, Model model) {
+    public String lendingBookById(@PathVariable("id") int id,Model model) {
         Book book = bookService.findBookByID(id);
         model.addAttribute("book",book);
-        model.addAttribute("allUsers",userService.allUsers());
+        model.addAttribute("allBorrower",userService.allUsers());
         return "lending";
     }
-    @GetMapping("/lending/{id}/userLending")
-    public String lendBookById(@PathVariable("id") int id,
-                                  @ModelAttribute UserLending userLending, Model model) {
-        Book book = bookService.findBookByID(id);
-        UserLending userByID = userService.findUserByID(userLending.getId());
-        bookService.lendBook(book.getId(), userByID);
+    @GetMapping("/lending/{id}/lending")
+    public String lendBookByIdByBorrower(@PathVariable("id") int userId,@ModelAttribute Book book, Model model) {
+        Book bookToBorrow = bookService.findBookByID(book.getId());
+        UserLending userByID = userService.findUserByID(userId);
+        bookService.lendBook(bookToBorrow.getId(), userByID);
 //        user.addBookToUserCollection(book);
-        model.addAttribute("allUsers",userService.allUsers());
         model.addAttribute("book", book);
         model.addAttribute("borrower", userByID);
-        model.addAttribute("message", "Book successfully borrowed! Back to management");
+        model.addAttribute("message", "Book successfully borrowed!"+ userByID.toString()+ " " + book.toString() +" Back to management");
 
         return "lending";
     }

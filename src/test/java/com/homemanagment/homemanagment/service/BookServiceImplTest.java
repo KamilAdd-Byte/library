@@ -106,7 +106,7 @@ class BookServiceImplTest {
         expected.setDescription("Example description");
         expected.setCategoryBook(CategoryBook.SAILING);
         expected.setLocalization(3);
-        expected.setAudit(expected.getAudit());
+
         //when
         session.beginTransaction();
         bookService.saveBook(expected);

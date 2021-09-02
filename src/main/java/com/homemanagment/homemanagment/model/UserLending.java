@@ -37,6 +37,18 @@ public class UserLending {
         result += " e-mail: " + email;
         return result;
     }
+    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST},fetch = FetchType.EAGER)
+    @JoinColumn(name = "books")
+    private Set<Book> books;
+
+
+
+    public void addBookToBorrowerList(Book book){
+        if (books==null){
+            books = new HashSet<>();
+        }
+        books.add(book);
+    }
 }
 
 

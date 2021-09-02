@@ -35,9 +35,6 @@ public class Book {
     @Column(name = "localization")
     private int localization;
 
-    @Embedded
-    private Audit audit = new Audit();
-
     @Enumerated(EnumType.STRING)
     private BookStatus bookStatus;
 
@@ -98,13 +95,6 @@ public class Book {
         this.localization = localization;
     }
 
-    public Audit getAudit() {
-        return audit;
-    }
-
-    public void setAudit(Audit audit) {
-        this.audit = audit;
-    }
 
     public BookStatus getBookStatus() {
         return bookStatus;
@@ -135,12 +125,12 @@ public class Book {
         if (this == o) return true;
         if (!(o instanceof Book)) return false;
         Book book = (Book) o;
-        return id == book.id && localization == book.localization && title.equals(book.title) && author.equals(book.author) && Objects.equals(isbn, book.isbn) && Objects.equals(description, book.description) && Objects.equals(audit, book.audit) && bookStatus == book.bookStatus && categoryBook == book.categoryBook;
+        return id == book.id && localization == book.localization && title.equals(book.title) && author.equals(book.author) && Objects.equals(isbn, book.isbn) && Objects.equals(description, book.description) && bookStatus == book.bookStatus && categoryBook == book.categoryBook;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, isbn, description, localization, audit, bookStatus, categoryBook);
+        return Objects.hash(id, title, author, isbn, description, localization, bookStatus, categoryBook);
     }
 
     @Override

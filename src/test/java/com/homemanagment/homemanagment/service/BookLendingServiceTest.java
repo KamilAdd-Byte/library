@@ -108,7 +108,7 @@ class BookLendingServiceTest {
 
 
         log.info("Book : " + lendBook.toString());
-
+        log.info("User: " + max.getBooks());
         assertThat(max.getFirstName()).isEqualTo("Marceli");
 
 
