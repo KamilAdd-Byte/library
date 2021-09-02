@@ -47,7 +47,11 @@ public class UserLending {
         if (books==null){
             books = new HashSet<>();
         }
-        books.add(book);
+        this.books.add(book);
+    }
+
+    public void removeBookToBorrowerList(Book book){
+        this.books.remove(book);
     }
 }
 
