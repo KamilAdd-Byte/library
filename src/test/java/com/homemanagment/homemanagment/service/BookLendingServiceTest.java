@@ -1,7 +1,7 @@
 package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.Borrower;
 import com.homemanagment.homemanagment.model.type.CategoryBook;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 @SpringBootTest
@@ -33,7 +32,7 @@ class BookLendingServiceTest {
         session = sessionFactory.openSession();
         session.beginTransaction();
         session.createQuery("delete Book").executeUpdate();
-        session.createQuery("delete UserLending").executeUpdate();
+        session.createQuery("delete Borrower").executeUpdate();
         session.getTransaction().commit();
     }
     @AfterEach
@@ -41,7 +40,7 @@ class BookLendingServiceTest {
         session = sessionFactory.openSession();
         session.beginTransaction();
         session.createQuery("delete Book").executeUpdate();
-        session.createQuery("delete UserLending").executeUpdate();
+        session.createQuery("delete Borrower").executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
@@ -50,12 +49,12 @@ class BookLendingServiceTest {
     @DisplayName("should add new user")
     void shouldAddNewUser() {
         //given
-        UserLending expected = createNewUser();
+        Borrower expected = createNewUser();
 
         //when
         userService.addUser(expected);
 
-        UserLending added = (UserLending) session.createQuery("from UserLending user where user.firstName=:firstName and " +
+        Borrower added = (Borrower) session.createQuery("from Borrower user where user.firstName=:firstName and " +
                 "user.lastName=:lastName and user.email=:email")
                 .setParameter("firstName",expected.getFirstName())
                 .setParameter("lastName",expected.getLastName())
@@ -68,8 +67,8 @@ class BookLendingServiceTest {
 
     }
 
-    private UserLending createNewUser() {
-        UserLending expected = new UserLending();
+    private Borrower createNewUser() {
+        Borrower expected = new Borrower();
         expected.setFirstName("Marceli");
         expected.setLastName("Szpak");
         expected.setEmail("marceli@szpak.pl");
@@ -80,7 +79,7 @@ class BookLendingServiceTest {
     @DisplayName("should remove user by id")
     void shouldRemoveUserById() {
         //given
-        UserLending expected = createNewUser();
+        Borrower expected = createNewUser();
         //when
         userService.addUser(expected);
         int expectedId = expected.getId();
@@ -97,7 +96,7 @@ class BookLendingServiceTest {
         //given
         Book addedBook = createBook();
 
-        UserLending max = createNewUser();
+        Borrower max = createNewUser();
         userService.addUser(max);
 
 
@@ -119,21 +118,23 @@ class BookLendingServiceTest {
         //given
         Book addedBook = createBook();
         Book addedBook2 = createBook2();
-        UserLending max = createNewUser();
+        Borrower max = createNewUser();
         userService.addUser(max);
 
 
         //when
         int addedBookId = addedBook.getId();
         int addedBookId2 = addedBook2.getId();
-        bookService.lendBook(addedBookId, max);
-        bookService.lendBook(addedBookId2, max);
+        Book lendBook = bookService.lendBook(addedBookId, max);
+        Book lendBook1 = bookService.lendBook(addedBookId2, max);
 
 
-//        log.info("Max : " + userLending1 + " <<Collection>>: " + userLending1.getBooks() + " <<Size>>: " + userLending1.getBooks().size());
+log.info("Max : " + max.toString() + " <<Collection>>: " + max.getBooks() + " <<Size>>: " + max.getBooks().size());
 //       log.info("Book : " + lendBook.getBorrower());
 //
-//        assertThat(lendBook.getBorrower()).isEqualTo(max);
+       assertThat(lendBook.getBorrower().getFirstName()).isEqualTo("Marceli");
+       assertThat(max.getBooks()).hasSize(2);
+
 
     }
 
@@ -164,7 +165,7 @@ class BookLendingServiceTest {
         //given
         Book addedBook = createNewBook();
 
-        UserLending max = createNewUser();
+        Borrower max = createNewUser();
         userService.addUser(max);
 
         //when

@@ -1,7 +1,7 @@
 package com.homemanagment.homemanagment.service.impl;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.Borrower;
 import com.homemanagment.homemanagment.model.type.BookStatus;
 import com.homemanagment.homemanagment.repositories.BookRepository;
 import com.homemanagment.homemanagment.repositories.UserRepository;
@@ -77,7 +77,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public Book lendBook(int id, UserLending borrower) {
+    public Book lendBook(int id, Borrower borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         book.setBorrower(borrower);
         book.setBookStatus(BookStatus.BORROWED);
@@ -99,7 +99,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public Book giveBackBook(int id, UserLending borrower) {
+    public Book giveBackBook(int id, Borrower borrower) {
         Book book = bookRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         borrower.removeBookToBorrowerList(book);
         book.setBookStatus(BookStatus.AVAILABLE);

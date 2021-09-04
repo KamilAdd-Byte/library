@@ -1,7 +1,7 @@
 package com.homemanagment.homemanagment.controller;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.Borrower;
 import com.homemanagment.homemanagment.repositories.BookRepository;
 import com.homemanagment.homemanagment.repositories.UserRepository;
 import com.homemanagment.homemanagment.service.BookService;
@@ -44,7 +44,7 @@ public class LibraryController {
     @GetMapping("/lending/{id}/lending")
     public String lendBookByIdByBorrower(@PathVariable("id") int userId,@ModelAttribute Book book, Model model) {
         Book bookToBorrow = bookService.findBookByID(book.getId());
-        UserLending userByID = userService.findUserByID(userId);
+        Borrower userByID = userService.findUserByID(userId);
         bookService.lendBook(bookToBorrow.getId(), userByID);
 //        user.addBookToUserCollection(book);
         model.addAttribute("allBorrower",userService.allUsers());
@@ -57,14 +57,14 @@ public class LibraryController {
 
     @GetMapping("/giveBackBook/{id}")
     public String giveBackBookById(@PathVariable("id") int id,
-                                  @ModelAttribute UserLending userLending, Model model) {
+                                   @ModelAttribute Borrower borrower, Model model) {
         Book book = bookService.findBookByID(id);
-        UserLending user = userService.findUserByID(userLending.getId());
+        Borrower user = userService.findUserByID(borrower.getId());
         bookService.giveBackBook(id,user);
         model.addAttribute("message", "Book successfully give back of your collection! Back to management");
         model.addAttribute("book",book);
         model.addAttribute("allUsers",userService.allUsers());
-        model.addAttribute("borrower",userLending);
+        model.addAttribute("borrower", borrower);
         return "giveback_book";
     }
 }

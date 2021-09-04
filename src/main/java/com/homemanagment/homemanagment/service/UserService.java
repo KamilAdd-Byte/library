@@ -1,18 +1,18 @@
 package com.homemanagment.homemanagment.service;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.Borrower;
 import java.util.List;
 
 public interface UserService {
 
-    List<UserLending> allUsers();
+    List<Borrower> allUsers();
 
-    void addUser(UserLending userLending);
+    void addUser(Borrower borrower);
 
-    void removeUser(int id,UserLending userLending);
+    void removeUser(int id, Borrower borrower);
 
-    UserLending findUserByID(int id);
+    Borrower findUserByID(int id);
 
-    void addBookToUserCollection(UserLending userLending, Book book);
+    void addBookToUserCollection(Borrower borrower, Book book);
 }

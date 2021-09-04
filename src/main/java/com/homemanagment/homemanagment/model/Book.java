@@ -42,9 +42,9 @@ public class Book {
     @NotNull(message = "Please select category book")
     private CategoryBook categoryBook;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private UserLending borrower;
+    private Borrower borrower;
 
 
     public int getId() {
@@ -112,12 +112,12 @@ public class Book {
         this.categoryBook = categoryBook;
     }
 
-    public UserLending getBorrower() {
+    public Borrower getBorrower() {
         return borrower;
     }
 
-    public void setBorrower(UserLending userLending){
-        this.borrower = userLending;
+    public void setBorrower(Borrower borrower){
+        this.borrower = borrower;
     }
 
     @Override

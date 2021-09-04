@@ -114,12 +114,13 @@
 				<td th:text="${borrower.lastName}"></td>
 				<td th:text="${borrower.email}"></td>
 				<td align="center">
-					<input autocomplete="off" th:object="${borrower}" id="borrower" name="borrower" type="radio">
+					<input autocomplete="off" type="radio">
 				</td>
 			</tr>
 			</tbody>
 		</table>
-		<a th:href="@{/lending/{id}/lending (id=${book.id})}" class="btn btn-outline-warning">Borrow</a>-->
+		<a th:href="@{/lending/{id}/lending (id=${book.id})}" class="btn btn-outline-warning">Borrow</a>
+
 		</form>
 		<button type="submit">Borrow</button>
 	</div>

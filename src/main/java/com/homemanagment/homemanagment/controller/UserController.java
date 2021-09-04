@@ -1,6 +1,6 @@
 package com.homemanagment.homemanagment.controller;
 
-import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.Borrower;
 import com.homemanagment.homemanagment.repositories.UserRepository;
 import com.homemanagment.homemanagment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,19 +36,19 @@ public class UserController {
 
     @GetMapping("/user/showNewFormUser")
     public String showNewUserForm(Model model) {
-        UserLending userLending = new UserLending();
-        model.addAttribute("user", userLending);
+        Borrower borrower = new Borrower();
+        model.addAttribute("user", borrower);
         return "new_user";
     }
 
     @PostMapping("/user/save_user")
-    public String saveUser(@Valid @ModelAttribute("user") UserLending userLending, Model model, BindingResult bindingResult) {
+    public String saveUser(@Valid @ModelAttribute("user") Borrower borrower, Model model, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<ObjectError> objectErrorList = bindingResult.getAllErrors();
             objectErrorList.forEach(objectError -> System.out.println(objectError.getDefaultMessage()));
             return "new_user";
         } else
-            userService.addUser(userLending);
+            userService.addUser(borrower);
         return "redirect:/user_info";
     }
 }

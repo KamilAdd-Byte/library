@@ -1,7 +1,7 @@
 package com.homemanagment.homemanagment.service.impl;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.Borrower;
 import com.homemanagment.homemanagment.model.type.BookStatus;
 import com.homemanagment.homemanagment.model.type.CategoryBook;
 import com.homemanagment.homemanagment.service.BookService;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class UserServiceImplTest {
     @Autowired
@@ -33,7 +33,7 @@ class UserServiceImplTest {
         session = sessionFactory.openSession();
         session.beginTransaction();
         session.createQuery("delete Book").executeUpdate();
-        session.createQuery("delete UserLending").executeUpdate();
+        session.createQuery("delete Borrower").executeUpdate();
         session.getTransaction().commit();
     }
     @AfterEach
@@ -41,7 +41,7 @@ class UserServiceImplTest {
         session = sessionFactory.openSession();
         session.beginTransaction();
         session.createQuery("delete Book").executeUpdate();
-        session.createQuery("delete UserLending").executeUpdate();
+        session.createQuery("delete Borrower").executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
@@ -50,12 +50,12 @@ class UserServiceImplTest {
     @DisplayName("should add new user")
     void shouldAddNewUser() {
         //given
-        UserLending expected = createNewUser();
+        Borrower expected = createNewUser();
 
         //when
         userService.addUser(expected);
 
-        UserLending added = (UserLending) session.createQuery("from UserLending user where user.firstName=:firstName and " +
+        Borrower added = (Borrower) session.createQuery("from Borrower user where user.firstName=:firstName and " +
                         "user.lastName=:lastName and user.email=:email")
                 .setParameter("firstName",expected.getFirstName())
                 .setParameter("lastName",expected.getLastName())
@@ -69,8 +69,8 @@ class UserServiceImplTest {
         Assertions.assertEquals(expected.getId(),added.getId());
     }
 
-    private UserLending createNewUser() {
-        UserLending expected = new UserLending();
+    private Borrower createNewUser() {
+        Borrower expected = new Borrower();
         expected.setFirstName("Marceli");
         expected.setLastName("Szpak");
         expected.setEmail("marceli@szpak.pl");
@@ -94,7 +94,7 @@ class UserServiceImplTest {
     @DisplayName("should remove user by id")
     void shouldRemoveUserById() {
         //given
-        UserLending expected = createNewUser();
+        Borrower expected = createNewUser();
         //when
         userService.addUser(expected);
         int expectedId = expected.getId();

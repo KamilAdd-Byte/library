@@ -1,7 +1,7 @@
 package com.homemanagment.homemanagment.restController;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.Borrower;
 import com.homemanagment.homemanagment.repositories.BookRepository;
 import com.homemanagment.homemanagment.service.BookService;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +21,9 @@ public class BookRestController {
 
 
     @PostMapping("/lending/{id}/borrower")
-    public ResponseEntity<Book> lendingBook (@PathVariable("id") int id, @RequestBody UserLending userLending){
+    public ResponseEntity<Book> lendingBook (@PathVariable("id") int id, @RequestBody Borrower borrower){
         Book borrowed = bookService.findBookByID(id);
-        bookService.lendBook(id, userLending);
+        bookService.lendBook(id, borrower);
         return ResponseEntity.ok().body(borrowed);
     }
 }

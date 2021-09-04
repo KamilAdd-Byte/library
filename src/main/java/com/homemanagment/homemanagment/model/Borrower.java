@@ -12,8 +12,8 @@ import java.util.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "userLending")
-public class UserLending {
+@Table(name = "borrower")
+public class Borrower {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +37,8 @@ public class UserLending {
         result += " e-mail: " + email;
         return result;
     }
-    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST},fetch = FetchType.EAGER)
-    @JoinColumn(name = "books")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH,CascadeType.REMOVE},fetch = FetchType.EAGER)
+    @JoinColumn(name = "book")
     private Set<Book> books;
 
 

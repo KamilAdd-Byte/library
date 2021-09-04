@@ -123,7 +123,8 @@
 				<td th:text="${book.borrower}"></td>
 				<td align="center">
 					<a th:href="@{/update/{id}(id=${book.id})}" class="btn btn-outline-warning">Edit</a>
-					<a th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Remove</a>
+
+					<a id="clickMe" th:href="@{/remove/{id}(id=${book.id})}" class="btn btn-outline-danger">Remove</a>
 					<a th:href="@{/lending/{id}(id =${book.id})}" class="btn btn-light">Borrow</a>
 					<a th:if="${book.bookStatus.BORROWED}" th:href="@{/giveBackBook/{id}(id =${book.id})}" class="btn btn-light">Give back</a>
 				</td>

@@ -1,7 +1,6 @@
 package com.homemanagment.homemanagment.service.valid;
 
-import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.Borrower;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +10,7 @@ import java.util.Set;
 
 @Component
 public class UserLendingValidate {
-    Set<UserLending> lendingSet;
+    Set<Borrower> lendingSet;
     Validator validator;
 
     @Autowired

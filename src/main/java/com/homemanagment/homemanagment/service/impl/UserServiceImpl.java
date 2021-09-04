@@ -1,16 +1,14 @@
 package com.homemanagment.homemanagment.service.impl;
 
 import com.homemanagment.homemanagment.model.Book;
-import com.homemanagment.homemanagment.model.UserLending;
+import com.homemanagment.homemanagment.model.Borrower;
 import com.homemanagment.homemanagment.repositories.BookRepository;
 import com.homemanagment.homemanagment.repositories.UserRepository;
 import com.homemanagment.homemanagment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,33 +21,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<UserLending> allUsers() {
+    public List<Borrower> allUsers() {
         return this.userRepository.findAll();
     }
 
     @Override
     @Transactional
-    public void addUser(UserLending userLending) {
-        this.userRepository.save(userLending);
+    public void addUser(Borrower borrower) {
+        this.userRepository.save(borrower);
     }
 
     @Override
     @Transactional
-    public void removeUser(int id, UserLending userLending) {
+    public void removeUser(int id, Borrower borrower) {
         this.userRepository.deleteById(id);
     }
 
     @Override
     @Transactional
-    public UserLending findUserByID(int id) {
-        UserLending userLending = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        return userLending;
+    public Borrower findUserByID(int id) {
+        Borrower borrower = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return borrower;
     }
 
     @Override
     @Transactional
-    public void addBookToUserCollection(UserLending userLending, Book book) {
-        UserLending borrower = userRepository.findById(userLending.getId()).orElseThrow(IllegalArgumentException::new);
+    public void addBookToUserCollection(Borrower userLending, Book book) {
+        Borrower borrower = userRepository.findById(userLending.getId()).orElseThrow(IllegalArgumentException::new);
         Book bookToBorrow = bookRepository.findById(book.getId()).orElseThrow(IllegalArgumentException::new);
     }
 }
