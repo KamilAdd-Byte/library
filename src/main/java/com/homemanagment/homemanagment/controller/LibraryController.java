@@ -42,15 +42,15 @@ public class LibraryController {
         return "lending";
     }
     @GetMapping("/lending/{id}/lending")
-    public String lendBookByIdByBorrower(@PathVariable("id") int userId,@ModelAttribute Book book, Model model) {
-        Book bookToBorrow = bookService.findBookByID(book.getId());
-        Borrower userByID = userService.findUserByID(userId);
+    public String lendBookByIdByBorrower(@PathVariable("id") int id,@ModelAttribute Borrower borrower, Model model) {
+        Book bookToBorrow = bookService.findBookByID(id);
+        Borrower userByID = userService.findUserByID(borrower.getId());
         bookService.lendBook(bookToBorrow.getId(), userByID);
 //        user.addBookToUserCollection(book);
         model.addAttribute("allBorrower",userService.allUsers());
-        model.addAttribute("book", book);
+        model.addAttribute("book", bookToBorrow);
         model.addAttribute("borrower", userByID);
-        model.addAttribute("message", "Book successfully borrowed!"+ userByID.toString()+ " " + book.toString() +" Back to management");
+        model.addAttribute("message", "Book successfully borrowed!"+ userByID.toString()+ " " + bookToBorrow.toString() +" Back to management");
 
         return "lending";
     }
